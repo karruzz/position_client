@@ -19,3 +19,5 @@ HEADERS += \
     Model/dataentrymodel.h \
     Model/roleentrymodel.h
 
+DISTFILES +=
+
