@@ -5,7 +5,8 @@ CONFIG += c++11
 
 SOURCES += main.cpp \
     Model/dataentrymodel.cpp \
-    Model/roleentrymodel.cpp
+    Model/roleentrymodel.cpp \
+    Channel/filechannel.cpp
 
 RESOURCES += qml.qrc
 
@@ -17,7 +18,12 @@ include(deployment.pri)
 
 HEADERS += \
     Model/dataentrymodel.h \
-    Model/roleentrymodel.h
+    Model/roleentrymodel.h \
+    Data/iframe.h \
+    Data/gyroframe.h \
+    Math/point3d.h \
+    Channel/ichannel.h \
+    Channel/filechannel.h
 
 DISTFILES +=
 
