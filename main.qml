@@ -1,7 +1,9 @@
 import QtQuick 2.3
 import QtQuick.Window 2.2
-//import org.example 1.0
+import QtQuick.Controls 1.2
+import QtQuick.Layouts 1.0
 
+import GyroData 1.0
 
 //Window {
 //    visible: true
@@ -30,30 +32,66 @@ import QtQuick.Window 2.2
 //               anchors.right: view.right; anchors.top: view.top }
 //}
 
-Rectangle
-{
-    id: rectangle1
-    width: 300
-    height: 300
+ApplicationWindow {
+    id:root
+    visible: true
+    width: 640
+    height: 480
+    title: qsTr("Gyro test")
 
-    ListView {
-        id: list
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.fill: parent
-     //   model: RoleEntryModel {}
-        model: model1
-        focus: true
-        delegate: Text {
-            text: 'hsv(' +
-                  Number(model.hue).toFixed(2) + ',' +
-                  Number(model.saturation).toFixed() + ',' +
-                  Number(model.brightness).toFixed() + ')'
-            color: model.name
+    Rectangle
+    {
+        id: buttonPanel
+        width: parent.width
+        height: 50
+        anchors.top: parent.top
+        color: "gray"
+    }
+
+    Rectangle
+    {
+        id: framePanel
+        width: parent.width
+        height: 50
+        anchors.top: buttonPanel.bottom
+        color: "lightgray"
+
+        RowLayout {
+            id: layout
+            anchors.fill: parent
+            spacing: 6
+
+
+            Text {
+                text: "Angle:"
+            }
+
+            Text {
+                text: dataEntry.Angle.Roll
+            }
         }
     }
 
-    ScrollView{ sa: list; height: 8; width: list.width
-               anchors.left: list.left; anchors.bottom: list.bottom }
+//    ListView {
+//        id: list
+//        anchors.left: parent.left
+//        anchors.right: parent.right
+//        anchors.top: framePanel.bottom
+//        anchors.bottom: parent.bottom
+//     //   model: RoleEntryModel {}
+//        model: model1
+//        focus: true
+//        delegate: Text {
+//            text: 'hsv(' +
+//                  Number(model.hue).toFixed(2) + ',' +
+//                  Number(model.saturation).toFixed() + ',' +
+//                  Number(model.brightness).toFixed() + ')'
+//            color: model.name
+//        }
+//    }
+
+//    ScrollView{ sa: framePanel; height: 8; width: framePanel.width
+//               anchors.left: framePanel.left; anchors.bottom: framePanel.bottom }
+
 }
 

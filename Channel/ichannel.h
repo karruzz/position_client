@@ -4,10 +4,11 @@
 #include <QtGlobal>
 #include "Data/gyroframe.h"
 
+template<class T>
 class IChannel
 {
     public:
-        virtual GyroFrame Read(quint64 index) = 0;
+        virtual T Read(quint64 index) = 0;
         virtual quint64 Count() = 0;
 };
 

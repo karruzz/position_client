@@ -5,7 +5,7 @@
 #include "ichannel.h"
 #include "Data/gyroframe.h"
 
-class FileChannel : public IChannel
+class FileChannel : public IChannel<GyroFrame>
 {
     public:
         bool Open(const QString &path);
@@ -16,6 +16,7 @@ class FileChannel : public IChannel
     private:
         QFile *_file;
         const int FrameSize = sizeof(GyroFrame);
+        quint64 _filePosition = 0;
 };
 
 #endif // FILECHANNEL_H

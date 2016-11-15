@@ -12,8 +12,9 @@ class GyroFrame : public IFrame
         Point3d Omega;
         Point3d Angle;
 
-        void Deserialize(QByteArray bytes);
-        QByteArray Serialize();
+        inline void Deserialize(QByteArray bytes) {
+            *this = *(reinterpret_cast<GyroFrame*>(bytes.data()));
+        }
 };
 
 #endif // GYROFRAME

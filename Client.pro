@@ -6,7 +6,9 @@ CONFIG += c++11
 SOURCES += main.cpp \
     Model/dataentrymodel.cpp \
     Model/roleentrymodel.cpp \
-    Channel/filechannel.cpp
+    Channel/filechannel.cpp \
+    Model/renderthread.cpp \
+    Model/qgyroframe.cpp
 
 RESOURCES += qml.qrc
 
@@ -23,7 +25,9 @@ HEADERS += \
     Data/gyroframe.h \
     Math/point3d.h \
     Channel/ichannel.h \
-    Channel/filechannel.h
+    Channel/filechannel.h \
+    Model/renderthread.h \
+    Model/qgyroframe.h
 
 DISTFILES +=
 

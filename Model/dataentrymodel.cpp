@@ -1,44 +1,30 @@
 #include "dataentrymodel.h"
 
 DataEntryModel::DataEntryModel(QObject *parent)
-    : QAbstractListModel(parent)
+    : QObject(parent), _channel(new FileChannel), m_frame(new QGyroFrame)
 {
-    // initialize our data (QList<QString>) with a list of color names
-    m_data = QColor::colorNames();
+    m_frame->frame.Angle.X = 10;
+}
+
+QGyroFrame *DataEntryModel::getValue() const
+{
+    return m_frame;
 }
 
 DataEntryModel::~DataEntryModel()
 {
+    if (_channel != NULL) _channel->Close();
 }
 
-int DataEntryModel::rowCount(const QModelIndex &parent) const
+void DataEntryModel::Open(const QString &path)
 {
-    Q_UNUSED(parent);
-    // return our data count
-    return m_data.count();
+    if (_channel->Open(path))
+        Count = _channel->Count();
 }
 
-QVariant DataEntryModel::data(const QModelIndex &index, int role) const
+void DataEntryModel::Seek(quint64 index)
 {
-    // the index returns the requested row and column information.
-    // we ignore the column and only use the row information
-    int row = index.row();
-
-    // boundary check for the row
-    if(row < 0 || row >= m_data.count()) {
-        return QVariant();
-    }
-
-    // A model can return data for different roles.
-    // The default role is the display role.
-    // it can be accesses in QML with "model.display"
-    switch(role) {
-        case Qt::DisplayRole:
-            // Return the color name for the particular row
-            // Qt automatically converts it to the QVariant type
-            return m_data.value(row);
-    }
-
-    // The view asked for other data, just return an empty QVariant
-    return QVariant();
+    if (_channel == NULL) return;
+    m_frame->frame = _channel->Read(index);
 }
+
