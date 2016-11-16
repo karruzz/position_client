@@ -2,6 +2,7 @@ import QtQuick 2.3
 import QtQuick.Window 2.2
 import QtQuick.Controls 1.2
 import QtQuick.Layouts 1.0
+import QtQuick.Dialogs 1.0
 
 import GyroData 1.0
 
@@ -32,12 +33,18 @@ import GyroData 1.0
 //               anchors.right: view.right; anchors.top: view.top }
 //}
 
+
 ApplicationWindow {
     id:root
     visible: true
     width: 640
     height: 480
     title: qsTr("Gyro test")
+
+    FileDialog {
+        id: fileDialogLoad
+        onRejected: fileDialogLoad.close();
+    }
 
     Rectangle
     {
@@ -46,7 +53,14 @@ ApplicationWindow {
         height: 50
         anchors.top: parent.top
         color: "gray"
+
+        Button{
+            text: "выбрать файл"
+            onClicked: fileDialogLoad.open();
+        }
+
     }
+
 
     Rectangle
     {
@@ -61,16 +75,53 @@ ApplicationWindow {
             anchors.fill: parent
             spacing: 6
 
-
-            Text {
-                text: "Angle:"
+            Rectangle {
+                width: 100
+                height: parent.height
+                Text {
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    anchors.fill: parent
+                    text: "Angle:"
+                }
             }
 
-            Text {
-                text: dataEntry.Angle.Roll
+            Rectangle {
+                width: 100
+                height: parent.height
+                Text {
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    anchors.fill: parent
+                    text: dataEntry.Angle.Roll
+                }
+            }
+
+            Rectangle {
+                width: 100
+                height: parent.height
+                Text {
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    anchors.fill: parent
+                    text: dataEntry.Angle.Pitch
+                }
+            }
+
+            Rectangle {
+                width: 100
+                height: parent.height
+                Text {
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    anchors.fill: parent
+                    text: dataEntry.Angle.Yaw
+                }
             }
         }
     }
+
+
 
 //    ListView {
 //        id: list
