@@ -2,12 +2,12 @@ import QtQuick 2.0
 import QtQuick.Dialogs 1.2
 
 Item {
-    width: 640
-    height: 480
+    id: root
+    function open() { fileDialogLoad.open() }
 
     FileDialog {
         id: fileDialogLoad
-        onRejected: fileDialogLoad.close();
+        modality: Qt.WindowModal
     }
 }
 

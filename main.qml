@@ -41,11 +41,6 @@ ApplicationWindow {
     height: 480
     title: qsTr("Gyro test")
 
-    FileDialog {
-        id: fileDialogLoad
-        onRejected: fileDialogLoad.close();
-    }
-
     Rectangle
     {
         id: buttonPanel
@@ -56,7 +51,13 @@ ApplicationWindow {
 
         Button{
             text: "выбрать файл"
-            onClicked: fileDialogLoad.open();
+
+            FileDialogs {
+                id: fileDialog
+            }
+
+
+            onClicked: fileDialog.open();
         }
 
     }
