@@ -2,6 +2,8 @@
 #define FILECHANNEL_H
 
 #include <QFile>
+#include <QUrl>
+
 #include "ichannel.h"
 #include "Data/gyroframe.h"
 

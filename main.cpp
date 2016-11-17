@@ -56,12 +56,20 @@ int main(int argc, char *argv[])
     qmlRegisterType<DataEntryModel>("GyroData", 1,0, "DataEntryModel");
     qmlRegisterType<QGyroFrame>("GyroData", 1,0, "QGyroFram"); // !!!
 
-//    qRegisterMetaType<DataEntryModel*>("DataEntryModel");
-//    qRegisterMetaType<QGyroFrame*>("QGyroFrame");
+    qRegisterMetaType<DataEntryModel*>("DataEntryModel");
+    qRegisterMetaType<QGyroFrame*>("QGyroFrame");
 
     DataEntryModel model;
     engine.rootContext()->setContextProperty("dataEntry", &model);
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+
+//    QQuickView *viewer = new QQuickView;
+
+//    DataEntryModel model(viewer);
+
+//    viewer->rootContext()->setContextProperty("dataEntry", &model);
+//    viewer->setSource(QUrl(QStringLiteral("qrc:/main.qml")));
+//    viewer->show();
 
     return app.exec();
 }

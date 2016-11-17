@@ -3,7 +3,8 @@
 bool FileChannel::Open(const QString &path)
 {
     _file = new QFile(path);
-    return _file->open(QIODevice::ReadOnly | QIODevice::Text);
+    auto result = _file->open(QIODevice::ReadOnly | QIODevice::Text);
+    return result;
 }
 
 void FileChannel::Close()

@@ -54,6 +54,14 @@ ApplicationWindow {
 
             FileDialogs {
                 id: fileDialog
+
+                onRejected: {
+                    console.log("Canceled")
+                }
+                onAccepted: {
+                    dataEntry.Open(fileDialog.fileUrl.toString().replace("file://",""))
+                    console.log("File selected: " + fileUrl)
+                }
             }
 
 
@@ -61,7 +69,6 @@ ApplicationWindow {
         }
 
     }
-
 
     Rectangle
     {

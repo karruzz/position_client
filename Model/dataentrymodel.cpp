@@ -1,14 +1,14 @@
 #include "dataentrymodel.h"
 
 DataEntryModel::DataEntryModel(QObject *parent)
-    : QObject(parent), _channel(new FileChannel), m_frame(new QGyroFrame)
+    : QObject(parent), _channel(new FileChannel), _frame(new QGyroFrame)
 {
-    m_frame->frame.Angle.X = 10;
+    _frame->frame.Angle.X = 10;
 }
 
 QGyroFrame *DataEntryModel::getValue() const
 {
-    return m_frame;
+    return _frame;
 }
 
 DataEntryModel::~DataEntryModel()
@@ -25,6 +25,6 @@ void DataEntryModel::Open(const QString &path)
 void DataEntryModel::Seek(quint64 index)
 {
     if (_channel == NULL) return;
-    m_frame->frame = _channel->Read(index);
+    _frame->frame = _channel->Read(index);
 }
 
