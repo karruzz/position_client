@@ -11,8 +11,8 @@ bool FileChannel::Open(const QString &path)
 
 void FileChannel::Close()
 {
-    if (_file != NULL) _file->close();
-    delete _file;
+//    if (_file != NULL) _file->close();
+//    delete _file;
 }
 
 quint64 FileChannel::Count()

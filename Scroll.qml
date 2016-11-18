@@ -1,18 +1,26 @@
-import QtQuick 2.0
+import QtQuick 2.3
+import QtQuick.Controls 1.2
 
 Item {
-     id: container
+    id: container
 
-     property variant sa
      property variant orientation: Qt.Horizontal
+
+     property int value: 0
+     property int minimum: 0
+     property int maximum: 10
+
+     signal seek(int index)
 
      function position()
      {
+         var delta = maximum - minimum;
+         if (delta == 0) return 0;
          var ny = 0;
          if (container.orientation == Qt.Vertical)
-             ny = sa.visibleArea.yPosition * container.height;
+             ny = value * container.height / delta;
          else
-             ny = sa.visibleArea.yPosition * container.width;
+             ny = value * container.width / delta;
          if (ny > 2) return ny; else return 2;
      }
 
@@ -21,14 +29,11 @@ Item {
          var nh, ny;
 
          if (container.orientation == Qt.Vertical)
-             nh = sa.visibleArea.heightRatio * container.height;
+             nh = container.height / 20;
          else
-             nh = sa.visibleArea.heightRatio * container.width;
+             nh = container.width / 20;
 
-         if (container.orientation == Qt.Vertical)
-             ny = sa.visibleArea.yPosition * container.height;
-         else
-             ny = sa.visibleArea.yPosition * container.width;
+         ny = position();
 
          if (ny > 3) {
              var t;
@@ -53,20 +58,17 @@ Item {
          MouseArea {
              anchors.fill: parent
              drag.target: parent
-//             drag.axis: Drag.YAxis
-//             drag.minimumY: 0
-//             drag.maximumY: (container.height-slider.height)
-
              drag.axis: Drag.XAxis
              drag.minimumX: 0
              drag.maximumX: (container.width-slider.width)
 
              onPositionChanged: {
+                 var delta = maximum - minimum;
                  if (pressedButtons == Qt.LeftButton) {
                      if (container.orientation == Qt.Vertical)
-                         sa.contentY = (slider.y * sa.contentHeight / container.height);
+                         container.seek(slider.y * delta);
                      else
-                         sa.contentY = (slider.x * sa.contentHeight / container.width);
+                         container.seek(slider.x * delta);
                  }
              }
          }

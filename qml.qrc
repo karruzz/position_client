@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>ScrollView.qml</file>
         <file>FileDialogs.qml</file>
+        <file>Scroll.qml</file>
     </qresource>
 </RCC>
