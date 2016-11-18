@@ -3,8 +3,10 @@
 bool FileChannel::Open(const QString &path)
 {
     _file = new QFile(path);
-    auto result = _file->open(QIODevice::ReadOnly | QIODevice::Text);
-    return result;
+    if (!_file->exists()) return false;
+    if (!_file->open(QIODevice::ReadOnly | QIODevice::Text)) return false;
+    _fileSizeInFrames = (_file->size()) / FrameSize;
+    return true;
 }
 
 void FileChannel::Close()
@@ -15,7 +17,7 @@ void FileChannel::Close()
 
 quint64 FileChannel::Count()
 {
-    return (_file->size()) / FrameSize;
+    return _fileSizeInFrames;
 }
 
 GyroFrame FileChannel::Read(quint64 index)

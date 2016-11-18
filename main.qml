@@ -59,7 +59,7 @@ ApplicationWindow {
                     console.log("Canceled")
                 }
                 onAccepted: {
-                    dataEntry.Open(fileDialog.fileUrl.toString().replace("file://",""))
+                    dataEntry.apen(fileDialog.fileUrl.toString().replace("file://",""))
                     console.log("File selected: " + fileUrl)
                 }
             }
@@ -101,7 +101,7 @@ ApplicationWindow {
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                     anchors.fill: parent
-                    text: dataEntry.Angle.Roll
+                    text: dataEntry.angle.Roll
                 }
             }
 
@@ -112,7 +112,7 @@ ApplicationWindow {
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                     anchors.fill: parent
-                    text: dataEntry.Angle.Pitch
+                    text: dataEntry.angle.Pitch
                 }
             }
 
@@ -123,7 +123,7 @@ ApplicationWindow {
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                     anchors.fill: parent
-                    text: dataEntry.Angle.Yaw
+                    text: dataEntry.angle.Yaw
                 }
             }
         }

@@ -19,6 +19,7 @@ class FileChannel : public IChannel<GyroFrame>
         QFile *_file;
         const int FrameSize = sizeof(GyroFrame);
         quint64 _filePosition = 0;
+        quint64 _fileSizeInFrames = 0;
 };
 
 #endif // FILECHANNEL_H

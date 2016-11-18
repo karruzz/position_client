@@ -11,22 +11,25 @@
 class DataEntryModel : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY( QGyroFrame *Angle READ getValue)
+    Q_PROPERTY( QGyroFrame *angle READ frame)
+    Q_PROPERTY( quint64 count READ count)
 
 public:
     explicit DataEntryModel(QObject *parent = 0);
     ~DataEntryModel();
-    QGyroFrame *getValue() const;
+    QGyroFrame *frame() const;
+    quint64 count() const;
 
 signals:
+    void opened();
 
 public slots:
-    void Open(const QString &path);
-    void Seek(quint64 index);
+    void open(const QString &path);
+    void seek(quint64 index);
 
 private:
     FileChannel *_channel;
-    int Count;
+    quint64 _count;
     QGyroFrame *_frame;
 
 };
