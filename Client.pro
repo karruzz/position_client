@@ -5,7 +5,6 @@ CONFIG += c++11
 
 SOURCES += main.cpp \
     Model/dataentrymodel.cpp \
-    Model/roleentrymodel.cpp \
     Channel/filechannel.cpp \
     Model/renderthread.cpp \
     Model/qgyroframe.cpp
@@ -20,7 +19,6 @@ include(deployment.pri)
 
 HEADERS += \
     Model/dataentrymodel.h \
-    Model/roleentrymodel.h \
     Data/gyroframe.h \
     Math/point3d.h \
     Channel/ichannel.h \
