@@ -66,9 +66,9 @@ Item {
                  var delta = maximum - minimum;
                  if (pressedButtons == Qt.LeftButton) {
                      if (container.orientation == Qt.Vertical)
-                         container.seek(slider.y * delta);
+                         container.seek(slider.y * delta / container.height);
                      else
-                         container.seek(slider.x * delta);
+                         container.seek(slider.x * delta / container.width);
                  }
              }
          }

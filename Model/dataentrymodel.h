@@ -29,8 +29,9 @@ public slots:
 
 private:
     FileChannel *_channel;
-    quint64 _count;
-    QGyroFrame *_frame;
+    bool _isChannelOpened = false;
+    quint64 _count = 0;
+    QGyroFrame *_frame;    
 
 };
 

@@ -28,7 +28,7 @@ ApplicationWindow {
                     console.log("Canceled")
                 }
                 onAccepted: {
-                    dataEntry.apen(fileDialog.fileUrl.toString().replace("file://",""))
+                    dataEntry.open(fileDialog.fileUrl.toString().replace("file://",""))
                     console.log("File selected: " + fileUrl)
                 }
             }
@@ -103,8 +103,16 @@ ApplicationWindow {
         anchors.top: framePanel.bottom
         anchors.bottom: parent.bottom
 
-        Scroll{ height: 8; width: graphPanel.width
-                       anchors.left: graphPanel.left; anchors.bottom: graphPanel.bottom }
+        Scroll{ height: 8
+                width: graphPanel.width
+                anchors.left: graphPanel.left
+                anchors.bottom: graphPanel.bottom
+
+                onSeek: {
+                    dataEntry.seek(index)
+                }
+
+        }
     }
 }
 

@@ -20,12 +20,13 @@ quint64 DataEntryModel::count() const
 
 DataEntryModel::~DataEntryModel()
 {
-    if (_channel != NULL) _channel->Close();
+    if (_isChannelOpened) _channel->Close();
 }
 
 void DataEntryModel::open(const QString &path)
 {
-    if (!_channel->Open(path)) return;
+    _isChannelOpened = _channel->Open(path);
+    if (!_isChannelOpened) return;
 
     _count = _channel->Count();
     emit opened();
@@ -33,7 +34,7 @@ void DataEntryModel::open(const QString &path)
 
 void DataEntryModel::seek(quint64 index)
 {
-    if (_channel == NULL) return;
-    _frame->frame = _channel->Read(index);
+    if (_isChannelOpened)
+        _frame->frame = _channel->Read(index);
 }
 
