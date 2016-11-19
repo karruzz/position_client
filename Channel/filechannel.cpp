@@ -2,17 +2,22 @@
 
 bool FileChannel::Open(const QString &path)
 {
-    _file = new QFile(path);
-    if (!_file->exists()) return false;
-    if (!_file->open(QIODevice::ReadOnly | QIODevice::Text)) return false;
-    _fileSizeInFrames = (_file->size()) / FrameSize;
+    _filePtr = new QFile(path);
+    if (!_filePtr->exists()) return false;
+    if (!_filePtr->open(QIODevice::ReadOnly | QIODevice::Text)) return false;
+    _fileSizeInFrames = (_filePtr->size()) / FrameSize;
+    _streamPtr = new QDataStream(_filePtr);
+    _streamPtr->setByteOrder(QDataStream::LittleEndian);
     return true;
 }
 
 void FileChannel::Close()
-{
-//    if (_file != NULL) _file->close();
-//    delete _file;
+{    
+    if (_filePtr != NULL && _filePtr->isOpen()) {
+         _filePtr->close();
+         delete _streamPtr;
+    }
+    delete _filePtr;
 }
 
 quint64 FileChannel::Count()
@@ -24,12 +29,12 @@ GyroFrame FileChannel::Read(quint64 index)
 {
     auto position = index * FrameSize;
     if (position != _filePosition) {
-        _file->seek(position);
+        _filePtr->seek(position);
         _filePosition = position;
     }
 
     GyroFrame result;
-    result.Deserialize(_file->read(FrameSize));
+    *_streamPtr >> result;
     _filePosition += FrameSize;
 
     return result;

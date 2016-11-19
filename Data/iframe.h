@@ -6,7 +6,7 @@
 class IFrame
 {
     public:
-        virtual void Deserialize(QByteArray bytes) = 0;
+        virtual int Size();
 };
 
 #endif // IFRAME_H

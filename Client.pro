@@ -21,7 +21,6 @@ include(deployment.pri)
 HEADERS += \
     Model/dataentrymodel.h \
     Model/roleentrymodel.h \
-    Data/iframe.h \
     Data/gyroframe.h \
     Math/point3d.h \
     Channel/ichannel.h \

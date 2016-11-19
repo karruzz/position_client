@@ -1,6 +1,7 @@
 #ifndef FILECHANNEL_H
 #define FILECHANNEL_H
 
+#include <QDataStream>
 #include <QFile>
 #include <QUrl>
 
@@ -16,8 +17,10 @@ class FileChannel : public IChannel<GyroFrame>
         GyroFrame Read(quint64 index);
         quint64 Count();
     private:
-        QFile *_file;
-        const int FrameSize = sizeof(GyroFrame);
+        QFile *_filePtr;
+        QDataStream *_streamPtr;
+
+        const int FrameSize = 80;
         quint64 _filePosition = 0;
         quint64 _fileSizeInFrames = 0;
 };
