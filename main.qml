@@ -68,7 +68,7 @@ ApplicationWindow {
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                     anchors.fill: parent
-                    text: dataEntry.angle.Roll
+                    text: dataEntry.frame.Roll.toFixed(7)
                 }
             }
 
@@ -79,7 +79,7 @@ ApplicationWindow {
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                     anchors.fill: parent
-                    text: dataEntry.angle.Pitch
+                    text: dataEntry.frame.Pitch.toFixed(7)
                 }
             }
 
@@ -90,7 +90,7 @@ ApplicationWindow {
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                     anchors.fill: parent
-                    text: dataEntry.angle.Yaw
+                    text: dataEntry.frame.Yaw.toFixed(7)
                 }
             }
         }
@@ -103,10 +103,12 @@ ApplicationWindow {
         anchors.top: framePanel.bottom
         anchors.bottom: parent.bottom
 
-        Scroll{ height: 8
+        Scroll{ visible: dataEntry.count
+                height: 8
                 width: graphPanel.width
                 anchors.left: graphPanel.left
                 anchors.bottom: graphPanel.bottom
+                maximum: dataEntry.count
 
                 onSeek: {
                     dataEntry.seek(index)

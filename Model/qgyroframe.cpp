@@ -3,19 +3,20 @@
 QGyroFrame::QGyroFrame(QObject *parent)
     : QObject(parent)
 {
+    data.Acs.X = data.Acs.Y = data.Acs.Z = 0;
 }
 
 double QGyroFrame::getRoll()
 {
-    return frame.Angle.X;
+    return data.Acs.X;
 }
 
 double QGyroFrame::getPitch()
 {
-    return frame.Angle.Y;
+    return data.Acs.Y;
 }
 
 double QGyroFrame::getYaw()
 {
-    return frame.Angle.Z;
+    return data.Acs.Z;
 }

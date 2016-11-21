@@ -11,6 +11,9 @@
 class FileChannel : public IChannel<GyroFrame>
 {
     public:
+        explicit FileChannel();
+        ~FileChannel();
+
         bool Open(const QString &path);
         void Close();
 

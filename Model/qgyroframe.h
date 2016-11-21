@@ -9,9 +9,9 @@ class QGyroFrame : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY( double Roll  READ getRoll)
-    Q_PROPERTY( double Pitch READ getPitch)
-    Q_PROPERTY( double Yaw   READ getYaw)
+    Q_PROPERTY( double Roll  READ getRoll NOTIFY changed)
+    Q_PROPERTY( double Pitch READ getPitch NOTIFY changed)
+    Q_PROPERTY( double Yaw   READ getYaw NOTIFY changed)
 
 public:
     explicit QGyroFrame(QObject *parent = 0);
@@ -20,8 +20,10 @@ public:
     double getPitch();
     double getYaw();
 
-    GyroFrame frame;
+    GyroFrame data;
 
+signals:
+    void changed();
 };
 
 #endif // QGYROFRAME

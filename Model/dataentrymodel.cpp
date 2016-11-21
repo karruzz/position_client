@@ -1,12 +1,9 @@
 #include "dataentrymodel.h"
 
 DataEntryModel::DataEntryModel(QObject *parent)
-    : QObject(parent), _channel(new FileChannel), _frame(new QGyroFrame)
-{
-    _frame->frame.Angle.X = 10;
-    _frame->frame.Angle.Y = 11;
-    _frame->frame.Angle.Z = 12;
-}
+    : QObject(parent), _frame(new QGyroFrame(this)), _channel(new FileChannel),
+      _count(0)
+{ }
 
 QGyroFrame *DataEntryModel::frame() const
 {
@@ -20,21 +17,19 @@ quint64 DataEntryModel::count() const
 
 DataEntryModel::~DataEntryModel()
 {
-    if (_isChannelOpened) _channel->Close();
+    delete _channel;
 }
 
 void DataEntryModel::open(const QString &path)
 {
-    _isChannelOpened = _channel->Open(path);
-    if (!_isChannelOpened) return;
-
+    if (!_channel->Open(path)) return;
     _count = _channel->Count();
     emit opened();
 }
 
 void DataEntryModel::seek(quint64 index)
 {
-    if (_isChannelOpened)
-        _frame->frame = _channel->Read(index);
+    _frame->data = _channel->Read(index);
+    emit _frame->changed();
 }
 

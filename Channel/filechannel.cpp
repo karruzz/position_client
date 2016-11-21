@@ -1,7 +1,17 @@
 #include "filechannel.h"
 
+FileChannel::FileChannel() : _filePtr(NULL), _streamPtr(NULL)
+{ }
+
+FileChannel::~FileChannel()
+{
+    Close();
+}
+
 bool FileChannel::Open(const QString &path)
 {
+    if (_filePtr) Close();
+
     _filePtr = new QFile(path);
     if (!_filePtr->exists()) return false;
     if (!_filePtr->open(QIODevice::ReadOnly | QIODevice::Text)) return false;
@@ -13,11 +23,11 @@ bool FileChannel::Open(const QString &path)
 
 void FileChannel::Close()
 {    
-    if (_filePtr != NULL && _filePtr->isOpen()) {
-         _filePtr->close();
-         delete _streamPtr;
-    }
+    if (!_filePtr) return;
+
+    if (_filePtr->isOpen()) _filePtr->close();
     delete _filePtr;
+    _filePtr = NULL;
 }
 
 quint64 FileChannel::Count()
