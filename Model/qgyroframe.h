@@ -3,7 +3,7 @@
 
 #include <QtCore>
 
-#include "Data/gyroframe.h"
+#include "Data/Devices/gyroframe.h"
 
 class QGyroFrame : public QObject
 {

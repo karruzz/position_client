@@ -1,9 +1,11 @@
 #include "dataentrymodel.h"
 
 DataEntryModel::DataEntryModel(QObject *parent)
-    : QObject(parent), _frame(new QGyroFrame(this)), _channel(new FileChannel),
+    : QObject(parent), _frame(new QGyroFrame(this)),
+      _channel(new TFileChannel<GyroFrame>()),
       _count(0)
-{ }
+{
+}
 
 QGyroFrame *DataEntryModel::frame() const
 {

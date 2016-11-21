@@ -6,7 +6,7 @@
 #include <QThread>
 #include <QWaitCondition>
 
-#include "Data/gyroframe.h"
+#include "Data/Devices/gyroframe.h"
 #include "Channel/ichannel.h"
 #include "Channel/filechannel.h"
 

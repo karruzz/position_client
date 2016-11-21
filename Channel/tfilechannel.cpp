@@ -1,14 +1,19 @@
-#include "filechannel.h"
+#include "tfilechannel.h"
 
-FileChannel::FileChannel() : _filePtr(NULL), _streamPtr(NULL)
+template class TFileChannel<GyroFrame>;
+
+template <class T>
+TFileChannel<T>::TFileChannel() : _filePtr(NULL), _streamPtr(NULL)
 { }
 
-FileChannel::~FileChannel()
+template <class T>
+TFileChannel<T>::~TFileChannel()
 {
     Close();
 }
 
-bool FileChannel::Open(const QString &path)
+template <class T>
+bool TFileChannel<T>::Open(const QString &path)
 {
     if (_filePtr) Close();
 
@@ -21,8 +26,10 @@ bool FileChannel::Open(const QString &path)
     return true;
 }
 
-void FileChannel::Close()
-{    
+
+template <class T>
+void TFileChannel<T>::Close()
+{
     if (!_filePtr) return;
 
     if (_filePtr->isOpen()) _filePtr->close();
@@ -30,12 +37,14 @@ void FileChannel::Close()
     _filePtr = NULL;
 }
 
-quint64 FileChannel::Count()
+template <class T>
+quint64 TFileChannel<T>::Count()
 {
     return _fileSizeInFrames;
 }
 
-GyroFrame FileChannel::Read(quint64 index)
+template <class T>
+T TFileChannel<T>::Read(quint64 index)
 {
     auto position = index * FrameSize;
     if (position != _filePosition) {
@@ -43,7 +52,7 @@ GyroFrame FileChannel::Read(quint64 index)
         _filePosition = position;
     }
 
-    GyroFrame result;
+    T result;
     *_streamPtr >> result;
     _filePosition += FrameSize;
 

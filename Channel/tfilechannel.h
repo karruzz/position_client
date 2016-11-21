@@ -1,24 +1,26 @@
-#ifndef FILECHANNEL_H
-#define FILECHANNEL_H
+#ifndef TFILECHANNEL
+#define TFILECHANNEL
 
 #include <QDataStream>
 #include <QFile>
 #include <QUrl>
 
 #include "ichannel.h"
-#include "Data/gyroframe.h"
+#include "Data/Devices/gyroframe.h"
 
-class FileChannel : public IChannel<GyroFrame>
+template <class T>
+class TFileChannel : public IChannel<T>
 {
     public:
-        explicit FileChannel();
-        ~FileChannel();
+        explicit TFileChannel();
+        ~TFileChannel();
 
         bool Open(const QString &path);
         void Close();
 
-        GyroFrame Read(quint64 index);
+        T Read(quint64 index);
         quint64 Count();
+
     private:
         QFile *_filePtr;
         QDataStream *_streamPtr;
@@ -28,5 +30,5 @@ class FileChannel : public IChannel<GyroFrame>
         quint64 _fileSizeInFrames = 0;
 };
 
-#endif // FILECHANNEL_H
+#endif // TFILECHANNEL
 

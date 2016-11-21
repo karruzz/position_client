@@ -5,8 +5,8 @@
 #include <QtGui>
 
 #include "qgyroframe.h"
-#include "Data/gyroframe.h"
-#include "Channel/filechannel.h"
+#include "Channel/tfilechannel.h"
+#include "Data/Devices/gyroframe.h"
 
 class DataEntryModel : public QObject
 {
@@ -31,7 +31,7 @@ public slots:
 
 private:
     QGyroFrame *_frame;
-    FileChannel *_channel;
+    TFileChannel<GyroFrame> *_channel;
     quint64 _count;
 };
 

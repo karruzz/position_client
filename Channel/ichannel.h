@@ -2,7 +2,6 @@
 #define ICHANNEL_H
 
 #include <QtGlobal>
-#include "Data/gyroframe.h"
 
 template<class T>
 class IChannel
