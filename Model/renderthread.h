@@ -8,7 +8,6 @@
 
 #include "Data/Devices/gyroframe.h"
 #include "Channel/ichannel.h"
-#include "Channel/filechannel.h"
 
 class RenderThread : public QThread
 {

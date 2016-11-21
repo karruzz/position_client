@@ -3,5 +3,6 @@
         <file>main.qml</file>
         <file>FileDialogs.qml</file>
         <file>Scroll.qml</file>
+        <file>Chart.qml</file>
     </qresource>
 </RCC>

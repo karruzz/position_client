@@ -9,16 +9,18 @@ class QGyroFrame : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY( double Roll  READ getRoll NOTIFY changed)
-    Q_PROPERTY( double Pitch READ getPitch NOTIFY changed)
-    Q_PROPERTY( double Yaw   READ getYaw NOTIFY changed)
+    Q_PROPERTY( quint64 Time  READ Time NOTIFY changed)
+    Q_PROPERTY( double Roll  READ Roll NOTIFY changed)
+    Q_PROPERTY( double Pitch READ Pitch NOTIFY changed)
+    Q_PROPERTY( double Yaw   READ Yaw NOTIFY changed)
 
 public:
     explicit QGyroFrame(QObject *parent = 0);
 
-    double getRoll();
-    double getPitch();
-    double getYaw();
+    quint64 Time() const { return data.TimeStamp; }
+    double Roll() const { return data.Angle.X; }
+    double Pitch() const { return data.Angle.Y; }
+    double Yaw() const { return data.Angle.Z; }
 
     GyroFrame data;
 

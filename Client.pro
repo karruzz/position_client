@@ -7,7 +7,8 @@ SOURCES += main.cpp \
     Model/dataentrymodel.cpp \
     Model/renderthread.cpp \
     Model/qgyroframe.cpp \
-    Channel/tfilechannel.cpp
+    Channel/tfilechannel.cpp \
+    View/chart.cpp
 
 RESOURCES += qml.qrc
 
@@ -25,7 +26,8 @@ HEADERS += \
     Model/renderthread.h \
     Model/qgyroframe.h \
     Data/iframe.h \
-    Channel/tfilechannel.h
+    Channel/tfilechannel.h \
+    View/chart.h
 
 DISTFILES +=
 

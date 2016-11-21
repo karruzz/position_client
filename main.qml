@@ -2,11 +2,11 @@ import QtQuick 2.3
 import QtQuick.Window 2.2
 import QtQuick.Controls 1.2
 import QtQuick.Layouts 1.0
-import GyroData 1.0
+import Client.Components 1.0
 
 ApplicationWindow {
     visible: true
-    width: 640
+    width: 840
     height: 480
     title: qsTr("Gyro test")
 
@@ -48,11 +48,38 @@ ApplicationWindow {
         RowLayout {
             id: layout
             anchors.fill: parent
-            spacing: 6
+            spacing: 4
+
 
             Rectangle {
-                width: 100
+                width: 70
                 height: parent.height
+                color: "transparent"
+                Text {
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    anchors.fill: parent
+                    text: "Time:"
+                }
+            }
+
+            Rectangle {
+                width: 120
+                height: parent.height
+                color: "transparent"
+                Text {
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    anchors.fill: parent
+                    text: dataEntry.frame.Time
+                }
+            }
+
+
+            Rectangle {
+                width: 70
+                height: parent.height
+                color: "transparent"
                 Text {
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
@@ -62,8 +89,9 @@ ApplicationWindow {
             }
 
             Rectangle {
-                width: 100
+                width: 70
                 height: parent.height
+                color: "transparent"
                 Text {
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
@@ -73,8 +101,9 @@ ApplicationWindow {
             }
 
             Rectangle {
-                width: 100
+                width: 70
                 height: parent.height
+                color: "transparent"
                 Text {
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
@@ -84,15 +113,16 @@ ApplicationWindow {
             }
 
             Rectangle {
-                width: 100
+                width: 70
                 height: parent.height
+                color: "transparent"
                 Text {
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                     anchors.fill: parent
                     text: dataEntry.frame.Yaw.toFixed(7)
                 }
-            }
+            }            
         }
     }
 
@@ -102,6 +132,11 @@ ApplicationWindow {
         width: parent.width
         anchors.top: framePanel.bottom
         anchors.bottom: parent.bottom
+
+        Chart
+        {
+            anchors.fill: graphPanel
+        }
 
         Scroll{ visible: dataEntry.count
                 height: 8

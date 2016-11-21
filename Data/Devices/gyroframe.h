@@ -23,17 +23,17 @@ inline QDataStream &operator >>(QDataStream &out, GyroFrame &frame)
 {
     out >> frame.TimeStamp;
 
-    out >> frame.Acs.X;
-    out >> frame.Acs.Y;
-    out >> frame.Acs.Z;
+    out >> frame.Angle.X;
+    out >> frame.Angle.Y;
+    out >> frame.Angle.Z;
 
     out >> frame.Omega.X;
     out >> frame.Omega.Y;
     out >> frame.Omega.Z;
 
-    out >> frame.Angle.X;
-    out >> frame.Angle.Y;
-    out >> frame.Angle.Z;
+    out >> frame.Acs.X;
+    out >> frame.Acs.Y;
+    out >> frame.Acs.Z;
 
     return out;
 }

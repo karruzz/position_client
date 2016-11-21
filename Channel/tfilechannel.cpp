@@ -26,7 +26,6 @@ bool TFileChannel<T>::Open(const QString &path)
     return true;
 }
 
-
 template <class T>
 void TFileChannel<T>::Close()
 {
