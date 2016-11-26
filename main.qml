@@ -2,13 +2,11 @@ import QtQuick 2.3
 import QtQuick.Window 2.2
 import QtQuick.Controls 1.2
 import QtQuick.Layouts 1.0
-import Client.Components 1.0
+import GyroData 1.0
 
-ApplicationWindow {
-    visible: true
+Item {
     width: 840
     height: 480
-    title: qsTr("Gyro test")
 
     Rectangle
     {
@@ -135,6 +133,8 @@ ApplicationWindow {
 
         Chart
         {
+            id: chartControl
+            objectName: "chartObj"
             anchors.fill: graphPanel
         }
 

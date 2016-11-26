@@ -46,14 +46,16 @@ template <class T>
 T TFileChannel<T>::Read(quint64 index)
 {
     auto position = index * FrameSize;
-    if (position != _filePosition) {
-        _filePtr->seek(position);
-        _filePosition = position;
-    }
+    _filePtr->seek(position);
+
+//    if (position != _filePosition) {
+//        _filePtr->seek(position);
+//        _filePosition = position;
+//    }
 
     T result;
     *_streamPtr >> result;
-    _filePosition += FrameSize;
+//    _filePosition += FrameSize;
 
     return result;
 }

@@ -24,6 +24,7 @@ public:
 signals:
     void opened();
     void seeked();
+    void pointsUpdated(const QVector<QPointF> &points);
 
 public slots:
     void open(const QString &path);
