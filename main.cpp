@@ -5,7 +5,6 @@
 #include <QtQml>
 
 #include <QtQuick/QQuickView>
-#include <QObject>
 
 #include "Model/dataentrymodel.h"
 #include "View/chart.h"
@@ -13,10 +12,11 @@
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+    QQmlApplicationEngine engine;
 
-    qmlRegisterType<DataEntryModel>("GyroData", 1,0, "DataEntryModel");
-    qmlRegisterType<QGyroFrame>("GyroData", 1,0, "QGyroFrame");
-    qmlRegisterType<Chart>("GyroData", 1,0, "Chart");
+    qmlRegisterType<DataEntryModel>("Client.Components", 1,0, "DataEntryModel");
+    qmlRegisterType<QGyroFrame>("Client.Components", 1,0, "QGyroFrame");
+    qmlRegisterType<Chart>("Client.Components", 1,0, "Chart");
 
     qRegisterMetaType<DataEntryModel*>("DataEntryModel");
     qRegisterMetaType<QGyroFrame*>("QGyroFrame");
@@ -34,7 +34,6 @@ int main(int argc, char *argv[])
     Chart *chart = root->findChild<Chart*>("chartObj");
     if (chart)
         QObject::connect(&model, &DataEntryModel::pointsUpdated, chart, &Chart::setPoints);
-//    QObject::connect(&model, SIGNAL(seeked(int i)), chart, SLOT(seeked(int i)));
 
     return app.exec();
 }

@@ -35,13 +35,12 @@ void DataEntryModel::seek(quint64 index)
     emit _frame->changed();
     emit seeked();
 
+    auto frames = _channel->Read(index, 800);
     QVector<QPointF> points;
-    points.clear();
-    points.resize(800);
-    for (int i = 0; i<800; i++){
-        auto frame = _channel->Read(index + i);
-        points[i] = QPointF(i, frame.Omega.X * 100 + 200) ;
-    }
+    points.reserve(800);
+    for (auto i = 0; i < 800; i++)
+        points.append( QPointF(i, frames[i].Angle.Y * 1000 + 200) );
+
     emit pointsUpdated(points);
 }
 

@@ -17,7 +17,7 @@ class QGyroFrame : public QObject
 public:
     explicit QGyroFrame(QObject *parent = 0);
 
-    quint64 Time() const { return data.TimeStamp; }
+    quint64 Time() const { return data.Counter; }
     double Roll() const { return data.Angle.X; }
     double Pitch() const { return data.Angle.Y; }
     double Yaw() const { return data.Angle.Z; }

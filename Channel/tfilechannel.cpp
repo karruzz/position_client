@@ -19,8 +19,8 @@ bool TFileChannel<T>::Open(const QString &path)
 
     _filePtr = new QFile(path);
     if (!_filePtr->exists()) return false;
-    if (!_filePtr->open(QIODevice::ReadOnly | QIODevice::Text)) return false;
-    _fileSizeInFrames = (_filePtr->size()) / FrameSize;
+    if (!_filePtr->open(QIODevice::ReadOnly)) return false;
+    _framesCount = (_filePtr->size()) / FrameSize;
     _streamPtr = new QDataStream(_filePtr);
     _streamPtr->setByteOrder(QDataStream::LittleEndian);
     return true;
@@ -39,7 +39,7 @@ void TFileChannel<T>::Close()
 template <class T>
 quint64 TFileChannel<T>::Count()
 {
-    return _fileSizeInFrames;
+    return _framesCount;
 }
 
 template <class T>
@@ -48,14 +48,27 @@ T TFileChannel<T>::Read(quint64 index)
     auto position = index * FrameSize;
     _filePtr->seek(position);
 
-//    if (position != _filePosition) {
-//        _filePtr->seek(position);
-//        _filePosition = position;
-//    }
-
     T result;
     *_streamPtr >> result;
-//    _filePosition += FrameSize;
+
+    return result;
+}
+
+template <class T>
+QVector<T> TFileChannel<T>::Read(quint64 index, int count)
+{
+    auto position = index * FrameSize;
+    _filePtr->seek(position);
+
+    QVector<T> result;
+    result.reserve(count);
+    int i = 0;
+    while (i++ < count)
+    {
+        T packet;
+        *_streamPtr >> packet;
+        result.append(packet);
+    }
 
     return result;
 }

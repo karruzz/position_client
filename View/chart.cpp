@@ -9,15 +9,8 @@ Chart::Chart(QQuickItem *parent)
 
 void Chart::setPoints(const QVector<QPointF> &points)
 {
-    _points.clear();
-
     if (points.isEmpty()) return;
-
-    _points.resize(points.size());
-
-    for (int i = 0; i < points.size(); i++) {
-        _points[i] = QPointF(points[i]);
-    }
+    _points = points;
 
     update();
 }

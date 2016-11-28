@@ -1,10 +1,14 @@
 #ifndef IFRAME_H
 #define IFRAME_H
 
+#include <QtGlobal>
+
 class IFrame
 {
     public:
-        virtual int Size();
+        quint64 Counter;
+
+        virtual int Size() = 0;
 };
 
 #endif // IFRAME_H
