@@ -14,10 +14,9 @@ class Dispatcher : public QObject
     Q_PROPERTY( quint64 count READ count NOTIFY opened)
 
 public:
-    explicit Dispatcher(QObject *parent = 0);
+    explicit Dispatcher(QQuickView *parent = 0);
     ~Dispatcher();
 
-    void SetRoot(QQuickItem *root) { _root = root; }
     quint64 count() const { return _count; }
 
 signals:
@@ -28,9 +27,8 @@ public slots:
     void seek(quint64 index);
 
 private:
-    QObject *_parent;
+    QQuickView *_parent;
     quint64 _count;
-    QQuickItem *_root;
 
     GyroChartModel *_gyroChart;
     TFileChannel<GyroFrame> *_channel;

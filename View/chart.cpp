@@ -2,7 +2,7 @@
 
 Chart::Chart(QQuickItem *parent)
     : QQuickItem(parent),
-      _min(0), _max(0)
+      _min(-0.1), _max(0.1), _color("red")
 {
     setFlag(ItemHasContents);
 }
@@ -31,7 +31,7 @@ QSGNode *Chart::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
         node->setGeometry(geometry);
         node->setFlag(QSGNode::OwnsGeometry);
         material = new QSGFlatColorMaterial;
-        material->setColor("Red");
+        material->setColor(_color);
         node->setMaterial(material);
         node->setFlag(QSGNode::OwnsMaterial);
         node->markDirty(QSGNode::DirtyMaterial);
@@ -42,11 +42,15 @@ QSGNode *Chart::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
         material = static_cast<QSGFlatColorMaterial*>(node->material());
     }
 
-    QSGGeometry::Point2D *vertices = geometry->vertexDataAsPoint2D();
+    auto delta = _max - _min;
 
+    QRectF bounds = boundingRect();
+    QSGGeometry::Point2D *vertices = geometry->vertexDataAsPoint2D();
     for (int i = 0; i < size; ++i) {
         const QPointF &p = _points[i];
-        vertices[i].set(p.x(), p.y());
+        float x = p.x() / size * bounds.width();
+        float y = (1.0 - (p.y() - _min) / delta) * bounds.height();
+        vertices[i].set(x, y);
     }
 
     node->markDirty(QSGNode::DirtyGeometry);

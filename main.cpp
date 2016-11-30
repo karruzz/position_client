@@ -25,7 +25,5 @@ int main(int argc, char *argv[])
     viewer->setSource(QUrl(QStringLiteral("qrc:/main.qml")));
     viewer->show();
 
-    model.SetRoot(viewer->rootObject());
-
     return app.exec();
 }

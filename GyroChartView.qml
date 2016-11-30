@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQuick.Layouts 1.0
 import Client.Components 1.0
 
 
@@ -8,11 +9,34 @@ Item{
     height: parent.height
     anchors.fill: parent
 
-    Chart
-    {
-        id: chartControl
-        objectName: "chartObj"
+    ColumnLayout {
+        id: layout
         anchors.fill: parent
+        spacing: 2
+
+        Chart
+        {
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            objectName: "gyroChartAngleX"
+            color: "red"
+        }
+
+        Chart
+        {
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            objectName: "gyroChartAngleY"
+            color: "blue"
+        }
+
+        Chart
+        {
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            objectName: "gyroChartAngleZ"
+            color: "green"
+        }
     }
 }
 

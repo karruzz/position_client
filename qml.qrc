@@ -3,7 +3,6 @@
         <file>main.qml</file>
         <file>FileDialogs.qml</file>
         <file>Scroll.qml</file>
-        <file>Chart.qml</file>
         <file>GyroChartView.qml</file>
     </qresource>
 </RCC>

@@ -13,12 +13,14 @@ class GyroChartModel : public QObject
     Q_OBJECT
 
     public:
-        explicit GyroChartModel(QObject *parent = 0, Chart *view = 0, IChannel<GyroFrame> *channel = 0);
+        explicit GyroChartModel(QQuickView *parent = 0, IChannel<GyroFrame> *channel = 0);
 
     void seek(quint64 index);
 
     signals:
         void AngleXUpdated(const QVector<QPointF> &points);
+        void AngleYUpdated(const QVector<QPointF> &points);
+        void AngleZUpdated(const QVector<QPointF> &points);
 
     private:
         IChannel<GyroFrame> *_channel;

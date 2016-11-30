@@ -6,8 +6,8 @@ import Client.Components 1.0
 
 Item {
         visible: true
-        width: 840
-        height: 280
+        width: 640
+        height: 80
 
         Rectangle
         {
