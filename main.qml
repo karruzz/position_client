@@ -27,7 +27,7 @@ Item {
                         console.log("Canceled")
                     }
                     onAccepted: {
-                        dataEntry.open(fileDialog.fileUrl.toString().replace("file://",""))
+                        dispatcher.open(fileDialog.fileUrl.toString().replace("file://",""))
                         console.log("File selected: " + fileUrl)
                     }
                 }
@@ -36,96 +36,19 @@ Item {
             }
         }
 
-        Rectangle
-        {
-            id: framePanel
-            width: parent.width
-            height: 50
-            anchors.top: buttonPanel.bottom
-            color: "lightgray"
 
-            RowLayout {
-                id: layout
-                anchors.fill: parent
-                spacing: 4
+        Scroll{ visible: dispatcher.count
+                height: 8
+                width: parent.width
+                anchors.left: parent.left
+                anchors.bottom: parent.bottom
+                maximum: dispatcher.count
 
-
-                Rectangle {
-                    width: 70
-                    height: parent.height
-                    color: "transparent"
-                    Text {
-                        verticalAlignment: Text.AlignVCenter
-                        horizontalAlignment: Text.AlignHCenter
-                        anchors.fill: parent
-                        text: "Time:"
-                    }
+                onSeek: {
+                    dispatcher.seek(index)
                 }
 
-                Rectangle {
-                    width: 120
-                    height: parent.height
-                    color: "transparent"
-                    Text {
-                        verticalAlignment: Text.AlignVCenter
-                        horizontalAlignment: Text.AlignHCenter
-                        anchors.fill: parent
-                        text: dataEntry.frame.Time
-                    }
-                }
-
-
-                Rectangle {
-                    width: 70
-                    height: parent.height
-                    color: "transparent"
-                    Text {
-                        verticalAlignment: Text.AlignVCenter
-                        horizontalAlignment: Text.AlignHCenter
-                        anchors.fill: parent
-                        text: "Angle:"
-                    }
-                }
-
-                Rectangle {
-                    width: 70
-                    height: parent.height
-                    color: "transparent"
-                    Text {
-                        verticalAlignment: Text.AlignVCenter
-                        horizontalAlignment: Text.AlignHCenter
-                        anchors.fill: parent
-                        text: dataEntry.frame.Roll.toFixed(7)
-                    }
-                }
-
-                Rectangle {
-                    width: 70
-                    height: parent.height
-                    color: "transparent"
-                    Text {
-                        verticalAlignment: Text.AlignVCenter
-                        horizontalAlignment: Text.AlignHCenter
-                        anchors.fill: parent
-                        text: dataEntry.frame.Pitch.toFixed(7)
-                    }
-                }
-
-                Rectangle {
-                    width: 70
-                    height: parent.height
-                    color: "transparent"
-                    Text {
-                        verticalAlignment: Text.AlignVCenter
-                        horizontalAlignment: Text.AlignHCenter
-                        anchors.fill: parent
-                        text: dataEntry.frame.Yaw.toFixed(7)
-                    }
-                }
-            }
         }
-
-
 
 
     Window {
@@ -133,33 +56,9 @@ Item {
         width: 800
         height: 400
 
-        Rectangle
+        GyroChartView
         {
-            id: graphPanel
-            width: parent.width
-            height: parent.height
-            anchors.top: framePanel.bottom
-            anchors.bottom: parent.bottom
-
-            Chart
-            {
-                id: chartControl
-                objectName: "chartObj"
-                anchors.fill: parent
-            }
-
-            Scroll{ visible: dataEntry.count
-                    height: 8
-                    width: parent.width
-                    anchors.left: parent.left
-                    anchors.bottom: parent.bottom
-                    maximum: dataEntry.count
-
-                    onSeek: {
-                        dataEntry.seek(index)
-                    }
-
-            }
+            anchors.fill: parent
         }
     }
 }

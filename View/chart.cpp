@@ -21,9 +21,11 @@ QSGNode *Chart::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
     QSGGeometry *geometry = 0;
     QSGFlatColorMaterial *material = 0;
 
+    auto size = _points.size();
+
     if (!oldNode) {
         node = new QSGGeometryNode;
-        geometry = new QSGGeometry(QSGGeometry::defaultAttributes_Point2D(), _points.size());
+        geometry = new QSGGeometry(QSGGeometry::defaultAttributes_Point2D(), size + 1);
         geometry->setLineWidth(2);
         geometry->setDrawingMode(GL_LINE_STRIP);
         node->setGeometry(geometry);
@@ -36,13 +38,13 @@ QSGNode *Chart::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
     } else {
         node = static_cast<QSGGeometryNode *>(oldNode);
         geometry = node->geometry();
-        geometry->allocate(_points.size());
+        geometry->allocate(size);
         material = static_cast<QSGFlatColorMaterial*>(node->material());
     }
 
     QSGGeometry::Point2D *vertices = geometry->vertexDataAsPoint2D();
 
-    for (int i = 0; i < _points.size(); ++i) {
+    for (int i = 0; i < size; ++i) {
         const QPointF &p = _points[i];
         vertices[i].set(p.x(), p.y());
     }

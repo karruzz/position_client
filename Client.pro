@@ -8,7 +8,9 @@ SOURCES += main.cpp \
     Model/renderthread.cpp \
     Model/qgyroframe.cpp \
     Channel/tfilechannel.cpp \
-    View/chart.cpp
+    View/chart.cpp \
+    Core/dispatcher.cpp \
+    Subsystems/Gyro/gyrochartmodel.cpp
 
 RESOURCES += qml.qrc
 
@@ -27,7 +29,9 @@ HEADERS += \
     Model/qgyroframe.h \
     Data/iframe.h \
     Channel/tfilechannel.h \
-    View/chart.h
+    View/chart.h \
+    Core/dispatcher.h \
+    Subsystems/Gyro/gyrochartmodel.h
 
 DISTFILES +=
 
