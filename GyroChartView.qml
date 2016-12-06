@@ -3,39 +3,63 @@ import QtQuick.Layouts 1.0
 import Client.Components 1.0
 
 
-Item{
+Rectangle{
     id: container
     width: parent.width
     height: parent.height
     anchors.fill: parent
+    color: "gray"
 
     ColumnLayout {
         id: layout
         anchors.fill: parent
-        spacing: 2
+        spacing: 1
 
-        Chart
-        {
+        Rectangle{
             Layout.fillHeight: true
             Layout.fillWidth: true
-            objectName: "gyroChartAngleX"
-            color: "red"
+            border.color: "lightsteelblue"
+            border.width: 1
+            anchors.margins: 2
+            color: "whitesmoke"
+
+            Chart
+            {
+                anchors.fill: parent
+                objectName: "gyroChartAngleX"
+                color: "green"
+            }
+        }
+        Rectangle{
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            border.color: "lightsteelblue"
+            border.width: 1
+            anchors.margins: 2
+            color: "whitesmoke"
+
+            Chart
+            {
+                anchors.fill: parent
+                objectName: "gyroChartAngleY"
+                color: "blue"
+            }
         }
 
-        Chart
-        {
+        Rectangle{
             Layout.fillHeight: true
             Layout.fillWidth: true
-            objectName: "gyroChartAngleY"
-            color: "blue"
-        }
+            border.color: "lightsteelblue"
+            border.width: 1
+            anchors.margins: 2
+            color: "whitesmoke"
 
-        Chart
-        {
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            objectName: "gyroChartAngleZ"
-            color: "green"
+            Chart
+            {
+                anchors.fill: parent
+                objectName: "gyroChartAngleZ"
+                color: "red"
+            }
         }
     }
 }

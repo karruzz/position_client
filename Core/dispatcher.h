@@ -4,9 +4,9 @@
 #include <QtCore>
 #include <QtQuick>
 
-#include "Channel/tfilechannel.h"
-#include "Data/Devices/gyroframe.h"
-#include "Subsystems/Gyro/gyrochartmodel.h"
+#include "Channel/TFileChannel.h"
+#include "Data/Devices/GyroFrame.h"
+#include "Subsystems/Gyro/GyroChartModel.h"
 
 class Dispatcher : public QObject
 {

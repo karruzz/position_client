@@ -4,9 +4,9 @@
 #include <QtCore>
 #include <QtQuick>
 
-#include "Channel/ichannel.h"
-#include "Data/Devices/gyroframe.h"
-#include "View/chart.h"
+#include "Channel/IChannel.h"
+#include "Data/Devices/GyroFrame.h"
+#include "UI/Controls/Chart/Chart.h"
 
 class GyroChartModel : public QObject
 {

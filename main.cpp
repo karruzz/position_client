@@ -6,15 +6,17 @@
 
 #include <QtQuick/QQuickView>
 
-#include "Core/dispatcher.h"
-#include "View/chart.h"
+#include "Core/Dispatcher.h"
+#include "UI/Controls/Chart/Chart.h"
+#include "UI/Controls/3D/Projection.h"
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    qmlRegisterType<Dispatcher>("Client.Components", 1,0, "Dispatcher");
-    qmlRegisterType<Chart>("Client.Components", 1,0, "Chart");
+    qmlRegisterType<Dispatcher>("Client.Components", 1, 0, "Dispatcher");
+    qmlRegisterType<Chart>("Client.Components", 1, 0, "Chart");
+    qmlRegisterType<Projection>("Client.Components", 1, 0, "Projection");
 
     QQuickView *viewer = new QQuickView;
     viewer->setTitle(QStringLiteral("Gyro client"));

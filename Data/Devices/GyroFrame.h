@@ -3,8 +3,8 @@
 
 #include <QDataStream>
 
-#include "Data/iframe.h"
-#include "Math/point3d.h"
+#include "Data/IFrame.h"
+#include "Math/Point3d.h"
 
 class GyroFrame : public IFrame
 {

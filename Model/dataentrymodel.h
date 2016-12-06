@@ -5,8 +5,8 @@
 #include <QtGui>
 
 #include "qgyroframe.h"
-#include "Channel/tfilechannel.h"
-#include "Data/Devices/gyroframe.h"
+#include "Channel/TFileChannel.h"
+#include "Data/Devices/GyroFrame.h"
 
 class DataEntryModel : public QObject
 {

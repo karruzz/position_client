@@ -1,4 +1,4 @@
-#include "dispatcher.h"
+#include "Dispatcher.h"
 
 Dispatcher::Dispatcher(QQuickView *parent)
     : QObject(parent), _parent(parent), _count(0), _channel(NULL)

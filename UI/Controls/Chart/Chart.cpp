@@ -1,4 +1,4 @@
-#include <View/chart.h>
+#include <UI/Controls/Chart/Chart.h>
 
 Chart::Chart(QQuickItem *parent)
     : QQuickItem(parent),

@@ -38,7 +38,7 @@ Item {
 
 
         Scroll{ visible: dispatcher.count
-                height: 8
+                height: 15
                 width: parent.width
                 anchors.left: parent.left
                 anchors.bottom: parent.bottom
@@ -52,11 +52,22 @@ Item {
 
 
     Window {
-        visible: true
+        visible: dispatcher.count
         width: 800
         height: 400
 
         GyroChartView
+        {
+            anchors.fill: parent
+        }
+    }
+
+    Window {
+        visible: true
+        width: 800
+        height: 400
+
+        Projection
         {
             anchors.fill: parent
         }

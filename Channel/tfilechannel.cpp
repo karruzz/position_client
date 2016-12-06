@@ -1,4 +1,4 @@
-#include "tfilechannel.h"
+#include "TFileChannel.h"
 
 template class TFileChannel<GyroFrame>;
 

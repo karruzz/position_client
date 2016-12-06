@@ -6,8 +6,8 @@
 #include <QThread>
 #include <QWaitCondition>
 
-#include "Data/Devices/gyroframe.h"
-#include "Channel/ichannel.h"
+#include "Data/Devices/GyroFrame.h"
+#include "Channel/IChannel.h"
 
 class RenderThread : public QThread
 {
