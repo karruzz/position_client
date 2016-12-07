@@ -1,6 +1,8 @@
 #ifndef PROJECTION_H
 #define PROJECTION_H
 
+#include <QVector>
+
 #include <QtQuick/QQuickItem>
 #include <QtGui/QOpenGLShaderProgram>
 #include <QtGui/QOpenGLFunctions>
@@ -9,6 +11,9 @@
 #include <QtGui/QOpenGLBuffer>
 
 #include "Data/Devices/GyroFrame.h"
+
+#include <QSurfaceFormat>
+#include <QMatrix4x4>
 
 class ProjectionRenderer  : public QObject, protected QOpenGLFunctions
 {
@@ -29,6 +34,9 @@ private:
     QOpenGLShaderProgram *_program;
     QOpenGLVertexArrayObject *_vao;
     QOpenGLBuffer *_vbo;
+
+    QVector<GLfloat> _data;
+    QMatrix4x4 _pMatrix;
 };
 
 class Projection : public QQuickItem
