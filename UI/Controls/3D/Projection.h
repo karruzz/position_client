@@ -4,40 +4,14 @@
 #include <QVector>
 
 #include <QtQuick/QQuickItem>
-#include <QtGui/QOpenGLShaderProgram>
-#include <QtGui/QOpenGLFunctions>
-
-#include <QtGui/QOpenGLVertexArrayObject>
-#include <QtGui/QOpenGLBuffer>
 
 #include "Data/Devices/GyroFrame.h"
 
 #include <QSurfaceFormat>
 #include <QMatrix4x4>
 
-class ProjectionRenderer  : public QObject, protected QOpenGLFunctions
-{
-    Q_OBJECT
-public:
-    ProjectionRenderer() : _t(0), _program(0) { }
-    ~ProjectionRenderer();
-
-    void setT(qreal t) { _t = t; }
-    void setViewportSize(const QSize &size) { m_viewportSize = size; }
-
-public slots:
-    void paint();
-
-private:
-    QSize m_viewportSize;
-    qreal _t;
-    QOpenGLShaderProgram *_program;
-    QOpenGLVertexArrayObject *_vao;
-    QOpenGLBuffer *_vbo;
-
-    QVector<GLfloat> _data;
-    QMatrix4x4 _pMatrix;
-};
+#include "Renderer.h"
+#include "Math/Quaternion.h"
 
 class Projection : public QQuickItem
 {
@@ -45,9 +19,12 @@ class Projection : public QQuickItem
     Q_PROPERTY( GyroFrame position READ position WRITE setPosition NOTIFY positionChanged)
 
     public:
-        Projection();
+        Projection(QQuickItem *parent = 0);
         GyroFrame position() const { return _position; }
         void setPosition(GyroFrame p);
+
+        void mousePressEvent(QMouseEvent *event);
+        void hoverMoveEvent(QHoverEvent *event);
 
     signals:
         void positionChanged();
@@ -60,8 +37,18 @@ class Projection : public QQuickItem
         void handleWindowChanged(QQuickWindow *win);
 
     private:
-        ProjectionRenderer *_renderer;
+        Renderer *_renderer;
         GyroFrame _position;
+
+        // camera
+        QVector3D _camX, _camY, _camZ, _camPos;
+        Quaternion _qCamera;
+        QVector2D _mousePosLast;
+
+        float _angle;
+
+        bool _dragAngle;
+        bool _dragPosition;
 };
 
 #endif // PROJECTION_H
