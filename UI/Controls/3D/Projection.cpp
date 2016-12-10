@@ -52,8 +52,8 @@ void Projection::hoverMoveEvent(QHoverEvent *event)
         if (dx != 0 || dy != 0){
             if (_dragAngle)
             {
-                _qCamera += _qCamera.derivative(-dy/60.0, 0, 0);
-                _qCamera = Quaternion::Unit(dx / 60.0, 0, 1, 0) * _qCamera;
+                _qCamera += _qCamera.derivative(-dy / 60.0, 0, 0);
+                _qCamera = Quaternion::Unit(-dx / 60.0, 0, 1, 0) * _qCamera;
             }
             if (_dragPosition)
             {
