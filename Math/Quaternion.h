@@ -3,6 +3,7 @@
 
 #include <QtGui/qvector3d.h>
 #include <QtGui/qvector4d.h>
+#include <QMatrix4x4>
 
 #include <QtMath>
 
@@ -24,6 +25,7 @@ class Quaternion
 
         static Quaternion Unit(float angle, float x, float y, float z);
 
+        QMatrix4x4 dcm() const;
         QVector3D vector() const;
         float length() const;
         float lengthSqr() const;
@@ -45,6 +47,29 @@ class Quaternion
 inline Quaternion::Quaternion() : ap(1.0f), xp(0.0f), yp(0.0f), zp(0.0f) {}
 
 inline Quaternion::Quaternion(float a, float x, float y, float z) : ap(a), xp(x), yp(y), zp(z) {}
+
+inline QMatrix4x4 Quaternion::dcm() const
+{
+    QMatrix4x4 m;
+    const float s = 2.0;
+    m.setColumn(0, QVector4D( 1.0 - s * (yp * yp + zp * zp),
+                              s * (xp * yp + zp * ap),
+                              s * (xp * zp - yp * ap),
+                              0.0 ));
+
+    m.setColumn(1, QVector4D( s * (xp * yp - zp * ap),
+                              1.0 - s * (xp * xp + zp * zp),
+                              s * (zp * yp + xp * ap),
+                              0.0 ));
+
+    m.setColumn(2, QVector4D( s * (xp * zp + yp * ap),
+                              s * (yp * zp - xp * ap),
+                              1.0 - s * (xp * xp + yp * yp),
+                              0.0 ));
+
+    m.setColumn(3, QVector4D( 0.0, 0.0, 0.0, 1.0 ));
+    return m;
+}
 
 inline QVector3D Quaternion::vector() const
 {

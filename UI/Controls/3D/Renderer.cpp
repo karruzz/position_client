@@ -28,21 +28,15 @@ void Renderer::paint()
 
         _program->addShaderFromSourceCode(QOpenGLShader::Fragment,
                                            "uniform lowp float t;"
-                                           "varying highp vec2 coords;"
                                            "void main() {"
-                                           "    lowp float i = 1. - (pow(abs(coords.x), 4.) + pow(abs(coords.y), 4.));"
-                                           "    i = smoothstep(t - 0.8, t + 0.8, i);"
-                                           "    i = floor(i * 20.) / 20.;"
-                                           "    gl_FragColor = vec4(coords * .5 + .5, i, i);"
+                                           "    gl_FragColor = vec4(0.5, 0.5, 0.5, 1);"
                                            "}");
 
         _program->addShaderFromSourceCode(QOpenGLShader::Vertex,
                                            "uniform mat4 matrix;"
                                            "attribute highp vec3 in_position;"
-                                           "varying highp vec2 coords;"
                                            "void main() {"
                                            "    gl_Position  =  matrix*vec4(in_position, 1.0);"
-                                           "    coords = in_position.xy;"
                                            "}");
 
         _program->link();
@@ -71,7 +65,7 @@ void Renderer::paint()
     }
 
     _pMatrix.setToIdentity();
-    _pMatrix.perspective(60, (float) m_viewportSize.width() / (float) m_viewportSize.height(), 0, 7);
+    _pMatrix.perspective(45, (float) m_viewportSize.width() / (float) m_viewportSize.height(), 0, 7);
 
  //   QMatrix4x4 vMatrix;
 //    QMatrix4x4 camera;
@@ -92,7 +86,7 @@ void Renderer::paint()
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
 
-    glClearColor(0.25, 0, 0, 1);
+    glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     _program->bind();

@@ -23,6 +23,7 @@ class Projection : public QQuickItem
         GyroFrame position() const { return _position; }
         void setPosition(GyroFrame p);
 
+        void wheelEvent(QWheelEvent *event);
         void mousePressEvent(QMouseEvent *event);
         void hoverMoveEvent(QHoverEvent *event);
 
@@ -37,6 +38,8 @@ class Projection : public QQuickItem
         void handleWindowChanged(QQuickWindow *win);
 
     private:
+        QMatrix4x4 vMatrix();
+
         Renderer *_renderer;
         GyroFrame _position;
 

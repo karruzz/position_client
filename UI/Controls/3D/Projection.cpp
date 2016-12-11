@@ -23,6 +23,18 @@ void Projection::setPosition(GyroFrame p)
     if (window()) window()->update();
 }
 
+void Projection::wheelEvent(QWheelEvent *event)
+{
+    QPoint numDegreses = event->angleDelta();
+
+    _camPos += _camY * numDegreses.y() / 400.0;
+
+    _renderer->setVMatrix(vMatrix());
+    if (window()) window()->update();
+
+    QQuickItem::wheelEvent(event);
+}
+
 void Projection::mousePressEvent(QMouseEvent *event)
 {
     if (event->buttons().testFlag(Qt::LeftButton)){
@@ -42,6 +54,24 @@ void Projection::mousePressEvent(QMouseEvent *event)
     QQuickItem::mousePressEvent(event);
 }
 
+QMatrix4x4 Projection::vMatrix()
+{
+    QMatrix4x4 r = _qCamera.dcm();
+    _camX = r.column(0).toVector3D();
+    _camY = r.column(1).toVector3D();
+    _camZ = r.column(2).toVector3D();
+
+    QMatrix4x4 vm;
+    vm.setRow(0, QVector4D(-_camX));
+    vm.setRow(1, QVector4D(_camZ));
+    vm.setRow(2, QVector4D(-_camY));
+    vm.setRow(3, QVector4D(0.0, 0.0, 0.0, 1.0));
+
+    vm.translate(-_camPos);
+
+    return vm;
+}
+
 void Projection::hoverMoveEvent(QHoverEvent *event)
 {
     if (_mousePosLast.x() != 0 || _mousePosLast.y() != 0)
@@ -52,8 +82,8 @@ void Projection::hoverMoveEvent(QHoverEvent *event)
         if (dx != 0 || dy != 0){
             if (_dragAngle)
             {
-                _qCamera += _qCamera.derivative(-dy / 60.0, 0, 0);
-                _qCamera = Quaternion::Unit(-dx / 60.0, 0, 1, 0) * _qCamera;
+                _qCamera += _qCamera.derivative(-dy / 80.0, 0, 0);
+                _qCamera = Quaternion::Unit(dx / 80.0, 0, 1, 0) * _qCamera;
             }
             if (_dragPosition)
             {
@@ -61,21 +91,7 @@ void Projection::hoverMoveEvent(QHoverEvent *event)
                 _camPos -= _camZ * dy / 40.0;
             }
 
-            auto norm = _qCamera.length();
-            Quaternion qCamInverted = _qCamera.conjugate() / norm / norm;
-            _camX = (_qCamera * Quaternion(0, 1, 0, 0) * qCamInverted).vector();
-            _camY = (_qCamera * Quaternion(0, 0, 1, 0) * qCamInverted).vector();
-            _camZ = (_qCamera * Quaternion(0, 0, 0, 1) * qCamInverted).vector();
-
-            QMatrix4x4 vMatrix;
-            vMatrix.setRow(0, QVector4D(-_camX));
-            vMatrix.setRow(1, QVector4D(_camZ));
-            vMatrix.setRow(2, QVector4D(-_camY));
-            vMatrix.setRow(3, QVector4D(0.0, 0.0, 0.0, 1.0));
-
-            vMatrix.translate(-_camPos);
-
-            _renderer->setVMatrix(vMatrix);
+            _renderer->setVMatrix(vMatrix());
             if (window()) window()->update();
         }
     }
