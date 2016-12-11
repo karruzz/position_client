@@ -44,9 +44,8 @@ class Projection : public QQuickItem
         GyroFrame _position;
 
         // camera
-        QVector3D _camX, _camY, _camZ, _camPos;
+        QVector4D _camX, _camY, _camZ, _camPos;
         Quaternion _qCamera;
-        QVector2D _mousePosLast;
 
         float _angle;
 

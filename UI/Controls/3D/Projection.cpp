@@ -4,8 +4,8 @@
 #include "Math/Quaternion.h"
 
 Projection::Projection(QQuickItem *parent)
-    :  QQuickItem(parent), _renderer(0), _camX(1,0,0), _camY(0,1,0), _camZ(0,0,1)
-    , _camPos(0,-2,0), _qCamera(1,0,0,0), _angle(0)
+    :  QQuickItem(parent), _renderer(0), _camX(1,0,0,0), _camY(0,1,0,0), _camZ(0,0,1,0)
+    , _camPos(0,-2,0,0), _qCamera(1,0,0,0), _angle(0)
     , _dragAngle(false)
 {
     connect(this, SIGNAL(windowChanged(QQuickWindow*)), this, SLOT(handleWindowChanged(QQuickWindow*)));
@@ -40,15 +40,11 @@ void Projection::mousePressEvent(QMouseEvent *event)
     if (event->buttons().testFlag(Qt::LeftButton)){
         _dragAngle = !_dragAngle;
         _dragPosition = false;
-        _mousePosLast.setX(0);
-        _mousePosLast.setY(0);
     }
 
     if (event->buttons().testFlag(Qt::RightButton)){
         _dragPosition = !_dragPosition;
         _dragAngle = false;
-        _mousePosLast.setX(0);
-        _mousePosLast.setY(0);
     }
 
     QQuickItem::mousePressEvent(event);
@@ -57,43 +53,40 @@ void Projection::mousePressEvent(QMouseEvent *event)
 QMatrix4x4 Projection::vMatrix()
 {
     QMatrix4x4 r = _qCamera.dcm();
-    _camX = r.column(0).toVector3D();
-    _camY = r.column(1).toVector3D();
-    _camZ = r.column(2).toVector3D();
+    _camX = r.column(0);
+    _camY = r.column(1);
+    _camZ = r.column(2);
 
     QMatrix4x4 vm;
-    vm.setRow(0, QVector4D(-_camX));
-    vm.setRow(1, QVector4D(_camZ));
-    vm.setRow(2, QVector4D(-_camY));
+    vm.setRow(0, -_camX);
+    vm.setRow(1, _camZ);
+    vm.setRow(2, -_camY);
     vm.setRow(3, QVector4D(0.0, 0.0, 0.0, 1.0));
 
-    vm.translate(-_camPos);
+    vm.translate(-_camPos.toVector3D());
 
     return vm;
 }
 
 void Projection::hoverMoveEvent(QHoverEvent *event)
 {
-    if (_mousePosLast.x() != 0 || _mousePosLast.y() != 0)
-    {
-        float dx = event->pos().x() - event->oldPos().x();
-        float dy = event->pos().y() - event->oldPos().y();
+    float dx = event->pos().x() - event->oldPos().x();
+    float dy = event->pos().y() - event->oldPos().y();
 
-        if (dx != 0 || dy != 0){
-            if (_dragAngle)
-            {
-                _qCamera += _qCamera.derivative(-dy / 80.0, 0, 0);
-                _qCamera = Quaternion::Unit(dx / 80.0, 0, 1, 0) * _qCamera;
-            }
-            if (_dragPosition)
-            {
-                _camPos -= _camX * dx / 40.0;
-                _camPos -= _camZ * dy / 40.0;
-            }
-
-            _renderer->setVMatrix(vMatrix());
-            if (window()) window()->update();
+    if (dx != 0 || dy != 0){
+        if (_dragAngle)
+        {
+            _qCamera += _qCamera.derivative(-dy / 80.0, 0, 0);
+            _qCamera = Quaternion::Unit(dx / 80.0, 0, 1, 0) * _qCamera;
         }
+        if (_dragPosition)
+        {
+            _camPos -= _camX * dx / 40.0;
+            _camPos -= _camZ * dy / 40.0;
+        }
+
+        _renderer->setVMatrix(vMatrix());
+        if (window()) window()->update();
     }
 
     _mousePosLast.setX(event->pos().x());
