@@ -69,6 +69,7 @@ Item {
 
         Projection
         {
+            objectName: "gyro3D"
             anchors.fill: parent
         }
     }

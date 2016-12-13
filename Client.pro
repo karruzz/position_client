@@ -8,13 +8,14 @@ SOURCES += main.cpp \
     Model/renderthread.cpp \
     Model/qgyroframe.cpp \
     Channel/tfilechannel.cpp \
-    Core/dispatcher.cpp \
     UI/Controls/3D/Projection.cpp \
     UI/Controls/Chart/Chart.cpp \
     Subsystems/Gyro/GyroChartModel.cpp \
     UI/Controls/3D/Renderer.cpp \
     Math/Quaternion.cpp \
-    UI/Controls/3D/Model/GlModel.cpp
+    UI/Controls/3D/Model/GlModel.cpp \
+    Subsystems/Gyro/Gyro3DModel.cpp \
+    Core/Dispatcher.cpp
 
 RESOURCES += qml.qrc
 
@@ -40,7 +41,8 @@ HEADERS += \
     UI/Controls/3D/Renderer.h \
     Math/Quaternion.h \
     UI/Controls/3D/Model/GlVertex.h \
-    UI/Controls/3D/Model/GlModel.h
+    UI/Controls/3D/Model/GlModel.h \
+    Subsystems/Gyro/Gyro3DModel.h
 
 DISTFILES +=
 

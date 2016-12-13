@@ -35,32 +35,69 @@ Renderer::Renderer() : _program(0)
 
     for (GLfloat i = -0.5; i < 0.5; i+=0.1)
     {
-        _gridVertexes << GlVertex(QVector3D( -0.5, i, 0.0 ), QVector3D( 0.1, 0.5, 0.5));
-        _gridVertexes << GlVertex(QVector3D( 0.5, i, 0.0 ), QVector3D( 0.5, 0.1, 0.5));
+        _gridVertexes << GlVertex(QVector3D( -0.5, i, 0.0 ), QVector3D( 0.5, 0.5, 0.5));
+        _gridVertexes << GlVertex(QVector3D( 0.5, i, 0.0 ), QVector3D( 0.5, 0.5, 0.5));
 
-        _gridVertexes << GlVertex(QVector3D( i, -0.5, 0.0 ), QVector3D( 0.1, 0.5, 0.5));
-        _gridVertexes << GlVertex(QVector3D( i, 0.5, 0.0 ), QVector3D( 0.5, 0.1, 0.5));
+        _gridVertexes << GlVertex(QVector3D( i, -0.5, 0.0 ), QVector3D( 0.5, 0.5, 0.5));
+        _gridVertexes << GlVertex(QVector3D( i, 0.5, 0.0 ), QVector3D( 0.5, 0.5, 0.5));
     }
 
-    QVector<GLushort> _gridIndexes = { 0, 10, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-                                 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
-
-    _grid = new GlModel(_program, _gridVertexes, _gridIndexes);
+    _grid = new GlModel(_program, _gridVertexes);
 
     QVector<GlVertex> _cubeVertexes;
 
-    _cubeVertexes << GlVertex(QVector3D( -0.5, -0.5, 0.2 ), QVector3D( 0.1, 0.5, 0.3));
-    _cubeVertexes << GlVertex(QVector3D( 0.5, -0.5, 0.2 ), QVector3D( 0.1, 0.5, 0.3));
-    _cubeVertexes << GlVertex(QVector3D(-0.5, 0.5, -0.2 ), QVector3D( 0.1, 0.5, 0.3));
+    //oy plate
+    _cubeVertexes << GlVertex(QVector3D( -0.21, 0.11, 0.051 ), QVector3D( 0.1, 0.1, 0.5 ));
+    _cubeVertexes << GlVertex(QVector3D( 0.21, 0.11, 0.051 ), QVector3D( 0.1, 0.1, 0.5 ));
+    _cubeVertexes << GlVertex(QVector3D(-0.21, 0.11, -0.051 ), QVector3D( 0.1, 0.1, 0.5 ));
 
-    _cubeVertexes << GlVertex(QVector3D( -0.5, 0, 0.2 ), QVector3D( 0.1, 0.1, 0.7));
-    _cubeVertexes << GlVertex(QVector3D( 0.5, 0, 0.2 ), QVector3D( 0.1, 0.1, 0.7));
-    _cubeVertexes << GlVertex(QVector3D(-0.5, 1.0, -0.2 ), QVector3D( 0.1, 0.1, 0.7));
+    _cubeVertexes << GlVertex(QVector3D( 0.21, 0.11, 0.051 ), QVector3D( 0.1, 0.1, 0.5));
+    _cubeVertexes << GlVertex(QVector3D(0.21, 0.11, -0.051 ), QVector3D( 0.1, 0.1, 0.5 ));
+    _cubeVertexes << GlVertex(QVector3D(-0.21, 0.11, -0.051 ), QVector3D( 0.1, 0.1, 0.5 ));
 
-    QVector<GLushort> _cubeIndexes = { 0, 1, 2 };
+    _cubeVertexes << GlVertex(QVector3D( -0.21, -0.11, 0.051 ), QVector3D( 0.1, 0.1, 0.5 ));
+    _cubeVertexes << GlVertex(QVector3D( 0.21, -0.11, 0.051 ), QVector3D( 0.1, 0.1, 0.5 ));
+    _cubeVertexes << GlVertex(QVector3D(-0.21, -0.11, -0.051 ), QVector3D( 0.1, 0.1, 0.5 ));
 
-    _cube = new GlModel(_program, _cubeVertexes, _cubeIndexes);
-    _cube->setPrimitive(GL_TRIANGLES);
+    _cubeVertexes << GlVertex(QVector3D( 0.21, -0.11, 0.051 ), QVector3D( 0.1, 0.1, 0.5 ));
+    _cubeVertexes << GlVertex(QVector3D(0.21, -0.11, -0.051 ), QVector3D( 0.1, 0.1, 0.5 ));
+    _cubeVertexes << GlVertex(QVector3D(-0.21, -0.11, -0.051 ), QVector3D( 0.1, 0.1, 0.5 ));
+
+    //ox plate
+    _cubeVertexes << GlVertex(QVector3D( -0.21, 0.11, 0.051 ), QVector3D( 0.5, 0.1, 0.3));
+    _cubeVertexes << GlVertex(QVector3D( -0.21, -0.11, 0.051 ), QVector3D( 0.5, 0.1, 0.3 ));
+    _cubeVertexes << GlVertex(QVector3D(-0.21, -0.11, -0.051 ), QVector3D( 0.5, 0.1, 0.3 ));
+
+    _cubeVertexes << GlVertex(QVector3D( -0.21, 0.11, 0.051 ), QVector3D( 0.5, 0.1, 0.3 ));
+    _cubeVertexes << GlVertex(QVector3D( -0.21, 0.11, -0.051 ), QVector3D( 0.5, 0.1, 0.3 ));
+    _cubeVertexes << GlVertex(QVector3D(-0.21, -0.11, -0.051 ), QVector3D( 0.5, 0.1, 0.3 ));
+
+    _cubeVertexes << GlVertex(QVector3D( 0.21, 0.11, 0.051 ), QVector3D( 0.5, 0.1, 0.3));
+    _cubeVertexes << GlVertex(QVector3D( 0.21, -0.11, 0.051 ), QVector3D( 0.5, 0.1, 0.3 ));
+    _cubeVertexes << GlVertex(QVector3D(0.21, -0.11, -0.051 ), QVector3D( 0.5, 0.1, 0.3 ));
+
+    _cubeVertexes << GlVertex(QVector3D( 0.21, 0.11, 0.051 ), QVector3D( 0.5, 0.1, 0.3 ));
+    _cubeVertexes << GlVertex(QVector3D( 0.21, 0.11, -0.051 ), QVector3D( 0.5, 0.1, 0.3 ));
+    _cubeVertexes << GlVertex(QVector3D(0.21, -0.11, -0.051 ), QVector3D( 0.5, 0.1, 0.3 ));
+
+    //oz plate
+    _cubeVertexes << GlVertex(QVector3D( -0.21, 0.11, 0.051 ), QVector3D( 0.1, 0.5, 0.3 ));
+    _cubeVertexes << GlVertex(QVector3D( -0.21, -0.11, 0.051 ), QVector3D( 0.1, 0.5, 0.3  ));
+    _cubeVertexes << GlVertex(QVector3D( 0.21, -0.11, 0.051 ), QVector3D( 0.1, 0.5, 0.3  ));
+
+    _cubeVertexes << GlVertex(QVector3D( 0.21, 0.11, 0.051 ), QVector3D( 0.1, 0.5, 0.3  ));
+    _cubeVertexes << GlVertex(QVector3D( 0.21, -0.11, 0.051 ), QVector3D( 0.1, 0.5, 0.3  ));
+    _cubeVertexes << GlVertex(QVector3D(-0.21, 0.11, 0.051 ), QVector3D( 0.1, 0.5, 0.3  ));
+
+    _cubeVertexes << GlVertex(QVector3D( -0.21, 0.11, -0.051 ), QVector3D( 0.1, 0.5, 0.3 ));
+    _cubeVertexes << GlVertex(QVector3D( -0.21, -0.11, -0.051 ), QVector3D( 0.1, 0.5, 0.3  ));
+    _cubeVertexes << GlVertex(QVector3D( 0.21, -0.11, -0.051 ), QVector3D( 0.1, 0.5, 0.3  ));
+
+    _cubeVertexes << GlVertex(QVector3D( 0.21, 0.11, -0.051 ), QVector3D( 0.1, 0.5, 0.3  ));
+    _cubeVertexes << GlVertex(QVector3D( 0.21, -0.11, -0.051 ), QVector3D( 0.1, 0.5, 0.3  ));
+    _cubeVertexes << GlVertex(QVector3D(-0.21, 0.11, -0.051 ), QVector3D( 0.1, 0.5, 0.3  ));
+
+    _cube = new GlModel(_program, _cubeVertexes);
 }
 
 Renderer::~Renderer()
@@ -74,7 +111,7 @@ Renderer::~Renderer()
 void Renderer::paint()
 {
     _pMatrix.setToIdentity();
-    _pMatrix.perspective(45, (float) m_viewportSize.width() / (float) m_viewportSize.height(), 0, 1000);
+    _pMatrix.perspective(45, (float) m_viewportSize.width() / (float) m_viewportSize.height(), 0, 100);
 
     glViewport(0, 0, m_viewportSize.width(), m_viewportSize.height());
 
@@ -93,14 +130,14 @@ void Renderer::paint()
 
     if (_grid)
     {
-        _program->setUniformValue("pvrtMatrix", _pMatrix * _vMatrix);// * _grid->rotate() * _grid->translate());
-        _grid->draw();
+        _program->setUniformValue("pvrtMatrix", _pMatrix * _vMatrix * _grid->rotate() * _grid->translate());
+        _grid->draw(GL_LINES);
     }
 
     if (_cube)
     {
-        _program->setUniformValue("pvrtMatrix", _pMatrix * _vMatrix);// * _cube->rotate() * _cube->translate());
-        _cube->draw();
+        _program->setUniformValue("pvrtMatrix", _pMatrix * _vMatrix * _cube->rotate() * _cube->translate());
+        _cube->draw(GL_TRIANGLES);
     }
 
     _program->release();

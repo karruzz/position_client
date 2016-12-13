@@ -1,7 +1,6 @@
 #include "GlModel.h"
 
-GlModel::GlModel(QOpenGLShaderProgram *_program, QVector<GlVertex> &vertexes, QVector<GLushort> &indexes) :
-    _primitive(GL_LINES)
+GlModel::GlModel(QOpenGLShaderProgram *_program, QVector<GlVertex> &vertexes)
 {
     initializeOpenGLFunctions();
 
@@ -24,25 +23,16 @@ GlModel::GlModel(QOpenGLShaderProgram *_program, QVector<GlVertex> &vertexes, QV
     _arrayBuffer->bind();
     _arrayBuffer->allocate(_data.constData(), _data.length() * sizeof(GLfloat));
 
-//    _indexBuffer = new QOpenGLBuffer(QOpenGLBuffer::IndexBuffer);
-//    _indexBuffer->create();
-//    _indexBuffer->setUsagePattern(QOpenGLBuffer::StaticDraw);
-//    _indexBuffer->bind();
-//    _indexBuffer->allocate(indexes.constData(), indexes.length() * sizeof(GLushort));
-
     _vao = new QOpenGLVertexArrayObject(this);
     _vao->create();
     _vao->bind();
     _arrayBuffer->bind();
-   // _indexBuffer->bind();
-
     _program->enableAttributeArray("in_position");
     _program->setAttributeBuffer("in_position", GL_FLOAT, 0, 3, 6 * sizeof(GLfloat));
 
     _program->enableAttributeArray("in_color");
     _program->setAttributeBuffer("in_color", GL_FLOAT, 3 * sizeof(GLfloat), 3, 6 * sizeof(GLfloat));
 
-  //  _indexBuffer->release();
     _arrayBuffer->release();
     _vao->release();
 }
@@ -56,9 +46,9 @@ GlModel::~GlModel()
     delete _arrayBuffer;
 }
 
-void GlModel::draw()
+void GlModel::draw(GLushort primitive)
 {
     _vao->bind();
-     glDrawArrays(_primitive, 0, _count);
+     glDrawArrays(primitive, 0, _count);
     _vao->release();
 }

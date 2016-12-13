@@ -38,6 +38,7 @@ class Projection : public QQuickItem
         void handleWindowChanged(QQuickWindow *win);
 
     private:
+        QMatrix4x4 dcm(Point3d euler);
         QMatrix4x4 vMatrix();
 
         Renderer *_renderer;
@@ -46,11 +47,11 @@ class Projection : public QQuickItem
         // camera
         QVector4D _camX, _camY, _camZ, _camPos;
         Quaternion _qCamera;
-
-        float _angle;
-
         bool _dragAngle;
         bool _dragPosition;
+
+        // cube
+        GlModel *_cube;
 };
 
 #endif // PROJECTION_H

@@ -7,6 +7,7 @@
 #include "Channel/TFileChannel.h"
 #include "Data/Devices/GyroFrame.h"
 #include "Subsystems/Gyro/GyroChartModel.h"
+#include "Subsystems/Gyro/Gyro3DModel.h"
 
 class Dispatcher : public QObject
 {
@@ -31,6 +32,7 @@ private:
     quint64 _count;
 
     GyroChartModel *_gyroChart;
+    Gyro3DModel *_gyro3D;
     TFileChannel<GyroFrame> *_channel;
 };
 

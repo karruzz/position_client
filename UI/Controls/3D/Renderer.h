@@ -18,6 +18,7 @@ public:
 
     void setViewportSize(const QSize &size) { m_viewportSize = size; }
     void setVMatrix(const QMatrix4x4 &vMatrix) { _vMatrix = vMatrix; }
+    GlModel *cube() { return _cube; }
 
 public slots:
     void paint();

@@ -13,11 +13,10 @@ class GlModel : public QObject, protected QOpenGLFunctions
 {
     Q_OBJECT
     public:
-        GlModel(QOpenGLShaderProgram *_program, QVector<GlVertex> &vertexes, QVector<GLushort> &indexes);
+        GlModel(QOpenGLShaderProgram *_program, QVector<GlVertex> &vertexes);
         ~GlModel();
 
-        void draw();
-        void setPrimitive(GLushort primitive) { _primitive = primitive; }
+        void draw(GLushort primitive);
         void setCount(int count) { _count = count; }
 
         void setRotate(QMatrix4x4 r) { _rotateMatrix = r; }
@@ -29,13 +28,11 @@ class GlModel : public QObject, protected QOpenGLFunctions
     private:
         QOpenGLVertexArrayObject *_vao;
         QOpenGLBuffer *_arrayBuffer;
-        QOpenGLBuffer *_indexBuffer;
 
         QMatrix4x4 _rotateMatrix;
         QMatrix4x4 _translateMatrix;
 
         int _count;
-        GLushort _primitive;
 };
 
 #endif // GLMODEL_H

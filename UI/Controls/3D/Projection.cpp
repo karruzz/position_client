@@ -2,10 +2,11 @@
 
 #include <QtQuick/qquickwindow.h>
 #include "Math/Quaternion.h"
+#include <QtMath>
 
 Projection::Projection(QQuickItem *parent)
     :  QQuickItem(parent), _renderer(0), _camX(1,0,0,0), _camY(0,1,0,0), _camZ(0,0,1,0)
-    , _camPos(0,-2,0,0), _qCamera(1,0,0,0), _angle(0)
+    , _camPos(0,-2,0,0), _qCamera(1,0,0,0),  _cube(0)
     , _dragAngle(false)
 {
     connect(this, SIGNAL(windowChanged(QQuickWindow*)), this, SLOT(handleWindowChanged(QQuickWindow*)));
@@ -20,7 +21,32 @@ void Projection::setPosition(GyroFrame p)
     _position = p;
     emit positionChanged();
 
+    if (_cube)
+    {
+        _cube->setRotate(dcm(p.Angle));
+    }
+
     if (window()) window()->update();
+}
+
+QMatrix4x4 Projection::dcm(Point3d euler)
+{
+    QMatrix4x4 r;
+    float xc = qCos(euler.X);
+    float xs = qSin(euler.X);
+
+    float yc = qCos(euler.Y);
+    float ys = qSin(euler.Y);
+
+    float zc = qCos(euler.Z);
+    float zs = qSin(euler.Z);
+
+    r.setColumn(0, QVector4D(yc*zc, yc*zs, -ys, 0.0));
+    r.setColumn(1, QVector4D(-xc*zs+xs*ys*zc, xc*zc+xs*ys*zs, xs*yc, 0.0));
+    r.setColumn(2, QVector4D(xs*zs+xc*ys*zc, -xs*zc+xc*ys*zs, xc*yc, 0.0));
+    r.setColumn(3, QVector4D(0.0, 0.0, 0.0, 1.0));
+
+    return r;
 }
 
 void Projection::wheelEvent(QWheelEvent *event)
@@ -116,9 +142,11 @@ void Projection::sync()
     if (!_renderer) {
         _renderer = new Renderer();
         connect(window(), SIGNAL(beforeRendering()), _renderer, SLOT(paint()), Qt::DirectConnection);
+        _cube = _renderer->cube();
     }
     _renderer->setViewportSize(window()->size() * window()->devicePixelRatio());
 }
+
 
 
 

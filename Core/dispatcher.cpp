@@ -18,6 +18,7 @@ void Dispatcher::open(const QString &path)
     if (!_channel->Open(path)) return;
 
     _gyroChart = new GyroChartModel(_parent, _channel);
+    _gyro3D = new Gyro3DModel(_parent, _channel);
     _count = _channel->Count();
     emit opened();
 }
@@ -25,4 +26,5 @@ void Dispatcher::open(const QString &path)
 void Dispatcher::seek(quint64 index)
 {
     _gyroChart->seek(index);
+    _gyro3D->seek(index);
 }
