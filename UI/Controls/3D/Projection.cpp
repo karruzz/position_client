@@ -25,9 +25,7 @@ void Projection::setPosition(GyroFrame p)
 
 void Projection::wheelEvent(QWheelEvent *event)
 {
-    QPoint numDegreses = event->angleDelta();
-
-    _camPos += _camY * numDegreses.y() / 400.0;
+    _camPos += _camY * event->angleDelta().y() / 400.0;
 
     _renderer->setVMatrix(vMatrix());
     if (window()) window()->update();
@@ -61,7 +59,7 @@ QMatrix4x4 Projection::vMatrix()
     vm.setRow(0, -_camX);
     vm.setRow(1, _camZ);
     vm.setRow(2, -_camY);
-    vm.setRow(3, QVector4D(0.0, 0.0, 0.0, 1.0));
+    vm.setRow(3, r.column(3));
 
     vm.translate(-_camPos.toVector3D());
 
@@ -103,11 +101,11 @@ void Projection::handleWindowChanged(QQuickWindow *win)
         // and nothing would show.
         win->setClearBeforeRendering(false);
 
-        QSurfaceFormat format;
-        format.setMajorVersion(3);
-        format.setMinorVersion(3);
-        format.setProfile( QSurfaceFormat::CompatibilityProfile );
-        win->setFormat( format );
+//        QSurfaceFormat format;
+//        format.setMajorVersion(3);
+//        format.setMinorVersion(3);
+//        format.setProfile( QSurfaceFormat::CompatibilityProfile );
+//        win->setFormat( format );
     }
 }
 
@@ -126,7 +124,6 @@ void Projection::sync()
         connect(window(), SIGNAL(beforeRendering()), _renderer, SLOT(paint()), Qt::DirectConnection);
     }
     _renderer->setViewportSize(window()->size() * window()->devicePixelRatio());
-    _renderer->setT(0.5);
 }
 
 

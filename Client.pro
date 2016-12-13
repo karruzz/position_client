@@ -12,9 +12,9 @@ SOURCES += main.cpp \
     UI/Controls/3D/Projection.cpp \
     UI/Controls/Chart/Chart.cpp \
     Subsystems/Gyro/GyroChartModel.cpp \
-    UI/Controls/3D/OpenGL/GlLoader.cpp \
     UI/Controls/3D/Renderer.cpp \
-    Math/Quaternion.cpp
+    Math/Quaternion.cpp \
+    UI/Controls/3D/Model/GlModel.cpp
 
 RESOURCES += qml.qrc
 
@@ -28,7 +28,6 @@ HEADERS += \
     Model/dataentrymodel.h \
     Model/renderthread.h \
     Model/qgyroframe.h \
-    UI/Controls/3D/OpenGL/GlRawModel.h \
     UI/Controls/3D/Projection.h \
     UI/Controls/Chart/Chart.h \
     Subsystems/Gyro/GyroChartModel.h \
@@ -38,9 +37,10 @@ HEADERS += \
     Core/Dispatcher.h \
     Channel/TFileChannel.h \
     Channel/IChannel.h \
-    UI/Controls/3D/OpenGL/GlLoader.h \
     UI/Controls/3D/Renderer.h \
-    Math/Quaternion.h
+    Math/Quaternion.h \
+    UI/Controls/3D/Model/GlVertex.h \
+    UI/Controls/3D/Model/GlModel.h
 
 DISTFILES +=
 
