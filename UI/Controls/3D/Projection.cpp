@@ -100,12 +100,6 @@ void Projection::handleWindowChanged(QQuickWindow *win)
         // If we allow QML to do the clearing, they would clear what we paint
         // and nothing would show.
         win->setClearBeforeRendering(false);
-
-//        QSurfaceFormat format;
-//        format.setMajorVersion(3);
-//        format.setMinorVersion(3);
-//        format.setProfile( QSurfaceFormat::CompatibilityProfile );
-//        win->setFormat( format );
     }
 }
 

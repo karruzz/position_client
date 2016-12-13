@@ -74,7 +74,7 @@ Renderer::~Renderer()
 void Renderer::paint()
 {
     _pMatrix.setToIdentity();
-    _pMatrix.perspective(45, (float) m_viewportSize.width() / (float) m_viewportSize.height(), 0, 100);
+    _pMatrix.perspective(45, (float) m_viewportSize.width() / (float) m_viewportSize.height(), 0, 1000);
 
     glViewport(0, 0, m_viewportSize.width(), m_viewportSize.height());
 
