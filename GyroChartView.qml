@@ -8,7 +8,7 @@ Rectangle{
     width: parent.width
     height: parent.height
     anchors.fill: parent
-    color: "gray"
+    color: "black"
 
     ColumnLayout {
         id: layout
@@ -21,7 +21,7 @@ Rectangle{
             border.color: "lightsteelblue"
             border.width: 1
             anchors.margins: 2
-            color: "whitesmoke"
+            color: "black"
 
             Chart
             {
@@ -36,7 +36,7 @@ Rectangle{
             border.color: "lightsteelblue"
             border.width: 1
             anchors.margins: 2
-            color: "whitesmoke"
+            color: "black"
 
             Chart
             {
@@ -52,7 +52,7 @@ Rectangle{
             border.color: "lightsteelblue"
             border.width: 1
             anchors.margins: 2
-            color: "whitesmoke"
+            color: "black"
 
             Chart
             {

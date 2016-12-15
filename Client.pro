@@ -15,7 +15,8 @@ SOURCES += main.cpp \
     UI/Controls/3D/Model/GlModel.cpp \
     Subsystems/Gyro/Gyro3DModel.cpp \
     Core/Dispatcher.cpp \
-    Core/Math.cpp
+    Core/Math.cpp \
+    UI/Controls/Chart/LineNode.cpp
 
 RESOURCES += qml.qrc
 
@@ -41,7 +42,8 @@ HEADERS += \
     UI/Controls/3D/Model/GlVertex.h \
     UI/Controls/3D/Model/GlModel.h \
     Subsystems/Gyro/Gyro3DModel.h \
-    Core/Math.h
+    Core/Math.h \
+    UI/Controls/Chart/LineNode.h
 
 DISTFILES +=
 

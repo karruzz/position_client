@@ -1,10 +1,11 @@
 #include <UI/Controls/Chart/Chart.h>
+#include "LineNode.h"
 
 Chart::Chart(QQuickItem *parent)
     : QQuickItem(parent),
       _min(-0.1), _max(0.1), _color("red")
 {
-    setFlag(ItemHasContents);
+    setFlag(ItemHasContents, true);
 }
 
 void Chart::setPoints(const QVector<QPointF> &points)
@@ -15,45 +16,34 @@ void Chart::setPoints(const QVector<QPointF> &points)
     update();
 }
 
+class ChartNode : public QSGNode
+{
+    public:
+        LineNode *line;
+};
+
 QSGNode *Chart::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
 {
-    QSGGeometryNode *node = 0;
-    QSGGeometry *geometry = 0;
-    QSGFlatColorMaterial *material = 0;
+    ChartNode *n = static_cast<ChartNode *>(oldNode);
 
-    auto size = _points.size();
+    QRectF rect = boundingRect();
 
-    if (!oldNode) {
-        node = new QSGGeometryNode;
-        geometry = new QSGGeometry(QSGGeometry::defaultAttributes_Point2D(), size + 1);
-        geometry->setLineWidth(2);
-        geometry->setDrawingMode(GL_LINE_STRIP);
-        node->setGeometry(geometry);
-        node->setFlag(QSGNode::OwnsGeometry);
-        material = new QSGFlatColorMaterial;
-        material->setColor(_color);
-        node->setMaterial(material);
-        node->setFlag(QSGNode::OwnsMaterial);
-        node->markDirty(QSGNode::DirtyMaterial);
-    } else {
-        node = static_cast<QSGGeometryNode *>(oldNode);
-        geometry = node->geometry();
-        geometry->allocate(size);
-        material = static_cast<QSGFlatColorMaterial*>(node->material());
+    if (rect.isEmpty()) {
+        delete n;
+        return 0;
     }
 
-    auto delta = _max - _min;
-
-    QRectF bounds = boundingRect();
-    QSGGeometry::Point2D *vertices = geometry->vertexDataAsPoint2D();
-    for (int i = 0; i < size; ++i) {
-        const QPointF &p = _points[i];
-        float x = p.x() / size * bounds.width();
-        float y = (1.0 - (p.y() - _min) / delta) * bounds.height();
-        vertices[i].set(x, y);
+    if (!n) {
+        n = new ChartNode();
+        n->line = new LineNode(_points.size()+1, _color);
+        n->appendChildNode(n->line);
+    }
+    else
+    {
+        n->line->alloc(_points.size());
     }
 
-    node->markDirty(QSGNode::DirtyGeometry);
+    n->line->setPoints(rect, _points, _max, _min);
 
-    return node;
+    return n;
 }

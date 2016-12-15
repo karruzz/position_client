@@ -34,7 +34,7 @@ Renderer::Renderer() : _program(0)
 
     _program->link();
 
-    auto gray = QColor( 0x80, 0x80, 0x80 );
+    auto gray = QColor( 0x50, 0x50, 0x50 );
     auto red = QColor( 0x80, 0x08, 0x40 );
     auto green = QColor( 0x08, 0x80, 0x40 );
     auto blue = QColor( 0x08, 0x08, 0x80 );
