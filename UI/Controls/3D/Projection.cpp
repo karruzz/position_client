@@ -1,13 +1,12 @@
 #include "Projection.h"
+#include "Core/Math.h"
 
 #include <QtQuick/qquickwindow.h>
-#include "Math/Quaternion.h"
 #include <QtMath>
 
 Projection::Projection(QQuickItem *parent)
     :  QQuickItem(parent), _renderer(0), _camX(1,0,0,0), _camY(0,1,0,0), _camZ(0,0,1,0)
-    , _camPos(0,-2,0,0), _qCamera(1,0,0,0),  _cube(0)
-    , _dragAngle(false)
+    , _camPos(0,-2,0,0), _qCamera(1,0,0,0), _dragAngle(false),  _cube(0)
 {
     connect(this, SIGNAL(windowChanged(QQuickWindow*)), this, SLOT(handleWindowChanged(QQuickWindow*)));
 
@@ -23,7 +22,7 @@ void Projection::setPosition(GyroFrame p)
 
     if (_cube)
     {
-        _cube->setRotate(dcm(p.Angle));
+        _cube->setRotate(Math::dcm(p.Angle));
     }
 
     if (window()) window()->update();
@@ -54,73 +53,9 @@ void Projection::mousePressEvent(QMouseEvent *event)
     QQuickItem::mousePressEvent(event);
 }
 
-QQuaternion Projection::derivative(QQuaternion &q, float wx, float wy, float wz)
-{
-    return 0.5 * q * QVector3D(wx, wy, wz);
-}
-
-QQuaternion Projection::unit(float angle, float x, float y, float z)
-{
-    float norm = 1.0 / qSqrt(x*x+y*y+z*z);
-    x *= norm;
-    y *= norm;
-    z *= norm;
-
-    float cos = qCos(angle / 2.0);
-    float sin = qSin(angle / 2.0);
-    return QQuaternion(cos, sin * x, sin * y, sin * z);
-}
-
-QMatrix4x4 Projection::dcm(Point3d euler)
-{
-    QMatrix4x4 r;
-    float xc = qCos(euler.X);
-    float xs = qSin(euler.X);
-
-    float yc = qCos(euler.Y);
-    float ys = qSin(euler.Y);
-
-    float zc = qCos(euler.Z);
-    float zs = qSin(euler.Z);
-
-    r.setColumn(0, QVector4D(yc*zc, yc*zs, -ys, 0.0));
-    r.setColumn(1, QVector4D(-xc*zs+xs*ys*zc, xc*zc+xs*ys*zs, xs*yc, 0.0));
-    r.setColumn(2, QVector4D(xs*zs+xc*ys*zc, -xs*zc+xc*ys*zs, xc*yc, 0.0));
-    r.setColumn(3, QVector4D(0.0, 0.0, 0.0, 1.0));
-
-    return r;
-}
-
-QMatrix4x4 Projection::dcm(QQuaternion q)
-{
-    QMatrix4x4 m;
-    float x = q.x();
-    float y = q.y();
-    float z = q.z();
-
-    const float s = 2.0;
-    m.setColumn(0, QVector4D( 1.0 - s * (y * y + z * z),
-                              s * (x * y + z * ap),
-                              s * (x * z - y * ap),
-                              0.0 ));
-
-    m.setColumn(1, QVector4D( s * (x * y - z * ap),
-                              1.0 - s * (x * x + z * z),
-                              s * (z * y + x * ap),
-                              0.0 ));
-
-    m.setColumn(2, QVector4D( s * (x * z + y * ap),
-                              s * (y * z - x * ap),
-                              1.0 - s * (x * x + y * y),
-                              0.0 ));
-
-    m.setColumn(3, QVector4D( 0.0, 0.0, 0.0, 1.0 ));
-    return m;
-}
-
 QMatrix4x4 Projection::vMatrix()
 {
-    QMatrix4x4 r = dcm(_qCamera);
+    QMatrix4x4 r = Math::dcm(_qCamera);
     _camX = r.column(0);
     _camY = r.column(1);
     _camZ = r.column(2);
@@ -144,8 +79,8 @@ void Projection::hoverMoveEvent(QHoverEvent *event)
     if (dx != 0 || dy != 0){
         if (_dragAngle)
         {
-            _qCamera += derivative(-dy / 80.0, 0, 0);
-            _qCamera = unit(dx / 80.0, 0, 1, 0) * _qCamera;
+            _qCamera += Math::derivative(-dy / 80.0, 0, 0);
+            _qCamera = Math::unit(dx / 80.0, 0, 1, 0) * _qCamera;
         }
         if (_dragPosition)
         {

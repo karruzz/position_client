@@ -26,9 +26,9 @@ void GyroChartModel::seek(quint64 index)
     pointsZ.reserve(800);
     for (auto i = 0; i < 800; i++)
     {
-        pointsX.append( QPointF(i, frames[i].Angle.X) );
-        pointsY.append( QPointF(i, frames[i].Angle.Y) );
-        pointsZ.append( QPointF(i, frames[i].Angle.Z) );
+        pointsX.append( QPointF(i, frames[i].Angle.x()) );
+        pointsY.append( QPointF(i, frames[i].Angle.y()) );
+        pointsZ.append( QPointF(i, frames[i].Angle.z()) );
     }
 
     emit AngleXUpdated(pointsX);

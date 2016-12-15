@@ -39,7 +39,7 @@ void DataEntryModel::seek(quint64 index)
     QVector<QPointF> points;
     points.reserve(800);
     for (auto i = 0; i < 800; i++)
-        points.append( QPointF(i, frames[i].Angle.Y * 1000 + 200) );
+        points.append( QPointF(i, frames[i].Angle.y() * 1000 + 200) );
 
     emit pointsUpdated(points);
 }

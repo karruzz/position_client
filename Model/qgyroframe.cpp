@@ -3,5 +3,5 @@
 QGyroFrame::QGyroFrame(QObject *parent)
     : QObject(parent)
 {
-    data.Angle.X = data.Angle.Y = data.Angle.Z = 0;
+    data.Angle = QVector3D(0,0,0);
 }

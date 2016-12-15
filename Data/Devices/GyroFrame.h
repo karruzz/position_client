@@ -2,17 +2,17 @@
 #define GYROFRAME
 
 #include <QDataStream>
+#include <QVector3D>
 
 #include "Data/IFrame.h"
-#include "Math/Point3d.h"
 
 class GyroFrame : public IFrame
 {
     public:
       //  quint64 TimeStamp;
-        Point3d Acs;
-        Point3d Omega;
-        Point3d Angle;
+        QVector3D Acs;
+        QVector3D Omega;
+        QVector3D Angle;
 
         inline int Size() override final { return 80; }
 
@@ -23,17 +23,9 @@ inline QDataStream &operator >>(QDataStream &out, GyroFrame &frame)
 {
     out >> frame.Counter;
 
-    out >> frame.Angle.X;
-    out >> frame.Angle.Y;
-    out >> frame.Angle.Z;
-
-    out >> frame.Omega.X;
-    out >> frame.Omega.Y;
-    out >> frame.Omega.Z;
-
-    out >> frame.Acs.X;
-    out >> frame.Acs.Y;
-    out >> frame.Acs.Z;
+    out >> frame.Angle;
+    out >> frame.Omega;
+    out >> frame.Acs;
 
     return out;
 }

@@ -18,9 +18,9 @@ public:
     explicit QGyroFrame(QObject *parent = 0);
 
     quint64 Time() const { return data.Counter; }
-    double Roll() const { return data.Angle.X; }
-    double Pitch() const { return data.Angle.Y; }
-    double Yaw() const { return data.Angle.Z; }
+    double Roll() const { return data.Angle.x(); }
+    double Pitch() const { return data.Angle.y(); }
+    double Yaw() const { return data.Angle.z(); }
 
     GyroFrame data;
 

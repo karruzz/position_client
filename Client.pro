@@ -12,10 +12,10 @@ SOURCES += main.cpp \
     UI/Controls/Chart/Chart.cpp \
     Subsystems/Gyro/GyroChartModel.cpp \
     UI/Controls/3D/Renderer.cpp \
-    Math/Quaternion.cpp \
     UI/Controls/3D/Model/GlModel.cpp \
     Subsystems/Gyro/Gyro3DModel.cpp \
-    Core/Dispatcher.cpp
+    Core/Dispatcher.cpp \
+    Core/Math.cpp
 
 RESOURCES += qml.qrc
 
@@ -32,17 +32,16 @@ HEADERS += \
     UI/Controls/3D/Projection.h \
     UI/Controls/Chart/Chart.h \
     Subsystems/Gyro/GyroChartModel.h \
-    Math/Point3d.h \
     Data/IFrame.h \
     Data/Devices/GyroFrame.h \
     Core/Dispatcher.h \
     Channel/TFileChannel.h \
     Channel/IChannel.h \
     UI/Controls/3D/Renderer.h \
-    Math/Quaternion.h \
     UI/Controls/3D/Model/GlVertex.h \
     UI/Controls/3D/Model/GlModel.h \
-    Subsystems/Gyro/Gyro3DModel.h
+    Subsystems/Gyro/Gyro3DModel.h \
+    Core/Math.h
 
 DISTFILES +=
 

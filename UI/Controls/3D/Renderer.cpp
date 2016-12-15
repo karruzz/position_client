@@ -1,6 +1,9 @@
 #include "Renderer.h"
-#include "Model/GlVertex.h"
+
 #include <QVector3D>
+#include <QColor>
+
+#include "Model/GlVertex.h"
 #include "Model/GlModel.h"
 
 Renderer::Renderer() : _program(0)
@@ -31,15 +34,20 @@ Renderer::Renderer() : _program(0)
 
     _program->link();
 
+    auto gray = QColor( 0x80, 0x80, 0x80 );
+    auto red = QColor( 0x80, 0x08, 0x40 );
+    auto green = QColor( 0x08, 0x80, 0x40 );
+    auto blue = QColor( 0x08, 0x08, 0x80 );
+
     QVector<GlVertex> _gridVertexes;
 
-    for (GLfloat i = -0.5; i < 0.5; i+=0.1)
+    for (GLfloat i = -0.5; i <= 0.5; i+=0.25)
     {
-        _gridVertexes << GlVertex(QVector3D( -0.5, i, 0.0 ), QVector3D( 0.5, 0.5, 0.5));
-        _gridVertexes << GlVertex(QVector3D( 0.5, i, 0.0 ), QVector3D( 0.5, 0.5, 0.5));
+        _gridVertexes << GlVertex(-0.5, i, 0.0 , gray );
+        _gridVertexes << GlVertex( 0.5, i, 0.0 , gray );
 
-        _gridVertexes << GlVertex(QVector3D( i, -0.5, 0.0 ), QVector3D( 0.5, 0.5, 0.5));
-        _gridVertexes << GlVertex(QVector3D( i, 0.5, 0.0 ), QVector3D( 0.5, 0.5, 0.5));
+        _gridVertexes << GlVertex( i, -0.5, 0.0 , gray );
+        _gridVertexes << GlVertex( i, 0.5, 0.0 , gray );
     }
 
     _grid = new GlModel(_program, _gridVertexes);
@@ -47,55 +55,55 @@ Renderer::Renderer() : _program(0)
     QVector<GlVertex> _cubeVertexes;
 
     //oy plate
-    _cubeVertexes << GlVertex(QVector3D( -0.21, 0.11, 0.051 ), QVector3D( 0.1, 0.1, 0.5 ));
-    _cubeVertexes << GlVertex(QVector3D( 0.21, 0.11, 0.051 ), QVector3D( 0.1, 0.1, 0.5 ));
-    _cubeVertexes << GlVertex(QVector3D(-0.21, 0.11, -0.051 ), QVector3D( 0.1, 0.1, 0.5 ));
+    _cubeVertexes << GlVertex(  -0.2, 0.1, 0.05, blue );
+    _cubeVertexes << GlVertex(  0.2, 0.1, 0.05, blue );
+    _cubeVertexes << GlVertex( -0.2, 0.1, -0.05, blue );
 
-    _cubeVertexes << GlVertex(QVector3D( 0.21, 0.11, 0.051 ), QVector3D( 0.1, 0.1, 0.5));
-    _cubeVertexes << GlVertex(QVector3D(0.21, 0.11, -0.051 ), QVector3D( 0.1, 0.1, 0.5 ));
-    _cubeVertexes << GlVertex(QVector3D(-0.21, 0.11, -0.051 ), QVector3D( 0.1, 0.1, 0.5 ));
+    _cubeVertexes << GlVertex(  0.2, 0.1, 0.05, blue );
+    _cubeVertexes << GlVertex( 0.2, 0.1, -0.05, blue );
+    _cubeVertexes << GlVertex( -0.2, 0.1, -0.05, blue );
 
-    _cubeVertexes << GlVertex(QVector3D( -0.21, -0.11, 0.051 ), QVector3D( 0.1, 0.1, 0.5 ));
-    _cubeVertexes << GlVertex(QVector3D( 0.21, -0.11, 0.051 ), QVector3D( 0.1, 0.1, 0.5 ));
-    _cubeVertexes << GlVertex(QVector3D(-0.21, -0.11, -0.051 ), QVector3D( 0.1, 0.1, 0.5 ));
+    _cubeVertexes << GlVertex(  -0.2, -0.1, 0.05, blue );
+    _cubeVertexes << GlVertex(  0.2, -0.1, 0.05, blue );
+    _cubeVertexes << GlVertex( -0.2, -0.1, -0.05, blue );
 
-    _cubeVertexes << GlVertex(QVector3D( 0.21, -0.11, 0.051 ), QVector3D( 0.1, 0.1, 0.5 ));
-    _cubeVertexes << GlVertex(QVector3D(0.21, -0.11, -0.051 ), QVector3D( 0.1, 0.1, 0.5 ));
-    _cubeVertexes << GlVertex(QVector3D(-0.21, -0.11, -0.051 ), QVector3D( 0.1, 0.1, 0.5 ));
+    _cubeVertexes << GlVertex(  0.2, -0.1, 0.05, blue );
+    _cubeVertexes << GlVertex( 0.2, -0.1, -0.05, blue );
+    _cubeVertexes << GlVertex( -0.2, -0.1, -0.05, blue );
 
     //ox plate
-    _cubeVertexes << GlVertex(QVector3D( -0.21, 0.11, 0.051 ), QVector3D( 0.5, 0.1, 0.3));
-    _cubeVertexes << GlVertex(QVector3D( -0.21, -0.11, 0.051 ), QVector3D( 0.5, 0.1, 0.3 ));
-    _cubeVertexes << GlVertex(QVector3D(-0.21, -0.11, -0.051 ), QVector3D( 0.5, 0.1, 0.3 ));
+    _cubeVertexes << GlVertex(  -0.2, 0.1, 0.05, red );
+    _cubeVertexes << GlVertex(  -0.2, -0.1, 0.05, red );
+    _cubeVertexes << GlVertex( -0.2, -0.1, -0.05, red );
 
-    _cubeVertexes << GlVertex(QVector3D( -0.21, 0.11, 0.051 ), QVector3D( 0.5, 0.1, 0.3 ));
-    _cubeVertexes << GlVertex(QVector3D( -0.21, 0.11, -0.051 ), QVector3D( 0.5, 0.1, 0.3 ));
-    _cubeVertexes << GlVertex(QVector3D(-0.21, -0.11, -0.051 ), QVector3D( 0.5, 0.1, 0.3 ));
+    _cubeVertexes << GlVertex(  -0.2, 0.1, 0.05, red );
+    _cubeVertexes << GlVertex(  -0.2, 0.1, -0.05, red );
+    _cubeVertexes << GlVertex( -0.2, -0.1, -0.05, red );
 
-    _cubeVertexes << GlVertex(QVector3D( 0.21, 0.11, 0.051 ), QVector3D( 0.5, 0.1, 0.3));
-    _cubeVertexes << GlVertex(QVector3D( 0.21, -0.11, 0.051 ), QVector3D( 0.5, 0.1, 0.3 ));
-    _cubeVertexes << GlVertex(QVector3D(0.21, -0.11, -0.051 ), QVector3D( 0.5, 0.1, 0.3 ));
+    _cubeVertexes << GlVertex(  0.2, 0.1, 0.05, red );
+    _cubeVertexes << GlVertex(  0.2, -0.1, 0.05, red );
+    _cubeVertexes << GlVertex( 0.2, -0.1, -0.05, red );
 
-    _cubeVertexes << GlVertex(QVector3D( 0.21, 0.11, 0.051 ), QVector3D( 0.5, 0.1, 0.3 ));
-    _cubeVertexes << GlVertex(QVector3D( 0.21, 0.11, -0.051 ), QVector3D( 0.5, 0.1, 0.3 ));
-    _cubeVertexes << GlVertex(QVector3D(0.21, -0.11, -0.051 ), QVector3D( 0.5, 0.1, 0.3 ));
+    _cubeVertexes << GlVertex(  0.2, 0.1, 0.05, red );
+    _cubeVertexes << GlVertex(  0.2, 0.1, -0.05, red );
+    _cubeVertexes << GlVertex( 0.2, -0.1, -0.05, red );
 
     //oz plate
-    _cubeVertexes << GlVertex(QVector3D( -0.21, 0.11, 0.051 ), QVector3D( 0.1, 0.5, 0.3 ));
-    _cubeVertexes << GlVertex(QVector3D( -0.21, -0.11, 0.051 ), QVector3D( 0.1, 0.5, 0.3  ));
-    _cubeVertexes << GlVertex(QVector3D( 0.21, -0.11, 0.051 ), QVector3D( 0.1, 0.5, 0.3  ));
+    _cubeVertexes << GlVertex(  -0.2, 0.1, 0.05, green );
+    _cubeVertexes << GlVertex(  -0.2, -0.1, 0.05, green );
+    _cubeVertexes << GlVertex(  0.2, -0.1, 0.05, green );
 
-    _cubeVertexes << GlVertex(QVector3D( 0.21, 0.11, 0.051 ), QVector3D( 0.1, 0.5, 0.3  ));
-    _cubeVertexes << GlVertex(QVector3D( 0.21, -0.11, 0.051 ), QVector3D( 0.1, 0.5, 0.3  ));
-    _cubeVertexes << GlVertex(QVector3D(-0.21, 0.11, 0.051 ), QVector3D( 0.1, 0.5, 0.3  ));
+    _cubeVertexes << GlVertex(  0.2, 0.1, 0.05, green );
+    _cubeVertexes << GlVertex(  0.2, -0.1, 0.05, green );
+    _cubeVertexes << GlVertex( -0.2, 0.1, 0.05, green );
 
-    _cubeVertexes << GlVertex(QVector3D( -0.21, 0.11, -0.051 ), QVector3D( 0.1, 0.5, 0.3 ));
-    _cubeVertexes << GlVertex(QVector3D( -0.21, -0.11, -0.051 ), QVector3D( 0.1, 0.5, 0.3  ));
-    _cubeVertexes << GlVertex(QVector3D( 0.21, -0.11, -0.051 ), QVector3D( 0.1, 0.5, 0.3  ));
+    _cubeVertexes << GlVertex(  -0.2, 0.1, -0.05, green );
+    _cubeVertexes << GlVertex(  -0.2, -0.1, -0.05, green );
+    _cubeVertexes << GlVertex(  0.2, -0.1, -0.05, green );
 
-    _cubeVertexes << GlVertex(QVector3D( 0.21, 0.11, -0.051 ), QVector3D( 0.1, 0.5, 0.3  ));
-    _cubeVertexes << GlVertex(QVector3D( 0.21, -0.11, -0.051 ), QVector3D( 0.1, 0.5, 0.3  ));
-    _cubeVertexes << GlVertex(QVector3D(-0.21, 0.11, -0.051 ), QVector3D( 0.1, 0.5, 0.3  ));
+    _cubeVertexes << GlVertex(  0.2, 0.1, -0.05, green );
+    _cubeVertexes << GlVertex(  0.2, -0.1, -0.05, green );
+    _cubeVertexes << GlVertex( -0.2, 0.1, -0.05, green );
 
     _cube = new GlModel(_program, _cubeVertexes);
 }

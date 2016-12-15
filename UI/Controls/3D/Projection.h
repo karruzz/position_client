@@ -10,9 +10,9 @@
 #include <QSurfaceFormat>
 #include <QMatrix4x4>
 #include <QQuaternion>
+#include <QVector3D>
 
 #include "Renderer.h"
-#include "Math/Quaternion.h"
 
 class Projection : public QQuickItem
 {
@@ -39,10 +39,6 @@ class Projection : public QQuickItem
         void handleWindowChanged(QQuickWindow *win);
 
     private:
-        QQuaternion derivative(QQuaternion &q, float wx, float wy, float wz);
-        QQuaternion unit(float angle, float x, float y, float z);
-        QMatrix4x4 dcm(Point3d euler);
-        QMatrix4x4 dcm(QQuaternion q);
         QMatrix4x4 vMatrix();
 
         Renderer *_renderer;
