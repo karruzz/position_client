@@ -7,7 +7,6 @@ SOURCES += main.cpp \
     Model/dataentrymodel.cpp \
     Model/renderthread.cpp \
     Model/qgyroframe.cpp \
-    Channel/tfilechannel.cpp \
     UI/Controls/3D/Projection.cpp \
     UI/Controls/Chart/Chart.cpp \
     Subsystems/Gyro/GyroChartModel.cpp \
@@ -17,7 +16,8 @@ SOURCES += main.cpp \
     Core/Dispatcher.cpp \
     Core/Math.cpp \
     UI/Controls/Chart/LineNode.cpp \
-    UI/Controls/Chart/GridNode.cpp
+    UI/Controls/Chart/GridNode.cpp \
+    Channel/TFileChannel.cpp
 
 RESOURCES += qml.qrc
 

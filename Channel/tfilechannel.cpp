@@ -1,4 +1,5 @@
 #include "TFileChannel.h"
+#include <QtMath>
 
 template class TFileChannel<GyroFrame>;
 
@@ -34,6 +35,38 @@ void TFileChannel<T>::Close()
     if (_filePtr->isOpen()) _filePtr->close();
     delete _filePtr;
     _filePtr = NULL;
+
+    delete _streamPtr;
+    _streamPtr = NULL;
+}
+
+template <class T>
+quint64 TFileChannel<T>::Counter(quint64 index)
+{
+    T result = Read(index);
+    return result.Counter;
+}
+
+template <class T>
+quint64 TFileChannel<T>::Index(quint64 counter)
+{
+    quint64 left = 0;
+    quint64 right = _framesCount - 1;
+    quint64 center = (right + left) / 2;
+    quint64 lastCenter = 0;
+
+    while (qAbs(center - lastCenter)>1)
+    {
+        T frame = Read(center);
+        if (counter > frame.Counter) left = center;
+        else if (counter < frame.Counter) right = center;
+        else return center;
+
+        lastCenter = center;
+        center = (right + left) / 2;
+    }
+
+    return qMin(lastCenter, center);
 }
 
 template <class T>

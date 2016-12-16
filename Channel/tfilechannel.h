@@ -18,6 +18,9 @@ class TFileChannel : public IChannel<T>
         bool Open(const QString &path);
         void Close();
 
+        quint64 Counter(quint64 index) override final;
+        quint64 Index(quint64 counter) override final;
+
         T Read(quint64 index) override final;
         QVector<T> Read(quint64 index, int count) override final;
         quint64 Count() override final;
