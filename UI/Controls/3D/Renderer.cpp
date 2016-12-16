@@ -106,6 +106,8 @@ Renderer::Renderer() : _program(0)
     _cubeVertexes << GlVertex( -0.2, 0.1, -0.05, green );
 
     _cube = new GlModel(_program, _cubeVertexes);
+
+    glClearColor(0, 0, 0, 1);
 }
 
 Renderer::~Renderer()

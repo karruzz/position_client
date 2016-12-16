@@ -1,5 +1,6 @@
 #include <UI/Controls/Chart/Chart.h>
 #include "LineNode.h"
+#include "GridNode.h"
 
 Chart::Chart(QQuickItem *parent)
     : QQuickItem(parent),
@@ -20,6 +21,7 @@ class ChartNode : public QSGNode
 {
     public:
         LineNode *line;
+        GridNode *grid;
 };
 
 QSGNode *Chart::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
@@ -35,15 +37,21 @@ QSGNode *Chart::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
 
     if (!n) {
         n = new ChartNode();
+        n->grid = new GridNode();
         n->line = new LineNode(_points.size()+1, _color);
+
+        n->appendChildNode(n->grid);
         n->appendChildNode(n->line);
     }
     else
     {
         n->line->alloc(_points.size());
+        n->grid->alloc();
     }
 
+    n->grid->setRect(rect);
     n->line->setPoints(rect, _points, _max, _min);
 
     return n;
 }
+

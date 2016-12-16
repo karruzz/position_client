@@ -13,19 +13,18 @@ Rectangle{
     ColumnLayout {
         id: layout
         anchors.fill: parent
+        anchors.margins: 8
         spacing: 1
 
         Rectangle{
             Layout.fillHeight: true
             Layout.fillWidth: true
-            border.color: "lightsteelblue"
-            border.width: 1
-            anchors.margins: 2
             color: "black"
 
             Chart
             {
                 anchors.fill: parent
+                anchors.margins: 8
                 objectName: "gyroChartAngleX"
                 color: "green"
             }
@@ -33,14 +32,12 @@ Rectangle{
         Rectangle{
             Layout.fillHeight: true
             Layout.fillWidth: true
-            border.color: "lightsteelblue"
-            border.width: 1
-            anchors.margins: 2
             color: "black"
 
             Chart
             {
                 anchors.fill: parent
+                anchors.margins: 8
                 objectName: "gyroChartAngleY"
                 color: "blue"
             }
@@ -49,14 +46,12 @@ Rectangle{
         Rectangle{
             Layout.fillHeight: true
             Layout.fillWidth: true
-            border.color: "lightsteelblue"
-            border.width: 1
-            anchors.margins: 2
             color: "black"
 
             Chart
             {
                 anchors.fill: parent
+                anchors.margins: 8
                 objectName: "gyroChartAngleZ"
                 color: "red"
             }
