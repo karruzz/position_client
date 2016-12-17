@@ -43,13 +43,15 @@ void TFileChannel<T>::Close()
 template <class T>
 quint64 TFileChannel<T>::Counter(quint64 index)
 {
-    T result = Read(index);
-    return result.Counter;
+    return Read(index).Counter;
 }
 
 template <class T>
 quint64 TFileChannel<T>::Index(quint64 counter)
 {
+    if (counter <= StartCounter()) return 0;
+    if (counter >= EndCounter()) return _framesCount - 1;
+
     quint64 left = 0;
     quint64 right = _framesCount - 1;
     quint64 center = (right + left) / 2;
@@ -67,6 +69,18 @@ quint64 TFileChannel<T>::Index(quint64 counter)
     }
 
     return qMin(lastCenter, center);
+}
+
+template <class T>
+quint64 TFileChannel<T>::StartCounter()
+{
+    return Counter(0);
+}
+
+template <class T>
+quint64 TFileChannel<T>::EndCounter()
+{
+    return Counter(_framesCount - 1);
 }
 
 template <class T>

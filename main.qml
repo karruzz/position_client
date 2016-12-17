@@ -37,22 +37,22 @@ Item {
         }
 
 
-        Scroll{ visible: dispatcher.count
+        Scroll{ visible: dispatcher.end
                 height: 15
                 width: parent.width
                 anchors.left: parent.left
                 anchors.bottom: parent.bottom
-                maximum: dispatcher.count
+                minimum: dispatcher.start
+                maximum: dispatcher.end
 
                 onSeek: {
-                    dispatcher.seek(index)
+                    dispatcher.seek(counter)
                 }
-
         }
 
 
     Window {
-        visible: dispatcher.count
+        visible: true
         width: 800
         height: 400
 

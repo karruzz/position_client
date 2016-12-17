@@ -7,10 +7,10 @@ Item {
      property variant orientation: Qt.Horizontal
 
      property int value: 0
-     property int minimum: 0
-     property int maximum: 10
+     property double minimum: 0
+     property double maximum: 10
 
-     signal seek(int index)
+     signal seek(double counter)
 
      function position()
      {
@@ -66,9 +66,9 @@ Item {
                  var delta = maximum - minimum;
                  if (pressedButtons == Qt.LeftButton) {
                      if (container.orientation == Qt.Vertical)
-                         container.seek(slider.y * delta / container.height);
+                         container.seek(minimum + slider.y * delta / container.height);
                      else
-                         container.seek(slider.x * delta / container.width);
+                         container.seek(minimum + slider.x * delta / container.width);
                  }
              }
          }

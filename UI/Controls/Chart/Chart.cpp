@@ -50,7 +50,7 @@ QSGNode *Chart::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
     }
 
     n->grid->setRect(rect);
-    n->line->setPoints(rect, _points, _max, _min);
+    n->line->setPoints(rect, _points, _max, _min, _left, _right);
 
     return n;
 }

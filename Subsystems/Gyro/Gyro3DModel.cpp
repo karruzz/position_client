@@ -9,8 +9,9 @@ Gyro3DModel::Gyro3DModel(QQuickView *parent, IChannel<GyroFrame> *channel)
     QObject::connect(this, &Gyro3DModel::PointUpdated, view, &Projection::setPosition);
 }
 
-void Gyro3DModel::seek(quint64 index)
+void Gyro3DModel::seek(quint64 counter)
 {
+    auto index = _channel->Index(counter);
     auto frame = _channel->Read(index);
     emit PointUpdated(frame);
 }

@@ -21,16 +21,17 @@ void LineNode::alloc(int size)
 }
 
 void LineNode::setPoints(const QRectF &bounds, const QVector<QPointF> &points,
-                         float max, float min)
+                         float max, float min, quint64 left, quint64 right)
 {
     auto size = points.size();
-    auto delta = max - min;
+    auto scaleY = max - min;
+    auto scaleX = right - left;
 
     QSGGeometry::Point2D *vertices = _geometry.vertexDataAsPoint2D();
     for (int i = 0; i < size; ++i) {
         const QPointF &p = points[i];
-        float x = p.x() / size * bounds.width();
-        float y = (1.0 - (p.y() - min) / delta) * bounds.height();
+        float x = (p.x() - left) / (scaleX - 1) * bounds.width();
+        float y = (1.0 - (p.y() - min) / scaleY) * bounds.height();
         vertices[i].set(x, y);
     }
 

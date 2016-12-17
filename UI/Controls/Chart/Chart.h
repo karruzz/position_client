@@ -13,8 +13,12 @@ class Chart : public QQuickItem
     Q_OBJECT
 
     Q_PROPERTY( QColor color READ color WRITE setColor NOTIFY colorChanged)
+
     Q_PROPERTY( qreal min READ min NOTIFY minChanged)
     Q_PROPERTY( qreal max READ max NOTIFY maxChanged)
+
+    Q_PROPERTY( quint64 left READ left WRITE setLeft NOTIFY leftChanged)
+    Q_PROPERTY( quint64 right READ right WRITE setRight NOTIFY rightChanged)
 
     Q_PROPERTY( QVector<QPointF> points READ points WRITE setPoints NOTIFY pointsChanged)
 
@@ -27,6 +31,12 @@ public:
     qreal min() const { return _min; }
     qreal max() const { return _max; }
 
+    quint64 left() const { return _left; }
+    Q_INVOKABLE void setLeft(quint64 l) { _left = l; }
+
+    quint64 right() const { return _right; }
+    Q_INVOKABLE void setRight(quint64 r) { _right = r; }
+
     QVector<QPointF> points() const { return _points; }
     Q_INVOKABLE void setPoints(const QVector<QPointF> &points);
 
@@ -36,16 +46,20 @@ protected:
 signals:
     void minChanged();
     void maxChanged();
+
+    void leftChanged();
+    void rightChanged();
+
     void pointsChanged();
     void colorChanged();
 
 private:
     QVector<QPointF> _points;
-    qreal _min;
-    qreal _max;
+    qreal _min, _max;
     QColor _color;
 
     int _samples;
+    quint64 _left, _right;
 };
 
 #endif // CHART_H

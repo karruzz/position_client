@@ -10,6 +10,9 @@ class IChannel
     public:
         virtual ~IChannel() {}
 
+        virtual quint64 StartCounter() = 0;
+        virtual quint64 EndCounter() = 0;
+
         virtual quint64 Counter(quint64 index) = 0;
         virtual quint64 Index(quint64 counter) = 0;
 

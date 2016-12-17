@@ -1,7 +1,7 @@
 #include "Dispatcher.h"
 
 Dispatcher::Dispatcher(QQuickView *parent)
-    : QObject(parent), _parent(parent), _count(0), _channel(NULL)
+    : QObject(parent), _parent(parent), _start(0), _end(0), _channel(NULL)
 {
 }
 
@@ -19,12 +19,14 @@ void Dispatcher::open(const QString &path)
 
     _gyroChart = new GyroChartModel(_parent, _channel);
     _gyro3D = new Gyro3DModel(_parent, _channel);
-    _count = _channel->Count();
+
+    _start = _channel->StartCounter();
+    _end = _channel->EndCounter();
     emit opened();
 }
 
-void Dispatcher::seek(quint64 index)
+void Dispatcher::seek(quint64 counter)
 {
-    _gyroChart->seek(index);
-    _gyro3D->seek(index);
+    _gyroChart->seek(counter);
+    _gyro3D->seek(counter);
 }
