@@ -9,18 +9,22 @@
 #include "Subsystems/Gyro/GyroChartModel.h"
 #include "Subsystems/Gyro/Gyro3DModel.h"
 
+#include <QFileSystemWatcher>
+
 class Dispatcher : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY( quint64 start READ start NOTIFY opened)
-    Q_PROPERTY( quint64 end READ end NOTIFY opened)
+    Q_PROPERTY( quint64 startCounter READ startCounter NOTIFY opened)
+    Q_PROPERTY( quint64 endCounter READ endCounter NOTIFY opened)
+    Q_PROPERTY( bool isOpened READ isOpened NOTIFY opened)
 
 public:
     explicit Dispatcher(QQuickView *parent = 0);
     ~Dispatcher();
 
-    quint64 start() const { return _start; }
-    quint64 end() const { return _end; }
+    quint64 startCounter() const { return _start; }
+    quint64 endCounter() const { return _end; }
+    bool isOpened() const { return _isOpened; }
 
 signals:
     void opened();
@@ -28,16 +32,25 @@ signals:
 public slots:
     void open(const QString &path);
     void seek(quint64 counter);
+    void watch();
+
+    void fileChanged(const QString &path);
 
 private:
     QQuickView *_parent;
+    QFileSystemWatcher *_watcher;
 
     quint64 _start;
     quint64 _end;
 
     GyroChartModel *_gyroChart;
     Gyro3DModel *_gyro3D;
+
     TFileChannel<GyroFrame> *_channel;
+    QString _path;
+
+    bool _isNowWatching;
+    bool _isOpened;
 };
 
 #endif // DISPATCHER_H

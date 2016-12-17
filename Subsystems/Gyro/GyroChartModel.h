@@ -18,8 +18,8 @@ class GyroChartModel : public QObject
     void seek(quint64 index);
 
     signals:
-        void SetLeft(quint64 left);
-        void SetRight(quint64 right);
+        void SetLeft(qint64 left);
+        void SetRight(qint64 right);
 
         void AngleXUpdated(const QVector<QPointF> &points);
         void AngleYUpdated(const QVector<QPointF> &points);

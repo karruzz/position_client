@@ -34,16 +34,20 @@ Item {
 
                 onClicked: fileDialog.open();
             }
-        }
 
+            Button{
+                text: "следить"
+                onClicked: dispatcher.watch();
+            }
+        }     
 
-        Scroll{ visible: dispatcher.end
+        Scroll{ visible: dispatcher.isOpened
                 height: 15
                 width: parent.width
                 anchors.left: parent.left
                 anchors.bottom: parent.bottom
-                minimum: dispatcher.start
-                maximum: dispatcher.end
+                minimum: dispatcher.startCounter
+                maximum: dispatcher.endCounter
 
                 onSeek: {
                     dispatcher.seek(counter)

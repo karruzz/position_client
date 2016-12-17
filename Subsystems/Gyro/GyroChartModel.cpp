@@ -22,10 +22,10 @@ GyroChartModel::GyroChartModel(QQuickView *parent, IChannel<GyroFrame> *channel)
 
 void GyroChartModel::seek(quint64 counter)
 {
-    auto counterLeft = counter - Scale_ns;
-    auto counterRight = counter + Scale_ns;
+    qint64 counterLeft = counter - Scale_ns;
+    qint64 counterRight = counter + Scale_ns;
 
-    auto indexLeft = _channel->Index(counterLeft);
+    auto indexLeft = counterLeft < 0 ? 0 : _channel->Index(counterLeft);
     auto indexRight = _channel->Index(counterRight);
     auto count = indexRight - indexLeft;
 
