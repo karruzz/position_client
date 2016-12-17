@@ -86,6 +86,7 @@ quint64 TFileChannel<T>::EndCounter()
 template <class T>
 quint64 TFileChannel<T>::Count()
 {
+    _framesCount = (_filePtr->size()) / FrameSize;
     return _framesCount;
 }
 

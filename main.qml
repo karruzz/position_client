@@ -36,8 +36,16 @@ Item {
             }
 
             Button{
+                anchors.right: parent.right
                 text: "следить"
-                onClicked: dispatcher.watch();
+
+                Timer {
+                    id: timer
+                    interval: 10; running: false; repeat: true
+                    onTriggered: dispatcher.seek(dispatcher.endCounter)
+                }
+
+                onClicked: timer.running = true;
             }
         }     
 

@@ -22,8 +22,8 @@ public:
     explicit Dispatcher(QQuickView *parent = 0);
     ~Dispatcher();
 
-    quint64 startCounter() const { return _start; }
-    quint64 endCounter() const { return _end; }
+    quint64 startCounter() const { return _channel ? _channel->StartCounter() : 0; }
+    quint64 endCounter() const { return _channel ? _channel->EndCounter() : 0; }
     bool isOpened() const { return _isOpened; }
 
 signals:
@@ -32,24 +32,17 @@ signals:
 public slots:
     void open(const QString &path);
     void seek(quint64 counter);
-    void watch();
 
     void fileChanged(const QString &path);
 
 private:
     QQuickView *_parent;
-    QFileSystemWatcher *_watcher;
-
-    quint64 _start;
-    quint64 _end;
 
     GyroChartModel *_gyroChart;
     Gyro3DModel *_gyro3D;
 
     TFileChannel<GyroFrame> *_channel;
-    QString _path;
 
-    bool _isNowWatching;
     bool _isOpened;
 };
 
