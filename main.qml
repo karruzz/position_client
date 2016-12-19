@@ -83,6 +83,118 @@ Item {
         {
             objectName: "gyro3D"
             anchors.fill: parent
+
+            RowLayout {
+                anchors.left: parent.left
+                anchors.top: parent.top
+                height: 60
+                width: 500
+                anchors.margins: 8
+                spacing: 8
+
+                ColumnLayout {
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    width: 150
+                    spacing: 8
+
+                    Text
+                    {
+                        anchors.margins: 8
+                        Layout.fillHeight: true
+                        Layout.fillWidth: true
+                        text: "roll:"
+                        color: "gray"
+                    }
+
+                    Text
+                    {
+                        anchors.margins: 8
+                        Layout.fillHeight: true
+                        Layout.fillWidth: true
+                        text: "pitch:"
+                        color: "gray"
+                    }
+
+                    Text
+                    {
+                        anchors.margins: 8
+                        Layout.fillHeight: true
+                        Layout.fillWidth: true
+                        text: "yaw:"
+                        color: "gray"
+                    }
+                }
+
+                ColumnLayout {
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    width: 150
+                    spacing: 8
+
+                    Text
+                    {
+                        anchors.margins: 8
+                        Layout.fillHeight: true
+                        Layout.fillWidth: true
+                        text: "wx:"
+                        color: "gray"
+                    }
+
+                    Text
+                    {
+                        anchors.margins: 8
+                        Layout.fillHeight: true
+                        Layout.fillWidth: true
+                        text: "wy:"
+                        color: "gray"
+                    }
+
+                    Text
+                    {
+                        anchors.margins: 8
+                        Layout.fillHeight: true
+                        Layout.fillWidth: true
+                        text: "wz:"
+                        color: "gray"
+                    }
+                }
+
+                ColumnLayout {
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    width: 150
+                    spacing: 8
+
+                    Text
+                    {
+                        anchors.margins: 8
+                        Layout.fillHeight: true
+                        Layout.fillWidth: true
+                        text: "ax:"
+                        color: "gray"
+                    }
+
+                    Text
+                    {
+                        anchors.margins: 8
+                        Layout.fillHeight: true
+                        Layout.fillWidth: true
+                        text: "ay:"
+                        color: "gray"
+                    }
+
+                    Text
+                    {
+                        anchors.margins: 8
+                        Layout.fillHeight: true
+                        Layout.fillWidth: true
+                        text: "az:"
+                        color: "gray"
+                    }
+                }
+            }
+
         }
     }
 }

@@ -6,9 +6,11 @@
 
 Projection::Projection(QQuickItem *parent)
     :  QQuickItem(parent), _renderer(0), _camX(1,0,0,0), _camY(0,1,0,0), _camZ(0,0,1,0)
-    , _camPos(0,-2,0,0), _qCamera(1,0,0,0), _dragAngle(false),  _cube(0)
+    , _camPos(1.3, -0.9, 1, 0), _qCamera(1,0,0,0), _dragAngle(false),  _cube(0)
 {
     connect(this, SIGNAL(windowChanged(QQuickWindow*)), this, SLOT(handleWindowChanged(QQuickWindow*)));
+    _qCamera += Math::derivative(_qCamera, -0.5, 0, 0);
+    _qCamera = Math::versor(0.9, 0, 0, 1) * _qCamera;
 
     setAcceptHoverEvents(true);
     setFlag(ItemAcceptsInputMethod, true);
