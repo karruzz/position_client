@@ -45,7 +45,7 @@ Item {
          } else return nh + ny;
      }
 
-     Rectangle { anchors.fill: parent; color: "Black"; opacity: 0.3 }
+     Rectangle { anchors.fill: parent; color: "gray" }
 
      Rectangle {
          id: slider

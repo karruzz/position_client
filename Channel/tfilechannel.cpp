@@ -16,11 +16,15 @@ TFileChannel<T>::~TFileChannel()
 template <class T>
 bool TFileChannel<T>::Open(const QString &path)
 {
-    if (_filePtr) Close();
-
     _filePtr = new QFile(path);
-    if (!_filePtr->exists()) return false;
-    if (!_filePtr->open(QIODevice::ReadOnly)) return false;
+
+    if (!_filePtr->open(QIODevice::ReadOnly)) {
+        delete _filePtr;
+        _filePtr = NULL;
+
+        return false;
+    }
+
     _framesCount = (_filePtr->size()) / FrameSize;
     _streamPtr = new QDataStream(_filePtr);
     _streamPtr->setByteOrder(QDataStream::LittleEndian);
@@ -31,8 +35,8 @@ template <class T>
 void TFileChannel<T>::Close()
 {
     if (!_filePtr) return;
-
     if (_filePtr->isOpen()) _filePtr->close();
+
     delete _filePtr;
     _filePtr = NULL;
 

@@ -6,7 +6,7 @@
 
 Projection::Projection(QQuickItem *parent)
     :  QQuickItem(parent), _renderer(0), _camX(1,0,0,0), _camY(0,1,0,0), _camZ(0,0,1,0)
-    , _camPos(1.3, -0.9, 1, 0), _qCamera(1,0,0,0), _dragAngle(false),  _cube(0)
+    , _camPos(1.3, -0.9, 1, 0), _qCamera(1,0,0,0), _dragAngle(false),  _cube(0), _frame(new QGyroFrame(this))
 {
     connect(this, SIGNAL(windowChanged(QQuickWindow*)), this, SLOT(handleWindowChanged(QQuickWindow*)));
     _qCamera += Math::derivative(_qCamera, -0.5, 0, 0);
@@ -19,8 +19,11 @@ Projection::Projection(QQuickItem *parent)
 
 void Projection::setPosition(GyroFrame p)
 {
+    _frame->data = p;
+    emit frameChanged();
+    emit _frame->changed();
+
     _position = p;
-    emit positionChanged();
 
     if (_cube)
     {

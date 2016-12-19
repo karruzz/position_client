@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<Dispatcher>("Client.Components", 1, 0, "Dispatcher");
     qmlRegisterType<Chart>("Client.Components", 1, 0, "Chart");
     qmlRegisterType<Projection>("Client.Components", 1, 0, "Projection");
+    qmlRegisterType<QGyroFrame>("Client.Components", 1,0, "QGyroFrame");
 
     QQuickView *viewer = new QQuickView;
     viewer->setTitle(QStringLiteral("Gyro client"));

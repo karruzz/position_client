@@ -11,6 +11,11 @@ Item {
 
         Rectangle
         {
+            anchors.fill: parent
+            color: "black"
+
+        Rectangle
+        {
             id: buttonPanel
             width: parent.width
             height: 50
@@ -61,6 +66,7 @@ Item {
                     dispatcher.seek(counter)
                 }
         }
+    }
 
 
     Window {
@@ -81,54 +87,60 @@ Item {
 
         Projection
         {
+            id: project
             objectName: "gyro3D"
             anchors.fill: parent
 
-            RowLayout {
+            Text
+            {
+                anchors.margins: 8
+                anchors.left: parent.left
+                anchors.bottom: parent.bottom
+                text: "counter: " + project.Frame.Counter
+                color: "gray"
+            }
+
+            Row {
                 anchors.left: parent.left
                 anchors.top: parent.top
                 height: 60
-                width: 500
+                width: parent.width
                 anchors.margins: 8
                 spacing: 8
 
                 ColumnLayout {
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
                     width: 150
                     spacing: 8
 
                     Text
                     {
                         anchors.margins: 8
+                        width: parent.width
                         Layout.fillHeight: true
-                        Layout.fillWidth: true
-                        text: "roll:"
+                        text: "roll: " + project.Frame.Roll.toFixed(7)
                         color: "gray"
                     }
 
                     Text
                     {
                         anchors.margins: 8
+                        width: parent.width
                         Layout.fillHeight: true
-                        Layout.fillWidth: true
-                        text: "pitch:"
+                        text: "pitch: " + project.Frame.Pitch.toFixed(7)
                         color: "gray"
                     }
 
                     Text
                     {
                         anchors.margins: 8
+                        width: parent.width
                         Layout.fillHeight: true
-                        Layout.fillWidth: true
-                        text: "yaw:"
+                        text: "yaw: " + project.Frame.Yaw.toFixed(7)
                         color: "gray"
                     }
                 }
 
                 ColumnLayout {
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
                     width: 150
                     spacing: 8
 
@@ -136,8 +148,7 @@ Item {
                     {
                         anchors.margins: 8
                         Layout.fillHeight: true
-                        Layout.fillWidth: true
-                        text: "wx:"
+                        text: "wx: " + project.Frame.wx.toFixed(7)
                         color: "gray"
                     }
 
@@ -145,8 +156,7 @@ Item {
                     {
                         anchors.margins: 8
                         Layout.fillHeight: true
-                        Layout.fillWidth: true
-                        text: "wy:"
+                        text: "wy: " + project.Frame.wy.toFixed(7)
                         color: "gray"
                     }
 
@@ -154,15 +164,12 @@ Item {
                     {
                         anchors.margins: 8
                         Layout.fillHeight: true
-                        Layout.fillWidth: true
-                        text: "wz:"
+                        text: "wz: " + project.Frame.wz.toFixed(7)
                         color: "gray"
                     }
                 }
 
                 ColumnLayout {
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
                     width: 150
                     spacing: 8
 
@@ -170,8 +177,15 @@ Item {
                     {
                         anchors.margins: 8
                         Layout.fillHeight: true
-                        Layout.fillWidth: true
-                        text: "ax:"
+                        text: "ax: " + project.Frame.ax
+                        color: "gray"
+                    }
+
+                    Text
+                    {
+                        anchors.margins: 8
+                        Layout.fillHeight: true
+                        text: "ay: " + project.Frame.ay
                         color: "gray"
                     }
 
@@ -180,16 +194,7 @@ Item {
                         anchors.margins: 8
                         Layout.fillHeight: true
                         Layout.fillWidth: true
-                        text: "ay:"
-                        color: "gray"
-                    }
-
-                    Text
-                    {
-                        anchors.margins: 8
-                        Layout.fillHeight: true
-                        Layout.fillWidth: true
-                        text: "az:"
+                        text: "az: " + project.Frame.az
                         color: "gray"
                     }
                 }

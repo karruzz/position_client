@@ -13,27 +13,29 @@
 #include <QVector3D>
 
 #include "Renderer.h"
+#include "Model/qgyroframe.h"
 
 class Projection : public QQuickItem
 {
     Q_OBJECT
-    Q_PROPERTY( GyroFrame position READ position WRITE setPosition NOTIFY positionChanged)
+    Q_PROPERTY( QGyroFrame *Frame READ Frame NOTIFY frameChanged)
 
     public:
         Projection(QQuickItem *parent = 0);
-        GyroFrame position() const { return _position; }
-        void setPosition(GyroFrame p);
+
+        QGyroFrame *Frame() const { return _frame; }
 
         void wheelEvent(QWheelEvent *event);
         void mousePressEvent(QMouseEvent *event);
         void hoverMoveEvent(QHoverEvent *event);
 
     signals:
-        void positionChanged();
+        void frameChanged();
 
     public slots:
         void sync();
         void cleanup();
+        void setPosition(GyroFrame p);
 
     private slots:
         void handleWindowChanged(QQuickWindow *win);
@@ -42,7 +44,10 @@ class Projection : public QQuickItem
         QMatrix4x4 vMatrix();
 
         Renderer *_renderer;
+
+        // current frame
         GyroFrame _position;
+        QGyroFrame *_frame;
 
         // camera
         QVector4D _camX, _camY, _camZ, _camPos;

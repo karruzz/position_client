@@ -22,8 +22,8 @@ public:
     explicit Dispatcher(QQuickView *parent = 0);
     ~Dispatcher();
 
-    quint64 startCounter() const { return _channel ? _channel->StartCounter() : 0; }
-    quint64 endCounter() const { return _channel ? _channel->EndCounter() : 0; }
+    quint64 startCounter() const { return _isOpened ? _channel->StartCounter() : 0; }
+    quint64 endCounter() const { return _isOpened ? _channel->EndCounter() : 0; }
     bool isOpened() const { return _isOpened; }
 
 signals:
