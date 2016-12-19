@@ -2,41 +2,59 @@
 
 #include <QSGFlatColorMaterial>
 
-GridNode::GridNode()
-    : _geometry(QSGGeometry::defaultAttributes_Point2D(), 29)
+GridNode::GridNode(QColor color, QVector2D margin, QVector2D colsRows)
+    : _geometry(QSGGeometry::defaultAttributes_Point2D(), colsRows.x()*colsRows.y() + 13), _margin(margin), _colsRows(colsRows)
 {
+    _verticesCount = _colsRows.x()*_colsRows.y() + 12;
     _geometry.setLineWidth(1);
     _geometry.setDrawingMode(GL_LINES);
     setGeometry(&_geometry);
 
     QSGFlatColorMaterial *material = new QSGFlatColorMaterial();
-    material->setColor(QColor(0x50, 0x50, 0x50));
+    material->setColor(color);
     setMaterial(material);
     setFlag(QSGNode::OwnsMaterial);
     markDirty(QSGNode::DirtyMaterial);
 }
 void GridNode::alloc()
 {
-   _geometry.allocate(28);
+   _geometry.allocate(_verticesCount);
 }
 
 void GridNode::setRect(const QRectF &bounds)
 {
     QSGGeometry::Point2D *vertices = _geometry.vertexDataAsPoint2D();
 
-    auto step = bounds.height() / 4;
-    for (int i = 0; i < 5; ++i) {
-        float y = i * step;
-        vertices[2*i].set(0, y);
-        vertices[2*i+1].set(bounds.width(), y);
+    float bottom = bounds.height() - _margin.y();
+    float step = (bottom - 2) / _colsRows.y();
+    float center = bottom / 2;
+    int i = 0;
+    int position = 0;
+
+    while (center + i * step < bottom)
+    {
+        vertices[position++].set(_margin.x(), center + i * step);
+        vertices[position++].set(bounds.width(), center + i * step);
+        vertices[position++].set(_margin.x(), center - i * step);
+        vertices[position++].set(bounds.width(), center - i * step);
+        i++;
     }
 
-    int shift = 10;
-    step = bounds.width() / 8;
-    for (int i = 0; i < 9; ++i) {
-        float x = i * step;
-        vertices[shift+2*i].set(x, 0);
-        vertices[shift+2*i+1].set(x, bounds.height());
+    step = (bounds.width() - _margin.x() - 2) / _colsRows.x();
+    center = (bounds.width() - _margin.x()) / 2 + _margin.x();
+    i = 0;
+
+    while (center + i * step < bounds.width())
+    {
+        vertices[position++].set(center + i * step, 0);
+        vertices[position++].set(center + i * step, bottom);
+        vertices[position++].set(center - i * step, 0);
+        vertices[position++].set(center - i * step, bottom);
+        i++;
+    }
+    while (position < _verticesCount)
+    {
+        vertices[position++].set(0, 0);
     }
 
     markDirty(QSGNode::DirtyGeometry);

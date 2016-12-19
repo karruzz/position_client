@@ -14,52 +14,46 @@ class Chart : public QQuickItem
 
     Q_PROPERTY( QColor color READ color WRITE setColor NOTIFY colorChanged)
 
-    Q_PROPERTY( qreal min READ min NOTIFY minChanged)
-    Q_PROPERTY( qreal max READ max NOTIFY maxChanged)
+    Q_PROPERTY( qreal minY READ minY NOTIFY minYChanged)
+    Q_PROPERTY( qreal maxY READ maxY NOTIFY maxYChanged)
 
-    Q_PROPERTY( qint64 left READ left WRITE setLeft NOTIFY leftChanged)
-    Q_PROPERTY( qint64 right READ right WRITE setRight NOTIFY rightChanged)
-
-    Q_PROPERTY( QVector<QPointF> points READ points WRITE setPoints NOTIFY pointsChanged)
-
+    Q_PROPERTY( qint64 minX READ minX NOTIFY minXChanged)
+    Q_PROPERTY( qint64 maxX READ maxX NOTIFY maxXChanged)
 public:
     explicit Chart(QQuickItem *parent = 0);
 
     QColor color() const { return _color; }
     void setColor(QColor c) { _color = c; emit colorChanged(); }
 
-    qreal min() const { return _min; }
-    qreal max() const { return _max; }
+    qreal minY() const { return _minY; }
+    qreal maxY() const { return _maxY; }
 
-    quint64 left() const { return _left; }
-    Q_INVOKABLE void setLeft(qint64 l) { _left = l; }
+    quint64 minX() const { return _minX; }
+    quint64 maxX() const { return _maxX; }
 
-    quint64 right() const { return _right; }
-    Q_INVOKABLE void setRight(qint64 r) { _right = r; }
-
-    QVector<QPointF> points() const { return _points; }
-    Q_INVOKABLE void setPoints(const QVector<QPointF> &points);
+public slots:
+    void appendPoints(const QVector<QPointF> &points, float minY, float maxY, float minX, float maxX );
 
 protected:
     QSGNode *updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *);
 
 signals:
-    void minChanged();
-    void maxChanged();
+    void minYChanged();
+    void maxYChanged();
 
-    void leftChanged();
-    void rightChanged();
+    void minXChanged();
+    void maxXChanged();
 
     void pointsChanged();
     void colorChanged();
 
 private:
     QVector<QPointF> _points;
-    qreal _min, _max;
+    qreal _minY, _maxY;
     QColor _color;
 
     int _samples;
-    qint64 _left, _right;
+    qint64 _minX, _maxX;
 };
 
 #endif // CHART_H

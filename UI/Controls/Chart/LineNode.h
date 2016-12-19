@@ -3,18 +3,21 @@
 
 #include <QSGGeometryNode>
 #include <QSGGeometry>
+#include <QVector2D>
 
 class LineNode : public QSGGeometryNode
 {
     public:
-        LineNode(int size, const QColor &color);
+        LineNode(int size, const QColor &color, QVector2D margin);
+
         void setPoints(const QRectF &bounds, const QVector<QPointF> &points,
-                       float max, float min, quint64 left, quint64 right);
+                       float minY, float maxY, quint64 minX, quint64 maxX);
 
         void alloc(int size);
 
     private:
         QSGGeometry _geometry;
+        QVector2D _margin;
 };
 
 #endif // LINENODE_H

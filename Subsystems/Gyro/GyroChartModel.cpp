@@ -5,28 +5,22 @@ GyroChartModel::GyroChartModel(QQuickView *parent, IChannel<GyroFrame> *channel)
 {
     auto root = parent->rootObject();
     auto viewX = root->findChild<Chart*>("gyroChartAngleX");
-    QObject::connect(this, &GyroChartModel::AngleXUpdated, viewX, &Chart::setPoints);
-    QObject::connect(this, &GyroChartModel::SetLeft, viewX, &Chart::setLeft);
-    QObject::connect(this, &GyroChartModel::SetRight, viewX, &Chart::setRight);
+    QObject::connect(this, &GyroChartModel::AngleXUpdated, viewX, &Chart::appendPoints);
 
     auto viewY = root->findChild<Chart*>("gyroChartAngleY");
-    QObject::connect(this, &GyroChartModel::AngleYUpdated, viewY, &Chart::setPoints);
-    QObject::connect(this, &GyroChartModel::SetLeft, viewY, &Chart::setLeft);
-    QObject::connect(this, &GyroChartModel::SetRight, viewY, &Chart::setRight);
+    QObject::connect(this, &GyroChartModel::AngleYUpdated, viewY, &Chart::appendPoints);
 
     auto viewZ = root->findChild<Chart*>("gyroChartAngleZ");
-    QObject::connect(this, &GyroChartModel::AngleZUpdated, viewZ, &Chart::setPoints);
-    QObject::connect(this, &GyroChartModel::SetLeft, viewZ, &Chart::setLeft);
-    QObject::connect(this, &GyroChartModel::SetRight, viewZ, &Chart::setRight);
+    QObject::connect(this, &GyroChartModel::AngleZUpdated, viewZ, &Chart::appendPoints);
 }
 
 void GyroChartModel::seek(quint64 counter)
 {
-    qint64 counterLeft = counter - Scale_ns;
-    qint64 counterRight = counter + Scale_ns;
+    qint64 minCounter = counter - Scale_ns;
+    qint64 maxCounter = counter + Scale_ns;
 
-    auto indexLeft = counterLeft < 0 ? 0 : _channel->Index(counterLeft);
-    auto indexRight = _channel->Index(counterRight);
+    auto indexLeft = minCounter < 0 ? 0 : _channel->Index(minCounter);
+    auto indexRight = _channel->Index(maxCounter);
     auto count = indexRight - indexLeft;
 
     auto frames = _channel->Read(indexLeft, count);
@@ -34,21 +28,35 @@ void GyroChartModel::seek(quint64 counter)
     QVector<QPointF> pointsX;
     QVector<QPointF> pointsY;
     QVector<QPointF> pointsZ;
+    float minX, maxX, minY, maxY, minZ, maxZ;
+
     pointsX.reserve(count);
     pointsY.reserve(count);
     pointsZ.reserve(count);
-    for (auto i = 0; i < count; i++)
-    {
-        pointsX.append( QPointF(frames[i].Counter, frames[i].Angle.x()) );
-        pointsY.append( QPointF(frames[i].Counter, frames[i].Angle.y()) );
-        pointsZ.append( QPointF(frames[i].Counter, frames[i].Angle.z()) );
+    if (count > 0){
+        minX = maxX = frames[0].Angle.x();
+        minY = maxY = frames[0].Angle.y();
+        minZ = maxZ = frames[0].Angle.z();
     }
 
-    emit SetLeft(counterLeft);
-    emit SetRight(counterRight);
-    emit AngleXUpdated(pointsX);
-    emit AngleYUpdated(pointsY);
-    emit AngleZUpdated(pointsZ);
+    for (quint64 i = 0; i < count; i++)
+    {
+        pointsX.append( QPointF(frames[i].Counter, frames[i].Angle.x()) );
+        if (frames[i].Angle.x() > maxX) maxX = frames[i].Angle.x();
+        if (frames[i].Angle.x() < minX) minX = frames[i].Angle.x();
+
+        pointsY.append( QPointF(frames[i].Counter, frames[i].Angle.y()) );
+        if (frames[i].Angle.y() > maxY) maxY = frames[i].Angle.y();
+        if (frames[i].Angle.y() < minY) minY = frames[i].Angle.y();
+
+        pointsZ.append( QPointF(frames[i].Counter, frames[i].Angle.z()) );
+        if (frames[i].Angle.z() > maxZ) maxZ = frames[i].Angle.z();
+        if (frames[i].Angle.z() < minZ) minZ = frames[i].Angle.z();
+    }
+
+    emit AngleXUpdated(pointsX, minX - 0.02, maxX + 0.02, minCounter, maxCounter);
+    emit AngleYUpdated(pointsY, minY - 0.02, maxY + 0.02, minCounter, maxCounter);
+    emit AngleZUpdated(pointsZ, minZ - 0.02, maxZ + 0.02, minCounter, maxCounter);
 }
 
 

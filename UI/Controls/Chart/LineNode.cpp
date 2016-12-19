@@ -2,8 +2,8 @@
 
 #include <QSGFlatColorMaterial>
 
-LineNode::LineNode(int size, const QColor &color)
-    : _geometry(QSGGeometry::defaultAttributes_Point2D(), size)
+LineNode::LineNode(int size, const QColor &color, const QVector2D margin)
+    : _geometry(QSGGeometry::defaultAttributes_Point2D(), size), _margin(margin)
 {
     _geometry.setLineWidth(1);
     _geometry.setDrawingMode(GL_LINE_STRIP);
@@ -21,17 +21,17 @@ void LineNode::alloc(int size)
 }
 
 void LineNode::setPoints(const QRectF &bounds, const QVector<QPointF> &points,
-                         float max, float min, quint64 left, quint64 right)
+                         float minY, float maxY, quint64 minX, quint64 maxX)
 {
     auto size = points.size();
-    auto scaleY = max - min;
-    auto scaleX = right - left;
+    float kx = (bounds.width() - _margin.x()) / (maxX - minX);
+    float ky = (bounds.height() - _margin.y()) / (maxY - minY);
 
     QSGGeometry::Point2D *vertices = _geometry.vertexDataAsPoint2D();
     for (int i = 0; i < size; ++i) {
         const QPointF &p = points[i];
-        float x = (p.x() - left) / (scaleX - 1) * bounds.width();
-        float y = (1.0 - (p.y() - min) / scaleY) * bounds.height();
+        float x = (p.x() - minX) * kx + _margin.x();
+        float y = (maxY - p.y()) * ky;
         vertices[i].set(x, y);
     }
 

@@ -18,12 +18,9 @@ class GyroChartModel : public QObject
     void seek(quint64 index);
 
     signals:
-        void SetLeft(qint64 left);
-        void SetRight(qint64 right);
-
-        void AngleXUpdated(const QVector<QPointF> &points);
-        void AngleYUpdated(const QVector<QPointF> &points);
-        void AngleZUpdated(const QVector<QPointF> &points);
+        void AngleXUpdated(const QVector<QPointF> &points, float minY, float maxY, float minX, float maxX );
+        void AngleYUpdated(const QVector<QPointF> &points, float minY, float maxY, float minX, float maxX );
+        void AngleZUpdated(const QVector<QPointF> &points, float minY, float maxY, float minX, float maxX );
 
     private:
         IChannel<GyroFrame> *_channel;
