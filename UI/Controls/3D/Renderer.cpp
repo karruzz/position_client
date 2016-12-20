@@ -40,70 +40,58 @@ Renderer::Renderer() : _program(0)
     auto blue = QColor( 0x08, 0x08, 0x80 );
 
     QVector<GlVertex> _gridVertexes;
+    float gridSize = 0.5;
+    float gridStep = 0.125;
 
-    for (GLfloat i = -0.5; i <= 0.5; i+=0.25)
+    for (GLfloat i = -gridSize; i <= gridSize; i+=gridStep)
     {
-        _gridVertexes << GlVertex(-0.5, i, 0.0 , gray );
-        _gridVertexes << GlVertex( 0.5, i, 0.0 , gray );
+        _gridVertexes << GlVertex(-gridSize, i, 0.0 , gray );
+        _gridVertexes << GlVertex( gridSize, i, 0.0 , gray );
 
-        _gridVertexes << GlVertex( i, -0.5, 0.0 , gray );
-        _gridVertexes << GlVertex( i, 0.5, 0.0 , gray );
+        _gridVertexes << GlVertex( i, -gridSize, 0.0 , gray );
+        _gridVertexes << GlVertex( i,  gridSize, 0.0 , gray );
     }
 
     _grid = new GlModel(_program, _gridVertexes);
 
     QVector<GlVertex> _cubeVertexes;
 
-    //oy plate
-    _cubeVertexes << GlVertex(  -0.2, 0.1, 0.05, blue );
-    _cubeVertexes << GlVertex(  0.2, 0.1, 0.05, blue );
-    _cubeVertexes << GlVertex( -0.2, 0.1, -0.05, blue );
+    float cubeX = 0.2;
+    float cubeY = 0.1;
+    float cubeZ = 0.05;
 
-    _cubeVertexes << GlVertex(  0.2, 0.1, 0.05, blue );
-    _cubeVertexes << GlVertex( 0.2, 0.1, -0.05, blue );
-    _cubeVertexes << GlVertex( -0.2, 0.1, -0.05, blue );
+    //oy plates
+    _cubeVertexes << GlVertex(  -cubeX, -cubeY, cubeZ, blue );
+    _cubeVertexes << GlVertex(  cubeX, -cubeY, cubeZ, blue );
+    _cubeVertexes << GlVertex( cubeX, -cubeY, -cubeZ, blue );
+    _cubeVertexes << GlVertex(  -cubeX, -cubeY, -cubeZ, blue );
 
-    _cubeVertexes << GlVertex(  -0.2, -0.1, 0.05, blue );
-    _cubeVertexes << GlVertex(  0.2, -0.1, 0.05, blue );
-    _cubeVertexes << GlVertex( -0.2, -0.1, -0.05, blue );
+    _cubeVertexes << GlVertex(  -cubeX, cubeY, cubeZ, blue );
+    _cubeVertexes << GlVertex(  -cubeX, cubeY, -cubeZ, blue );
+    _cubeVertexes << GlVertex( cubeX, cubeY, -cubeZ, blue );
+    _cubeVertexes << GlVertex(  cubeX, cubeY, cubeZ, blue );
 
-    _cubeVertexes << GlVertex(  0.2, -0.1, 0.05, blue );
-    _cubeVertexes << GlVertex( 0.2, -0.1, -0.05, blue );
-    _cubeVertexes << GlVertex( -0.2, -0.1, -0.05, blue );
+    //ox plates
+    _cubeVertexes << GlVertex(  -cubeX, cubeY, cubeZ, red );
+    _cubeVertexes << GlVertex(  -cubeX, -cubeY, cubeZ, red );
+    _cubeVertexes << GlVertex( -cubeX, -cubeY, -cubeZ, red );
+    _cubeVertexes << GlVertex(  -cubeX, cubeY, -cubeZ, red );
 
-    //ox plate
-    _cubeVertexes << GlVertex(  -0.2, 0.1, 0.05, red );
-    _cubeVertexes << GlVertex(  -0.2, -0.1, 0.05, red );
-    _cubeVertexes << GlVertex( -0.2, -0.1, -0.05, red );
+    _cubeVertexes << GlVertex(  cubeX, cubeY, cubeZ, red );
+    _cubeVertexes << GlVertex(  cubeX, cubeY, -cubeZ, red );
+    _cubeVertexes << GlVertex( cubeX, -cubeY, -cubeZ, red );
+    _cubeVertexes << GlVertex(  cubeX, -cubeY, cubeZ, red );
 
-    _cubeVertexes << GlVertex(  -0.2, 0.1, 0.05, red );
-    _cubeVertexes << GlVertex(  -0.2, 0.1, -0.05, red );
-    _cubeVertexes << GlVertex( -0.2, -0.1, -0.05, red );
+    //oz plates
+    _cubeVertexes << GlVertex(  -cubeX, cubeY, -cubeZ, green );
+    _cubeVertexes << GlVertex(  -cubeX, -cubeY, -cubeZ, green );
+    _cubeVertexes << GlVertex(  cubeX, -cubeY, -cubeZ, green );
+    _cubeVertexes << GlVertex(  cubeX, cubeY, -cubeZ, green );
 
-    _cubeVertexes << GlVertex(  0.2, 0.1, 0.05, red );
-    _cubeVertexes << GlVertex(  0.2, -0.1, 0.05, red );
-    _cubeVertexes << GlVertex( 0.2, -0.1, -0.05, red );
-
-    _cubeVertexes << GlVertex(  0.2, 0.1, 0.05, red );
-    _cubeVertexes << GlVertex(  0.2, 0.1, -0.05, red );
-    _cubeVertexes << GlVertex( 0.2, -0.1, -0.05, red );
-
-    //oz plate
-    _cubeVertexes << GlVertex(  -0.2, 0.1, 0.05, green );
-    _cubeVertexes << GlVertex(  -0.2, -0.1, 0.05, green );
-    _cubeVertexes << GlVertex(  0.2, -0.1, 0.05, green );
-
-    _cubeVertexes << GlVertex(  0.2, 0.1, 0.05, green );
-    _cubeVertexes << GlVertex(  0.2, -0.1, 0.05, green );
-    _cubeVertexes << GlVertex( -0.2, 0.1, 0.05, green );
-
-    _cubeVertexes << GlVertex(  -0.2, 0.1, -0.05, green );
-    _cubeVertexes << GlVertex(  -0.2, -0.1, -0.05, green );
-    _cubeVertexes << GlVertex(  0.2, -0.1, -0.05, green );
-
-    _cubeVertexes << GlVertex(  0.2, 0.1, -0.05, green );
-    _cubeVertexes << GlVertex(  0.2, -0.1, -0.05, green );
-    _cubeVertexes << GlVertex( -0.2, 0.1, -0.05, green );
+    _cubeVertexes << GlVertex(  -cubeX, cubeY, cubeZ, green );
+    _cubeVertexes << GlVertex(  cubeX, cubeY, cubeZ, green );
+    _cubeVertexes << GlVertex(  cubeX, -cubeY, cubeZ, green );
+    _cubeVertexes << GlVertex(  -cubeX, -cubeY, cubeZ, green );
 
     _cube = new GlModel(_program, _cubeVertexes);
 }
@@ -124,7 +112,7 @@ void Renderer::paint()
     glViewport(0, 0, m_viewportSize.width(), m_viewportSize.height());
 
     glEnable(GL_DEPTH_TEST);
-  //  glEnable(GL_CULL_FACE);
+    glEnable(GL_CULL_FACE);
     glDepthMask(GL_TRUE);
 
     glClearColor(0, 0, 0, 1);
@@ -145,7 +133,7 @@ void Renderer::paint()
     if (_cube)
     {
         _program->setUniformValue("pvrtMatrix", _pMatrix * _vMatrix * _cube->rotate() * _cube->translate());
-        _cube->draw(GL_TRIANGLES);
+        _cube->draw(GL_QUADS);
     }
 
     _program->release();

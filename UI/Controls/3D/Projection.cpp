@@ -6,11 +6,15 @@
 
 Projection::Projection(QQuickItem *parent)
     :  QQuickItem(parent), _renderer(0), _camX(1,0,0,0), _camY(0,1,0,0), _camZ(0,0,1,0)
-    , _camPos(1.3, -0.9, 1, 0), _qCamera(1,0,0,0), _dragAngle(false),  _cube(0), _frame(new QGyroFrame(this))
+    , _camPos(0, -2, 0, 0), _qCamera(1,0,0,0), _dragAngle(false),  _cube(0), _frame(new QGyroFrame(this))
 {
     connect(this, SIGNAL(windowChanged(QQuickWindow*)), this, SLOT(handleWindowChanged(QQuickWindow*)));
-    _qCamera += Math::derivative(_qCamera, -0.5, 0, 0);
-    _qCamera = Math::versor(0.9, 0, 0, 1) * _qCamera;
+    _camPos = QVector4D(-0.829103708, -1.18958151, 0.454426438, 0);
+    _qCamera = QQuaternion(0.93892175, -0.112024069, 0.0385280848, -0.322915971);
+  //  _qCamera = Math::versor(1, 0, 0, 0);
+    //_qCamera = Math::versor(0.9, 0, 0, 1);
+  //  _qCamera += Math::derivative(_qCamera, -0.5, 0, 0);
+//    _qCamera = Math::versor(0.9, 0, 0, 1) * _qCamera;
 
     setAcceptHoverEvents(true);
     setFlag(ItemAcceptsInputMethod, true);
@@ -25,10 +29,8 @@ void Projection::setPosition(GyroFrame p)
 
     _position = p;
 
-    if (_cube)
-    {
-        _cube->setRotate(Math::dcm(p.Angle));
-    }
+    if (_cube)    
+        _cube->setRotate(Math::dcm(p.Angle));    
 
     if (window()) window()->update();
 }
@@ -129,6 +131,7 @@ void Projection::sync()
         _cube = _renderer->cube();
     }
     _renderer->setViewportSize(window()->size() * window()->devicePixelRatio());
+    _renderer->setVMatrix(vMatrix());
 }
 
 

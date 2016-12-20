@@ -17,6 +17,7 @@ void Dispatcher::open(const QString &path)
         _channel->Close();
         delete _gyroChart;
         delete _gyro3D;
+
         _isOpened = false;
     }
 
