@@ -2,8 +2,8 @@
 
 #include <QSGFlatColorMaterial>
 
-GridNode::GridNode(QColor color, QVector2D margin, QVector2D colsRows)
-    : _geometry(QSGGeometry::defaultAttributes_Point2D(), colsRows.x()*colsRows.y() + 13), _margin(margin), _colsRows(colsRows)
+GridNode::GridNode(QColor color, QVector2D colsRows)
+    : _geometry(QSGGeometry::defaultAttributes_Point2D(), colsRows.x()*colsRows.y() + 13), _colsRows(colsRows)
 {
     _verticesCount = _colsRows.x()*_colsRows.y() + 12;
     _geometry.setLineWidth(1);
@@ -25,7 +25,7 @@ void GridNode::setRect(const QRectF &bounds)
 {
     QSGGeometry::Point2D *vertices = _geometry.vertexDataAsPoint2D();
 
-    float bottom = bounds.height() - _margin.y();
+    float bottom = bounds.height();
     float step = (bottom - 2) / _colsRows.y();
     float center = bottom / 2;
     int i = 0;
@@ -33,15 +33,15 @@ void GridNode::setRect(const QRectF &bounds)
 
     while (center + i * step < bottom)
     {
-        vertices[position++].set(_margin.x(), center + i * step);
+        vertices[position++].set(0, center + i * step);
         vertices[position++].set(bounds.width(), center + i * step);
-        vertices[position++].set(_margin.x(), center - i * step);
+        vertices[position++].set(0, center - i * step);
         vertices[position++].set(bounds.width(), center - i * step);
         i++;
     }
 
-    step = (bounds.width() - _margin.x() - 2) / _colsRows.x();
-    center = (bounds.width() - _margin.x()) / 2 + _margin.x();
+    step = (bounds.width()- 2) / _colsRows.x();
+    center = bounds.width() / 2;
     i = 0;
 
     while (center + i * step < bounds.width())

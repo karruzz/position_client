@@ -9,14 +9,13 @@
 class GridNode : public QSGGeometryNode
 {
     public:
-        GridNode( const QColor color, const QVector2D margin, const QVector2D colsRows);
+        GridNode( const QColor color, const QVector2D colsRows);
 
         void setRect(const QRectF &bounds);
         void alloc();
 
     private:
         QSGGeometry _geometry;
-        QVector2D _margin;
         QVector2D _colsRows;
         int _verticesCount;
 };

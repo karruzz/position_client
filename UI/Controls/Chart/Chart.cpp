@@ -44,9 +44,9 @@ QSGNode *Chart::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
 
     if (!n) {
         n = new ChartNode();
-        n->gridRed = new GridNode(QColor(0x40, 0, 0), QVector2D(50, 15), QVector2D(5, 3));
-        n->gridGray = new GridNode(QColor(0x20, 0x20, 0x20), QVector2D(50, 15), QVector2D(20, 6));
-        n->line = new LineNode(_points.size()+1, _color, QVector2D(50, 15));
+        n->gridRed = new GridNode(QColor(0x40, 0, 0), QVector2D(5, 3));
+        n->gridGray = new GridNode(QColor(0x20, 0x20, 0x20), QVector2D(20, 6));
+        n->line = new LineNode(_points.size()+1, _color);
 
         n->appendChildNode(n->gridGray);
         n->appendChildNode(n->gridRed);

@@ -16,17 +16,46 @@ Rectangle{
         anchors.margins: 8
         spacing: 1
 
+
         Rectangle{
             Layout.fillHeight: true
             Layout.fillWidth: true
             color: "black"
 
-            Chart
+            GridLayout
             {
                 anchors.fill: parent
                 anchors.margins: 8
-                objectName: "gyroChartAngleX"
-                color: "green"
+                columns: 2
+
+                Rectangle
+                {
+                    color: "#000065"
+                    Layout.fillHeight: true
+                    width: 60
+                }
+
+                Chart
+                {
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    objectName: "gyroChartAngleX"
+                    color: "green"
+                }
+
+                Rectangle
+                {
+                    color: "#006500"
+                    height: 20
+                    width: 60
+                }
+
+                Rectangle
+                {
+                    color: "#650000"
+                    Layout.fillWidth: true
+                    height: 20
+                }
             }
         }
         Rectangle{
