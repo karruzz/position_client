@@ -6,7 +6,6 @@ CONFIG += c++11
 SOURCES += main.cpp \
     Model/dataentrymodel.cpp \
     Model/renderthread.cpp \
-    Model/qgyroframe.cpp \
     UI/Controls/3D/Projection.cpp \
     UI/Controls/Chart/Chart.cpp \
     Subsystems/Gyro/GyroChartModel.cpp \
@@ -17,7 +16,8 @@ SOURCES += main.cpp \
     Core/Math.cpp \
     UI/Controls/Chart/LineNode.cpp \
     UI/Controls/Chart/GridNode.cpp \
-    Channel/TFileChannel.cpp
+    Channel/TFileChannel.cpp \
+    Data/Devices/QGyroFrame.cpp
 
 RESOURCES += qml.qrc
 
@@ -30,7 +30,6 @@ include(deployment.pri)
 HEADERS += \
     Model/dataentrymodel.h \
     Model/renderthread.h \
-    Model/qgyroframe.h \
     UI/Controls/3D/Projection.h \
     UI/Controls/Chart/Chart.h \
     Subsystems/Gyro/GyroChartModel.h \
@@ -45,7 +44,8 @@ HEADERS += \
     Subsystems/Gyro/Gyro3DModel.h \
     Core/Math.h \
     UI/Controls/Chart/LineNode.h \
-    UI/Controls/Chart/GridNode.h
+    UI/Controls/Chart/GridNode.h \
+    Data/Devices/QGyroFrame.h
 
 DISTFILES +=
 

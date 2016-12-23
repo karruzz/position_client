@@ -13,7 +13,7 @@
 #include <QVector3D>
 
 #include "Renderer.h"
-#include "Model/qgyroframe.h"
+#include "Data/Devices/QGyroFrame.h"
 
 class Projection : public QQuickItem
 {

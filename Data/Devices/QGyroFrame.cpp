@@ -1,4 +1,4 @@
-#include "qgyroframe.h"
+#include "QGyroFrame.h"
 
 QGyroFrame::QGyroFrame(QObject *parent)
     : QObject(parent)

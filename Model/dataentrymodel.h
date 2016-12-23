@@ -4,7 +4,7 @@
 #include <QtCore>
 #include <QtGui>
 
-#include "qgyroframe.h"
+#include "Data/Devices/QGyroFrame.h"
 #include "Channel/TFileChannel.h"
 #include "Data/Devices/GyroFrame.h"
 
