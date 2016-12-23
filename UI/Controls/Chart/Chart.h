@@ -14,11 +14,11 @@ class Chart : public QQuickItem
 
     Q_PROPERTY( QColor color READ color WRITE setColor NOTIFY colorChanged)
 
-    Q_PROPERTY( qreal minY READ minY NOTIFY minYChanged)
-    Q_PROPERTY( qreal maxY READ maxY NOTIFY maxYChanged)
+    Q_PROPERTY( qreal minY READ minY NOTIFY boundaryChanged)
+    Q_PROPERTY( qreal maxY READ maxY NOTIFY boundaryChanged)
 
-    Q_PROPERTY( qint64 minX READ minX NOTIFY minXChanged)
-    Q_PROPERTY( qint64 maxX READ maxX NOTIFY maxXChanged)
+    Q_PROPERTY( qint64 minX READ minX NOTIFY boundaryChanged)
+    Q_PROPERTY( qint64 maxX READ maxX NOTIFY boundaryChanged)
 public:
     explicit Chart(QQuickItem *parent = 0);
 
@@ -38,11 +38,7 @@ protected:
     QSGNode *updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *);
 
 signals:
-    void minYChanged();
-    void maxYChanged();
-
-    void minXChanged();
-    void maxXChanged();
+    void boundaryChanged();
 
     void pointsChanged();
     void colorChanged();

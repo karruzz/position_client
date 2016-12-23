@@ -4,5 +4,6 @@
         <file>FileDialogs.qml</file>
         <file>Scroll.qml</file>
         <file>GyroChartView.qml</file>
+        <file>Plotter.qml</file>
     </qresource>
 </RCC>

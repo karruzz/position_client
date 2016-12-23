@@ -20,6 +20,7 @@ void Chart::appendPoints(const QVector<QPointF> &points, float minY, float maxY,
     _minX = minX;
     _maxX = maxX;
 
+    emit boundaryChanged();
     update();
 }
 
