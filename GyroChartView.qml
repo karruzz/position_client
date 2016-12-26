@@ -23,6 +23,7 @@ Rectangle{
 
             objectN:"gyroChartAngleX"
             color: "green"
+            text: "roll"
         }
 
         Plotter
@@ -32,6 +33,7 @@ Rectangle{
 
             objectN:"gyroChartAngleY"
             color: "blue"
+            text: "pitch"
         }
 
         Plotter
@@ -41,6 +43,7 @@ Rectangle{
 
             objectN:"gyroChartAngleZ"
             color: "red"
+            text: "yaw"
         }
     }
 }

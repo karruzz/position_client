@@ -77,6 +77,7 @@ Item {
 
                         onClicked: {
                             timer.running = checked;
+                            if (!checked) dispatcher.countChanged();
                         }
                     }
 
@@ -122,6 +123,7 @@ Item {
         visible: true
         width: 800
         height: 400
+        title: "Charts"
 
         GyroChartView
         {
@@ -134,6 +136,7 @@ Item {
         visible: true
         width: 800
         height: 400
+        title: "3D view"
 
         Gyro3DView
         {

@@ -4,8 +4,6 @@ QT += qml quick
 CONFIG += c++11
 
 SOURCES += main.cpp \
-    Model/dataentrymodel.cpp \
-    Model/renderthread.cpp \
     UI/Controls/3D/Projection.cpp \
     UI/Controls/Chart/Chart.cpp \
     Subsystems/Gyro/GyroChartModel.cpp \
@@ -28,8 +26,6 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 HEADERS += \
-    Model/dataentrymodel.h \
-    Model/renderthread.h \
     UI/Controls/3D/Projection.h \
     UI/Controls/Chart/Chart.h \
     Subsystems/Gyro/GyroChartModel.h \

@@ -29,17 +29,14 @@ void Dispatcher::open(const QString &path)
 
     _isOpened = true;
     emit opened();
+    emit countChanged();
 }
 
 void Dispatcher::seek(quint64 counter)
 {
     _channel->Count();
+
     _gyroChart->seek(counter);
     _gyro3D->seek(counter);
 }
 
-void Dispatcher::fileChanged(const QString &path)
-{
-    _gyroChart->seek(_channel->EndCounter());
-    _gyro3D->seek(_channel->EndCounter());
-}

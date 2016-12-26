@@ -102,7 +102,7 @@ Item
                 {
                     anchors.margins: 8
                     Layout.fillHeight: true
-                    text: "ax: " + project.Frame.ax
+                    text: "ax: " + project.Frame.ax.toFixed(7)
                     color: "gray"
                 }
 
@@ -110,7 +110,7 @@ Item
                 {
                     anchors.margins: 8
                     Layout.fillHeight: true
-                    text: "ay: " + project.Frame.ay
+                    text: "ay: " + project.Frame.ay.toFixed(7)
                     color: "gray"
                 }
 
@@ -119,7 +119,7 @@ Item
                     anchors.margins: 8
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-                    text: "az: " + project.Frame.az
+                    text: "az: " + project.Frame.az.toFixed(7)
                     color: "gray"
                 }
             }

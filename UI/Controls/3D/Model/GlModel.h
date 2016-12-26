@@ -22,8 +22,8 @@ class GlModel : public QObject, protected QOpenGLFunctions
         void setRotate(QMatrix4x4 r) { _rotateMatrix = r; }
         void setTranslate(QMatrix4x4 r) { _translateMatrix = r; }
 
-        QMatrix4x4 rotate() { return _rotateMatrix; }
-        QMatrix4x4 translate() { return _translateMatrix; }
+        QMatrix4x4 rotateMatrix() { return _rotateMatrix; }
+        QMatrix4x4 translateMatrix() { return _translateMatrix; }
 
     private:
         QOpenGLVertexArrayObject *_vao;

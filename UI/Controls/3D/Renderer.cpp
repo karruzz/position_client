@@ -39,6 +39,15 @@ Renderer::Renderer() : _program(0)
     auto green = QColor( 0x08, 0x80, 0x40 );
     auto blue = QColor( 0x08, 0x08, 0x80 );
 
+    QVector<GlVertex> _axlesVertexes;
+    _axlesVertexes << GlVertex(0.0, 0.0, 0.0 , QColor("green") );
+    _axlesVertexes << GlVertex(0.0, 0.0, 0.3 , QColor("green") );
+    _axlesVertexes << GlVertex(0.0, 0.0, 0.0 , QColor("blue") );
+    _axlesVertexes << GlVertex(0.3, 0.0, 0.0 , QColor("blue") );
+    _axlesVertexes << GlVertex(0.0, 0.0, 0.0 , QColor("red") );
+    _axlesVertexes << GlVertex(0.0, 0.3, 0.0 , QColor("red") );
+    _axles = new GlModel(_program, _axlesVertexes);
+
     QVector<GlVertex> _gridVertexes;
     float gridSize = 0.5;
     float gridStep = 0.125;
@@ -56,42 +65,42 @@ Renderer::Renderer() : _program(0)
 
     QVector<GlVertex> _cubeVertexes;
 
-    float cubeX = 0.2;
-    float cubeY = 0.1;
+    float cubeX = 0.1;
+    float cubeY = 0.2;
     float cubeZ = 0.05;
 
     //oy plates
-    _cubeVertexes << GlVertex(  -cubeX, -cubeY, cubeZ, blue );
-    _cubeVertexes << GlVertex(  cubeX, -cubeY, cubeZ, blue );
-    _cubeVertexes << GlVertex( cubeX, -cubeY, -cubeZ, blue );
-    _cubeVertexes << GlVertex(  -cubeX, -cubeY, -cubeZ, blue );
-
-    _cubeVertexes << GlVertex(  -cubeX, cubeY, cubeZ, blue );
-    _cubeVertexes << GlVertex(  -cubeX, cubeY, -cubeZ, blue );
-    _cubeVertexes << GlVertex( cubeX, cubeY, -cubeZ, blue );
-    _cubeVertexes << GlVertex(  cubeX, cubeY, cubeZ, blue );
-
-    //ox plates
     _cubeVertexes << GlVertex(  -cubeX, cubeY, cubeZ, red );
-    _cubeVertexes << GlVertex(  -cubeX, -cubeY, cubeZ, red );
-    _cubeVertexes << GlVertex( -cubeX, -cubeY, -cubeZ, red );
+    _cubeVertexes << GlVertex(  cubeX, cubeY, cubeZ, red );
+    _cubeVertexes << GlVertex( cubeX, cubeY, -cubeZ, red );
     _cubeVertexes << GlVertex(  -cubeX, cubeY, -cubeZ, red );
 
-    _cubeVertexes << GlVertex(  cubeX, cubeY, cubeZ, red );
-    _cubeVertexes << GlVertex(  cubeX, cubeY, -cubeZ, red );
+    _cubeVertexes << GlVertex(  -cubeX, -cubeY, cubeZ, red );
+    _cubeVertexes << GlVertex(  -cubeX, -cubeY, -cubeZ, red );
     _cubeVertexes << GlVertex( cubeX, -cubeY, -cubeZ, red );
     _cubeVertexes << GlVertex(  cubeX, -cubeY, cubeZ, red );
 
-    //oz plates
-    _cubeVertexes << GlVertex(  -cubeX, cubeY, -cubeZ, green );
-    _cubeVertexes << GlVertex(  -cubeX, -cubeY, -cubeZ, green );
-    _cubeVertexes << GlVertex(  cubeX, -cubeY, -cubeZ, green );
-    _cubeVertexes << GlVertex(  cubeX, cubeY, -cubeZ, green );
+    //ox plates
+    _cubeVertexes << GlVertex(  cubeX, cubeY, cubeZ, blue );
+    _cubeVertexes << GlVertex(  cubeX, -cubeY, cubeZ, blue );
+    _cubeVertexes << GlVertex( cubeX, -cubeY, -cubeZ, blue );
+    _cubeVertexes << GlVertex(  cubeX, cubeY, -cubeZ, blue );
 
+    _cubeVertexes << GlVertex(  -cubeX, cubeY, cubeZ, blue );
+    _cubeVertexes << GlVertex(  -cubeX, cubeY, -cubeZ, blue );
+    _cubeVertexes << GlVertex( -cubeX, -cubeY, -cubeZ, blue );
+    _cubeVertexes << GlVertex(  -cubeX, -cubeY, cubeZ, blue );
+
+    //oz plates
     _cubeVertexes << GlVertex(  -cubeX, cubeY, cubeZ, green );
-    _cubeVertexes << GlVertex(  cubeX, cubeY, cubeZ, green );
-    _cubeVertexes << GlVertex(  cubeX, -cubeY, cubeZ, green );
     _cubeVertexes << GlVertex(  -cubeX, -cubeY, cubeZ, green );
+    _cubeVertexes << GlVertex(  cubeX, -cubeY, cubeZ, green );
+    _cubeVertexes << GlVertex(  cubeX, cubeY, cubeZ, green );
+
+    _cubeVertexes << GlVertex(  -cubeX, cubeY, -cubeZ, green );
+    _cubeVertexes << GlVertex(  cubeX, cubeY, -cubeZ, green );
+    _cubeVertexes << GlVertex(  cubeX, -cubeY, -cubeZ, green );
+    _cubeVertexes << GlVertex(  -cubeX, -cubeY, -cubeZ, green );
 
     _cube = new GlModel(_program, _cubeVertexes);
 }
@@ -102,6 +111,7 @@ Renderer::~Renderer()
 
     if (_grid) delete _grid;
     if (_cube) delete _cube;
+    if (_axles) delete _axles;
 }
 
 void Renderer::paint()
@@ -126,14 +136,20 @@ void Renderer::paint()
 
     if (_grid)
     {
-        _program->setUniformValue("pvrtMatrix", _pMatrix * _vMatrix * _grid->rotate() * _grid->translate());
+        _program->setUniformValue("pvrtMatrix", _pMatrix * _vMatrix * _grid->rotateMatrix() * _grid->translateMatrix());
         _grid->draw(GL_LINES);
     }
 
     if (_cube)
     {
-        _program->setUniformValue("pvrtMatrix", _pMatrix * _vMatrix * _cube->rotate() * _cube->translate());
+        _program->setUniformValue("pvrtMatrix", _pMatrix * _vMatrix * _cube->rotateMatrix() * _cube->translateMatrix());
         _cube->draw(GL_QUADS);
+    }
+
+    if (_axles)
+    {
+        _program->setUniformValue("pvrtMatrix", _pMatrix * _vMatrix * _axles->rotateMatrix() * _axles->translateMatrix());
+        _axles->draw(GL_LINES);
     }
 
     _program->release();

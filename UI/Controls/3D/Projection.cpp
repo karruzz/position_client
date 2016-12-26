@@ -10,8 +10,8 @@ Projection::Projection(QQuickItem *parent)
 {
     connect(this, SIGNAL(windowChanged(QQuickWindow*)), this, SLOT(handleWindowChanged(QQuickWindow*)));
     // init position
-    _camPos = QVector4D(-0.829103708, -1.18958151, 0.454426438, 0);
-    _qCamera = QQuaternion(0.93892175, -0.112024069, 0.0385280848, -0.322915971);
+    _camPos = QVector4D(-0.761009872, -0.914833724, 0.563965559, 0);
+    _qCamera = QQuaternion(0.340076178, 0.0609764457, 0.165994048, 0.925754309);
 
     setAcceptHoverEvents(true);
     setFlag(ItemAcceptsInputMethod, true);
@@ -65,7 +65,7 @@ QMatrix4x4 Projection::vMatrix()
     QMatrix4x4 vm;
     vm.setRow(0, -_camX);
     vm.setRow(1, _camZ);
-    vm.setRow(2, -_camY);
+    vm.setRow(2, _camY);
     vm.setRow(3, r.column(3));
 
     vm.translate(-_camPos.toVector3D());
@@ -81,8 +81,8 @@ void Projection::hoverMoveEvent(QHoverEvent *event)
     if (dx != 0 || dy != 0){
         if (_dragAngle)
         {
-            _qCamera += Math::derivative(-dy / 80.0, 0, 0);
-            _qCamera = Math::unit(dx / 80.0, 0, 1, 0) * _qCamera;
+            _qCamera += Math::derivative(dy / 80.0, 0, 0);
+            _qCamera = Math::unit(-dx / 80.0, 0, 1, 0) * _qCamera;
         }
         if (_dragPosition)
         {

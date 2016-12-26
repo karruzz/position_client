@@ -14,8 +14,8 @@
 class Dispatcher : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY( quint64 startCounter READ startCounter NOTIFY opened)
-    Q_PROPERTY( quint64 endCounter READ endCounter NOTIFY opened)
+    Q_PROPERTY( quint64 startCounter READ startCounter NOTIFY countChanged)
+    Q_PROPERTY( quint64 endCounter READ endCounter NOTIFY countChanged)
     Q_PROPERTY( bool isOpened READ isOpened NOTIFY opened)
 
 public:
@@ -28,12 +28,11 @@ public:
 
 signals:
     void opened();
+    void countChanged();
 
 public slots:
     void open(const QString &path);
     void seek(quint64 counter);
-
-    void fileChanged(const QString &path);
 
 private:
     QQuickView *_parent;

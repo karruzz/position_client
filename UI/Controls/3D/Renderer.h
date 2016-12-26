@@ -29,6 +29,7 @@ private:
 
     GlModel *_grid;
     GlModel *_cube;
+    GlModel *_axles;
 
     QVector<GLfloat> _data;
     QMatrix4x4 _pMatrix;

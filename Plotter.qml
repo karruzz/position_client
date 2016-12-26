@@ -5,6 +5,7 @@ import Client.Components 1.0
 Item {
     property alias objectN: chart.objectName
     property alias color: chart.color
+    property alias text: chartName.text
 
     GridLayout
     {
@@ -48,11 +49,26 @@ Item {
             }
         }
 
-        Chart
+        Rectangle
         {
-            id: chart
             Layout.fillHeight: true
             Layout.fillWidth: true
+            color: "black"
+
+            Chart
+            {
+                id: chart
+                anchors.fill: parent
+            }
+
+            Text
+            {
+                id: chartName
+                anchors.margins: 3
+                anchors.right: parent.right
+                anchors.top: parent.top
+                color: "gray"
+            }
         }
 
         Rectangle
