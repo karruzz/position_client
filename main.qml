@@ -10,7 +10,7 @@ import Client.Components 1.0
 Item {
         visible: true
         width: 640
-        height: 80
+        height: 65
 
         Rectangle
         {
@@ -90,6 +90,11 @@ Item {
                             source: "UI/Pics/settings.png"
                             anchors.fill: parent
                         }
+
+                        onClicked: {
+                            chartWindow.visible = true;
+                            projectionWindow.visible = true;
+                        }
                     }
                 }
 
@@ -113,6 +118,7 @@ Item {
 
 
     Window {
+        id: chartWindow
         visible: true
         width: 800
         height: 400
@@ -124,6 +130,7 @@ Item {
     }
 
     Window {
+        id: projectionWindow
         visible: true
         width: 800
         height: 400
