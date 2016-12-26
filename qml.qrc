@@ -9,5 +9,6 @@
         <file>UI/Pics/play.png</file>
         <file>UI/Pics/settings.png</file>
         <file>UI/Pics/stop.png</file>
+        <file>Gyro3DView.qml</file>
     </qresource>
 </RCC>
