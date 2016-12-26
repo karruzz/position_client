@@ -89,7 +89,7 @@ Item {
                     Text
                     {
                         anchors.horizontalCenter: parent.horizontalCenter
-                        text: (-2  + 4 / 5.0 * (index+0.5)).toFixed(0)
+                        text: ((chart.maxX - (chart.maxX - chart.minX) / 5.0 * (index+0.5))/1000000000).toFixed(1)
                         color: "gray"
                     }
                 }
