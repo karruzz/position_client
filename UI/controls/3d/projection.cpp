@@ -1,12 +1,12 @@
-#include "Projection.h"
-#include "Core/Math.h"
+#include "projection.h"
+#include "core/math.h"
 
 #include <QtQuick/qquickwindow.h>
 #include <QtMath>
 
 Projection::Projection(QQuickItem *parent)
-    :  QQuickItem(parent), _renderer(0), _camX(1,0,0,0), _camY(0,1,0,0), _camZ(0,0,1,0)
-    , _camPos(0, -2, 0, 0), _qCamera(1,0,0,0), _dragAngle(false),  _cube(0), _frame(new QGyroFrame(this))
+	:  QQuickItem(parent), _renderer(0), _frame(new QGyroFrame(this)), _camX(1,0,0,0), _camY(0,1,0,0), _camZ(0,0,1,0)
+	, _camPos(0, -2, 0, 0), _qCamera(1,0,0,0), _dragAngle(false),  _cube(0)
 {
     connect(this, SIGNAL(windowChanged(QQuickWindow*)), this, SLOT(handleWindowChanged(QQuickWindow*)));
     // init position

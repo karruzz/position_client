@@ -4,9 +4,9 @@
 #include <QtCore>
 #include <QtQuick>
 
-#include "Channel/IChannel.h"
-#include "Data/Devices/GyroFrame.h"
-#include "UI/Controls/3D/Projection.h"
+#include "channel/ichannel.h"
+#include "data/devices/gyro_frame.h"
+#include "ui/controls/3d/projection.h"
 
 class Gyro3DModel : public QObject
 {

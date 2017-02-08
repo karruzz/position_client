@@ -5,8 +5,8 @@
 #include <QFile>
 #include <QUrl>
 
-#include "IChannel.h"
-#include "Data/Devices/GyroFrame.h"
+#include "ichannel.h"
+#include "data/devices/gyro_frame.h"
 
 template <class T>
 class TFileChannel : public IChannel<T>

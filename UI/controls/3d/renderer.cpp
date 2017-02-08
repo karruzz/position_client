@@ -1,10 +1,10 @@
-#include "Renderer.h"
+#include "renderer.h"
 
 #include <QVector3D>
 #include <QColor>
 
-#include "Model/GlVertex.h"
-#include "Model/GlModel.h"
+#include "model/gl_vertex.h"
+#include "model/gl_model.h"
 
 Renderer::Renderer() : _program(0)
 {

@@ -1,14 +1,14 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
-        <file>FileDialogs.qml</file>
-        <file>Scroll.qml</file>
-        <file>GyroChartView.qml</file>
-        <file>Plotter.qml</file>
-        <file>UI/Pics/open.png</file>
-        <file>UI/Pics/play.png</file>
-        <file>UI/Pics/settings.png</file>
-        <file>UI/Pics/stop.png</file>
-        <file>Gyro3DView.qml</file>
+        <file>qml/main.qml</file>
+        <file>qml/FileDialogs.qml</file>
+        <file>qml/Scroll.qml</file>
+        <file>qml/Gyro3DView.qml</file>
+        <file>qml/GyroChartView.qml</file>
+        <file>qml/Plotter.qml</file>
+        <file>ui/pics/open.png</file>
+        <file>ui/pics/play.png</file>
+        <file>ui/pics/settings.png</file>
+        <file>ui/pics/stop.png</file>
     </qresource>
 </RCC>

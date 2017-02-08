@@ -1,4 +1,4 @@
-#include "GlModel.h"
+#include "gl_model.h"
 
 GlModel::GlModel(QOpenGLShaderProgram *_program, QVector<GlVertex> &vertexes)
 {

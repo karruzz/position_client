@@ -4,7 +4,7 @@
 #include <QDataStream>
 #include <QVector3D>
 
-#include "Data/IFrame.h"
+#include "data/iframe.h"
 
 class GyroFrame : public IFrame
 {

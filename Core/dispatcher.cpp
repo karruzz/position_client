@@ -1,4 +1,4 @@
-#include "Dispatcher.h"
+#include "dispatcher.h"
 
 Dispatcher::Dispatcher(QQuickView *parent)
     : QObject(parent), _parent(parent), _channel(new TFileChannel<GyroFrame>()), _isOpened(false)

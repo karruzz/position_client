@@ -1,4 +1,4 @@
-#include "Math.h"
+#include "math.h"
 #include <QtMath>
 
 QQuaternion q = Math::derivative(QQuaternion(1,0,0,0), 0, 0, 0);

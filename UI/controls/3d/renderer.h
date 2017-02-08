@@ -7,7 +7,7 @@
 #include <QtGui/QOpenGLVertexArrayObject>
 #include <QtGui/QOpenGLBuffer>
 
-#include "Model/GlModel.h"
+#include "model/gl_model.h"
 
 class Renderer  : public QObject, protected QOpenGLFunctions
 {

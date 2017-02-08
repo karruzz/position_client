@@ -1,4 +1,4 @@
-#include "LineNode.h"
+#include "line_node.h"
 
 #include <QSGFlatColorMaterial>
 

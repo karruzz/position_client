@@ -36,7 +36,7 @@ Item {
 
                         Image
                         {
-                            source: "UI/Pics/open.png"
+                            source: "../ui/pics/open.png"
                             anchors.fill: parent
                         }
 
@@ -65,7 +65,7 @@ Item {
 
                         Image
                         {
-                            source: parent.checked ?  "UI/Pics/stop.png" : "UI/Pics/play.png"
+                            source: parent.checked ?  "../ui/pics/stop.png" : "../ui/pics/play.png"
                             anchors.fill: parent
                         }
 
@@ -88,7 +88,7 @@ Item {
 
                         Image
                         {
-                            source: "UI/Pics/settings.png"
+                            source: "../ui/pics/settings.png"
                             anchors.fill: parent
                         }
 

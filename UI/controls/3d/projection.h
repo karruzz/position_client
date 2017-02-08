@@ -5,15 +5,15 @@
 
 #include <QtQuick/QQuickItem>
 
-#include "Data/Devices/GyroFrame.h"
+#include "data/devices/gyro_frame.h"
 
 #include <QSurfaceFormat>
 #include <QMatrix4x4>
 #include <QQuaternion>
 #include <QVector3D>
 
-#include "Renderer.h"
-#include "Data/Devices/QGyroFrame.h"
+#include "renderer.h"
+#include "data/devices/qgyro_frame.h"
 
 class Projection : public QQuickItem
 {
@@ -47,7 +47,7 @@ class Projection : public QQuickItem
 
         // current frame
         GyroFrame _position;
-        QGyroFrame *_frame;
+		QGyroFrame *_frame;
 
         // camera
         QVector4D _camX, _camY, _camZ, _camPos;
@@ -55,8 +55,8 @@ class Projection : public QQuickItem
         bool _dragAngle;
         bool _dragPosition;
 
-        // cube
-        GlModel *_cube;
+		// cube
+		GlModel *_cube;
 };
 
 #endif // PROJECTION_H

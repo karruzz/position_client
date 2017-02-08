@@ -6,9 +6,9 @@
 
 #include <QtQuick/QQuickView>
 
-#include "Core/Dispatcher.h"
-#include "UI/Controls/Chart/Chart.h"
-#include "UI/Controls/3D/Projection.h"
+#include "core/dispatcher.h"
+#include "ui/controls/chart/chart.h"
+#include "ui/controls/3d/projection.h"
 
 int main(int argc, char *argv[])
 {
@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
     Dispatcher model(viewer);
 
     viewer->rootContext()->setContextProperty("dispatcher", &model);
-    viewer->setSource(QUrl(QStringLiteral("qrc:/main.qml")));
+	viewer->setSource(QUrl(QStringLiteral("qrc:/qml/main.qml")));
     viewer->show();
 
     return app.exec();

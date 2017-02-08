@@ -1,4 +1,4 @@
-#include "TFileChannel.h"
+#include "tfile_channel.h"
 #include <QtMath>
 
 template class TFileChannel<GyroFrame>;

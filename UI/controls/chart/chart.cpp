@@ -1,6 +1,6 @@
-#include <UI/Controls/Chart/Chart.h>
-#include "LineNode.h"
-#include "GridNode.h"
+#include <ui/controls/chart/chart.h>
+#include "line_node.h"
+#include "grid_node.h"
 
 Chart::Chart(QQuickItem *parent)
     : QQuickItem(parent),

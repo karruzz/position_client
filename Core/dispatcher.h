@@ -4,10 +4,10 @@
 #include <QtCore>
 #include <QtQuick>
 
-#include "Channel/TFileChannel.h"
-#include "Data/Devices/GyroFrame.h"
-#include "Subsystems/Gyro/GyroChartModel.h"
-#include "Subsystems/Gyro/Gyro3DModel.h"
+#include "channel/tfile_channel.h"
+#include "data/devices/gyro_frame.h"
+#include "subsystems/gyro/gyro_chart_model.h"
+#include "subsystems/gyro/gyro_3d_model.h"
 
 #include <QFileSystemWatcher>
 

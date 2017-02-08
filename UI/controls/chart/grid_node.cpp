@@ -1,4 +1,4 @@
-#include "GridNode.h"
+#include "grid_node.h"
 
 #include <QSGFlatColorMaterial>
 

@@ -1,5 +1,4 @@
-
-#include "Gyro3DModel.h"
+#include "gyro_3d_model.h"
 
 Gyro3DModel::Gyro3DModel(QQuickView *parent, IChannel<GyroFrame> *channel)
     : QObject(parent), _channel(channel)

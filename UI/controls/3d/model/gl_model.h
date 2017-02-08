@@ -7,7 +7,7 @@
 #include <QtGui/QOpenGLVertexArrayObject>
 #include <QtGui/QOpenGLBuffer>
 
-#include "GlVertex.h"
+#include "gl_vertex.h"
 
 class GlModel : public QObject, protected QOpenGLFunctions
 {

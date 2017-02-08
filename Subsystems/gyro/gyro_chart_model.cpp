@@ -1,4 +1,4 @@
-#include "GyroChartModel.h"
+#include "gyro_chart_model.h"
 
 GyroChartModel::GyroChartModel(QQuickView *parent, IChannel<GyroFrame> *channel)
     : QObject(parent), _channel(channel)
