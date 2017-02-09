@@ -1,3 +1,11 @@
+/*
+ * line_node.h
+ *
+ *  Created on: Feb 9, 2017
+ *  Copyright © 2017-2080 Ilja Karasev. All rights reserved.
+ *     License: GNU GPL 3
+ */
+
 #ifndef LINENODE_H
 #define LINENODE_H
 

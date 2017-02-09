@@ -1,3 +1,11 @@
+/*
+ * gl_model.cpp
+ *
+ *  Created on: Feb 9, 2017
+ *  Copyright © 2017-2080 Ilja Karasev. All rights reserved.
+ *     License: GNU GPL 3
+ */
+
 #include "gl_model.h"
 
 GlModel::GlModel(QOpenGLShaderProgram *_program, QVector<GlVertex> &vertexes)

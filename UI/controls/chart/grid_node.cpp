@@ -1,3 +1,11 @@
+/*
+ * grid_node.cpp
+ *
+ *  Created on: Feb 9, 2017
+ *  Copyright © 2017-2080 Ilja Karasev. All rights reserved.
+ *     License: GNU GPL 3
+ */
+
 #include "grid_node.h"
 
 #include <QSGFlatColorMaterial>
