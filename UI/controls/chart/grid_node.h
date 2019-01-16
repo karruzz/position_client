@@ -16,16 +16,16 @@
 
 class GridNode : public QSGGeometryNode
 {
-    public:
-        GridNode( const QColor color, const QVector2D colsRows);
+public:
+	GridNode(const QColor color, int cols, int rows);
 
-        void setRect(const QRectF &bounds);
-        void alloc();
+	void setRect(const QRectF &bounds);
+	void alloc();
 
-    private:
-        QSGGeometry _geometry;
-        QVector2D _colsRows;
-        int _verticesCount;
+private:
+	QSGGeometry _geometry;
+	int _cols, _rows;
+	int _verticesCount;
 };
 
 #endif // GRIDNODE_H

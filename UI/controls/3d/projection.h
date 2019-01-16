@@ -25,46 +25,45 @@
 
 class Projection : public QQuickItem
 {
-    Q_OBJECT
-    Q_PROPERTY( QGyroFrame *Frame READ Frame NOTIFY frameChanged)
+Q_OBJECT
+Q_PROPERTY( QGyroFrame *Frame READ Frame NOTIFY frameChanged)
 
-    public:
-        Projection(QQuickItem *parent = 0);
+public:
+	Projection(QQuickItem *parent = 0);
 
-        QGyroFrame *Frame() const { return _frame; }
+	QGyroFrame *Frame() const { return _frame; }
 
-        void wheelEvent(QWheelEvent *event);
-        void mousePressEvent(QMouseEvent *event);
-        void hoverMoveEvent(QHoverEvent *event);
+	void wheelEvent(QWheelEvent *event);
+	Q_INVOKABLE void mouse_dragged(Qt::MouseButtons but, int dx, int dy);
 
-    signals:
-        void frameChanged();
+signals:
+	void frameChanged();
 
-    public slots:
-        void sync();
-        void cleanup();
-        void setPosition(GyroFrame p);
+public slots:
+	void sync();
+	void setPosition(GyroFrame p);
 
-    private slots:
-        void handleWindowChanged(QQuickWindow *win);
+private slots:
+	void handleWindowChanged(QQuickWindow *win);
 
-    private:
-        QMatrix4x4 vMatrix();
+private:
+	QMatrix4x4 vMatrix();
 
-        Renderer *_renderer;
+	// todo: remove pointer
+	Renderer _renderer;
 
-        // current frame
-        GyroFrame _position;
-		QGyroFrame *_frame;
+	// current frame
+	GyroFrame _position;
+	QGyroFrame *_frame;
 
-        // camera
-        QVector4D _camX, _camY, _camZ, _camPos;
-        QQuaternion _qCamera;
-        bool _dragAngle;
-        bool _dragPosition;
+	// camera
+	QVector4D _camX, _camY, _camZ, _camPos;
+	QQuaternion _qCamera;
+	bool _dragAngle;
+	bool _dragPosition;
 
-		// cube
-		GlModel *_cube;
+	// cube
+	GlModel *_cube;
 };
 
 #endif // PROJECTION_H

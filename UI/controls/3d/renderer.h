@@ -15,33 +15,31 @@
 #include <QtGui/QOpenGLVertexArrayObject>
 #include <QtGui/QOpenGLBuffer>
 
+#include <QScopedPointer>
+
 #include "model/gl_model.h"
 
 class Renderer  : public QObject, protected QOpenGLFunctions
 {
-    Q_OBJECT
+Q_OBJECT
 public:
-    Renderer();
-    ~Renderer();
+	Renderer(QObject* parent = 0)
+		: QObject(parent)
+	{}
 
-    void setViewportSize(const QSize &size) { m_viewportSize = size; }
-    void setVMatrix(const QMatrix4x4 &vMatrix) { _vMatrix = vMatrix; }
-    GlModel *cube() { return _cube; }
+	void init();
+	void set_viewport_size(const QSize &size);
+	void set_view_matrix(const QMatrix4x4 &vMatrix) { _view_matrix = vMatrix; }
+	GlModel *cube() { return _cube.data(); }
 
 public slots:
-    void paint();
+	void paint();
 
 private:
-    QSize m_viewportSize;
-    QOpenGLShaderProgram *_program;
+	QOpenGLShaderProgram _program;
 
-    GlModel *_grid;
-    GlModel *_cube;
-    GlModel *_axles;
-
-    QVector<GLfloat> _data;
-    QMatrix4x4 _pMatrix;
-    QMatrix4x4 _vMatrix;
+	QScopedPointer<GlModel> _grid, _cube, _axles;
+	QMatrix4x4 _uniform_matrix, _view_matrix;
 };
 
 #endif // RENDERER_H

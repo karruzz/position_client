@@ -34,7 +34,7 @@ Item
             spacing: 8
 
             ColumnLayout {
-                width: 150
+                width: 200
                 spacing: 8
 
                 Text
@@ -66,7 +66,7 @@ Item
             }
 
             ColumnLayout {
-                width: 150
+                width: 200
                 spacing: 8
 
                 Text
@@ -95,7 +95,7 @@ Item
             }
 
             ColumnLayout {
-                width: 150
+                width: 200
                 spacing: 8
 
                 Text
@@ -118,9 +118,26 @@ Item
                 {
                     anchors.margins: 8
                     Layout.fillHeight: true
-                    Layout.fillWidth: true
                     text: "az: " + project.Frame.az.toFixed(7)
                     color: "gray"
+                }
+            }
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            property variant previousPosition
+            acceptedButtons: Qt.LeftButton | Qt.RightButton
+            onPressed: {
+                previousPosition = Qt.point(mouseX, mouseY)
+            }
+            onPositionChanged: {
+                if (pressedButtons == Qt.LeftButton || pressedButtons == Qt.RightButton) {
+                    var dx = mouseX - previousPosition.x
+                    var dy = mouseY - previousPosition.y
+                    previousPosition.x = mouseX
+                    previousPosition.y = mouseY
+                    project.mouse_dragged(pressedButtons, dx, dy)
                 }
             }
         }

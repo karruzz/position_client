@@ -18,46 +18,46 @@
 
 class Chart : public QQuickItem
 {
-    Q_OBJECT
+	Q_OBJECT
 
-    Q_PROPERTY( QColor color READ color WRITE setColor NOTIFY colorChanged)
+	Q_PROPERTY( QColor color READ color WRITE setColor NOTIFY colorChanged)
 
-    Q_PROPERTY( qreal minY READ minY NOTIFY boundaryChanged)
-    Q_PROPERTY( qreal maxY READ maxY NOTIFY boundaryChanged)
+	Q_PROPERTY( qreal minY READ minY NOTIFY boundaryChanged)
+	Q_PROPERTY( qreal maxY READ maxY NOTIFY boundaryChanged)
 
-    Q_PROPERTY( qint64 minX READ minX NOTIFY boundaryChanged)
-    Q_PROPERTY( qint64 maxX READ maxX NOTIFY boundaryChanged)
+	Q_PROPERTY( qint64 minX READ minX NOTIFY boundaryChanged)
+	Q_PROPERTY( qint64 maxX READ maxX NOTIFY boundaryChanged)
 public:
-    explicit Chart(QQuickItem *parent = 0);
+	explicit Chart(QQuickItem *parent = 0);
 
-    QColor color() const { return _color; }
-    void setColor(QColor c) { _color = c; emit colorChanged(); }
+	QColor color() const { return _color; }
+	void setColor(QColor c) { _color = c; emit colorChanged(); }
 
-    qreal minY() const { return _minY; }
-    qreal maxY() const { return _maxY; }
+	qreal minY() const { return _minY; }
+	qreal maxY() const { return _maxY; }
 
-    quint64 minX() const { return _minX; }
-    quint64 maxX() const { return _maxX; }
+	quint64 minX() const { return _minX; }
+	quint64 maxX() const { return _maxX; }
 
 public slots:
-    void appendPoints(const QVector<QPointF> &points, float minY, float maxY, float minX, float maxX );
+	void appendPoints(const QVector<QPointF> &points, float minY, float maxY, float minX, float maxX );
 
 protected:
-    QSGNode *updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *);
+	QSGNode *updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *);
 
 signals:
-    void boundaryChanged();
+	void boundaryChanged();
 
-    void pointsChanged();
-    void colorChanged();
+	void pointsChanged();
+	void colorChanged();
 
 private:
-    QVector<QPointF> _points;
-    qreal _minY, _maxY;
-    QColor _color;
+	QVector<QPointF> _points;
+	qreal _minY, _maxY;
+	QColor _color;
 
-    int _samples;
-    qint64 _minX, _maxX;
+	int _samples;
+	qint64 _minX, _maxX;
 };
 
 #endif // CHART_H

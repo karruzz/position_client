@@ -16,26 +16,27 @@
 
 class GyroFrame : public IFrame
 {
-    public:
-      //  quint64 TimeStamp;
-        QVector3D Acs;
-        QVector3D Omega;
-        QVector3D Angle;
+public:
+	const static int FrameSize = 80;
 
-        inline int Size() override final { return 80; }
+	QVector3D Acs;
+	QVector3D Omega;
+	QVector3D Angle;
 
-        friend QDataStream &operator >>(QDataStream &out, GyroFrame &frame);
+	friend QDataStream &operator >>(QDataStream &out, GyroFrame &frame);
 };
 
 inline QDataStream &operator >>(QDataStream &out, GyroFrame &frame)
 {
-    out >> frame.Counter;
+//	quint64 header;
+//	out >> header;
+	out >> frame.Counter;
 
-    out >> frame.Angle;
-    out >> frame.Omega;
-    out >> frame.Acs;
+	out >> frame.Angle;
+	out >> frame.Omega;
+	out >> frame.Acs;
 
-    return out;
+	return out;
 }
 
 #endif // GYROFRAME

@@ -9,6 +9,7 @@ Rectangle{
     height: parent.height
     anchors.fill: parent
     color: "black"
+    border.color: "gray"
 
     ColumnLayout {
         id: layout

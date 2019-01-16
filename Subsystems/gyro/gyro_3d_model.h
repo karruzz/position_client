@@ -18,19 +18,19 @@
 
 class Gyro3DModel : public QObject
 {
-    Q_OBJECT
+Q_OBJECT
 
-    public:
-        explicit Gyro3DModel(QQuickView *parent = 0, IChannel<GyroFrame> *channel = 0);
+public:
+	Gyro3DModel(QQuickView *parent, IChannel<GyroFrame>& channel);
 
-    void seek(quint64 index);
+void seek(quint64 index);
 
-    signals:
-        void PointUpdated(const GyroFrame &points);
+signals:
+	void PointUpdated(const GyroFrame &points);
 
-    private:
-        IChannel<GyroFrame> *_channel;
-        quint64 _count;
+private:
+	IChannel<GyroFrame>& _channel;
+	quint64 _count;
 };
 
 #endif // GYRO3DMODEL_H

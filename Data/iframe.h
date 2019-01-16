@@ -13,10 +13,11 @@
 
 class IFrame
 {
-    public:
-        quint64 Counter;
+public:
+	const static int FrameSize = 0;
+//	const int FrameSize;
 
-        virtual int Size() = 0;
+	quint64 Counter;
 };
 
 #endif // IFRAME_H

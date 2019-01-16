@@ -8,43 +8,29 @@
 
 #include "dispatcher.h"
 
-Dispatcher::Dispatcher(QQuickView *parent)
-    : QObject(parent), _parent(parent), _channel(new TFileChannel<GyroFrame>()), _isOpened(false)
-{
-}
-
-Dispatcher::~Dispatcher()
-{
-    if (_isOpened)
-        _channel->Close();
-}
-
 void Dispatcher::open(const QString &path)
 {
-    if (_isOpened){
-        _channel->Close();
-        delete _gyroChart;
-        delete _gyro3D;
+	_gyroChart.reset();
+	_gyro3D.reset();
+	_channel.reset(new TFileChannel<GyroFrame>());
 
-        _isOpened = false;
-    }
+	if (!_channel->Open(path)) {
+		_channel.reset();
+		return;
+	}
 
-    if (!_channel->Open(path)) return;
+	_channel->Count();
+	_gyroChart.reset(new GyroChartModel(_parent, *_channel));
+	_gyro3D.reset(new Gyro3DModel(_parent, *_channel));
 
-    _channel->Count();
-    _gyroChart = new GyroChartModel(_parent, _channel);
-    _gyro3D = new Gyro3DModel(_parent, _channel);
-
-    _isOpened = true;
-    emit opened();
-    emit countChanged();
+	emit opened();
+	emit count_changed();
 }
 
 void Dispatcher::seek(quint64 counter)
 {
-    _channel->Count();
-
-    _gyroChart->seek(counter);
-    _gyro3D->seek(counter);
+	_channel->Count();
+	_gyroChart->seek(counter);
+	_gyro3D->seek(counter);
 }
 

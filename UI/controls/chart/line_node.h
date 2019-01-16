@@ -15,16 +15,16 @@
 
 class LineNode : public QSGGeometryNode
 {
-    public:
-        LineNode(int size, const QColor &color);
+public:
+	LineNode(int size, const QColor &color);
 
-        void setPoints(const QRectF &bounds, const QVector<QPointF> &points,
-                       float minY, float maxY, quint64 minX, quint64 maxX);
+	void setPoints(const QRectF &bounds, const QVector<QPointF> &points,
+				   float minY, float maxY, quint64 minX, quint64 maxX);
 
-        void alloc(int size);
+	void alloc(int size);
 
-    private:
-        QSGGeometry _geometry;
+private:
+	QSGGeometry _geometry;
 };
 
 #endif // LINENODE_H

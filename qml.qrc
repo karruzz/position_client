@@ -10,5 +10,6 @@
         <file>ui/pics/play.png</file>
         <file>ui/pics/settings.png</file>
         <file>ui/pics/stop.png</file>
+        <file>ui/pics/exit.png</file>
     </qresource>
 </RCC>
