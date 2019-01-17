@@ -7,7 +7,6 @@ SOURCES += main.cpp \
     core/dispatcher.cpp \
     core/math.cpp \
     channel/tfile_channel.cpp \
-    data/devices/qgyro_frame.cpp \
     subsystems/gyro/gyro_chart_model.cpp \
     subsystems/gyro/gyro_3d_model.cpp \
     ui/controls/3d/projection.cpp \

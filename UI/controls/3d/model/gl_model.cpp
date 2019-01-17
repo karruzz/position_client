@@ -9,13 +9,12 @@
 #include "gl_model.h"
 
 GlModel::GlModel(QOpenGLShaderProgram& _program, QVector<GlVertex> &vertexes)
+	: _count(vertexes.length())
 {
 	initializeOpenGLFunctions();
 
-	_rotateMatrix.setToIdentity();
-	_translateMatrix.setToIdentity();
-
-	_count = vertexes.length();
+	rotate_matrix.setToIdentity();
+	translate_matrix.setToIdentity();
 
 	QVector<GLfloat> _data;
 	QVectorIterator<GlVertex> i(vertexes);
@@ -25,10 +24,10 @@ GlModel::GlModel(QOpenGLShaderProgram& _program, QVector<GlVertex> &vertexes)
 		_data << vertex.Color.x() << vertex.Color.y() << vertex.Color.z();
 	}
 
-	_arrayBuffer.create();
-	_arrayBuffer.bind();
-	_arrayBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
-	_arrayBuffer.allocate(_data.constData(), _data.length() * sizeof(GLfloat));
+	_array_buffer.create();
+	_array_buffer.bind();
+	_array_buffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
+	_array_buffer.allocate(_data.constData(), _data.length() * sizeof(GLfloat));
 
 	_vao.create();
 	_vao.bind();
@@ -38,20 +37,20 @@ GlModel::GlModel(QOpenGLShaderProgram& _program, QVector<GlVertex> &vertexes)
 	_program.setAttributeBuffer("in_position", GL_FLOAT, 0, 3, 6 * sizeof(GLfloat));
 	_program.setAttributeBuffer("in_color", GL_FLOAT, 3 * sizeof(GLfloat), 3, 6 * sizeof(GLfloat));
 
-	_arrayBuffer.release();
+	_array_buffer.release();
 	_vao.release();
 }
 
 GlModel::~GlModel()
 {
 	_vao.destroy();
-	_arrayBuffer.destroy();
+	_array_buffer.destroy();
 }
 
 void GlModel::draw(QOpenGLShaderProgram& _program, GLushort primitive)
 {
 	_vao.bind();
-	_arrayBuffer.bind();
+	_array_buffer.bind();
 
 	_program.enableAttributeArray("in_position");
 	_program.enableAttributeArray("in_color");
@@ -60,6 +59,6 @@ void GlModel::draw(QOpenGLShaderProgram& _program, GLushort primitive)
 
 	glDrawArrays(primitive, 0, _count);
 
-	 _arrayBuffer.release();
+	 _array_buffer.release();
 	_vao.release();
 }

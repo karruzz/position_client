@@ -25,22 +25,14 @@ public:
 	~GlModel();
 
 	void draw(QOpenGLShaderProgram& _program, GLushort primitive);
-	void setCount(int count) { _count = count; }
 
-	void setRotate(QMatrix4x4 r) { _rotateMatrix = r; }
-	void setTranslate(QMatrix4x4 r) { _translateMatrix = r; }
-
-	QMatrix4x4 rotateMatrix() { return _rotateMatrix; }
-	QMatrix4x4 translateMatrix() { return _translateMatrix; }
+	QMatrix4x4 rotate_matrix;
+	QMatrix4x4 translate_matrix;
 
 private:
-	QOpenGLVertexArrayObject _vao;
-	QOpenGLBuffer _arrayBuffer;
-
-	QMatrix4x4 _rotateMatrix;
-	QMatrix4x4 _translateMatrix;
-
 	int _count;
+	QOpenGLVertexArrayObject _vao;
+	QOpenGLBuffer _array_buffer;
 };
 
 #endif // GLMODEL_H

@@ -29,8 +29,8 @@ public:
 
 	void init();
 	void set_viewport_size(const QSize &size);
-	void set_view_matrix(const QMatrix4x4 &vMatrix) { _view_matrix = vMatrix; }
-	GlModel *cube() { return _cube.data(); }
+	void set_view_matrix(const QMatrix4x4& m) { _view_matrix = m; }
+	void set_cube_rotate_matrix(const QMatrix4x4& m) { _cube->rotate_matrix = m; }
 
 public slots:
 	void paint();

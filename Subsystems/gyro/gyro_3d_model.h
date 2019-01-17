@@ -23,12 +23,13 @@ Q_OBJECT
 public:
 	Gyro3DModel(QQuickView *parent, IChannel<GyroFrame>& channel);
 
-void seek(quint64 index);
+	void seek(quint64 index);
 
 signals:
 	void PointUpdated(const GyroFrame &points);
 
 private:
+	// todo: to const reference
 	IChannel<GyroFrame>& _channel;
 	quint64 _count;
 };

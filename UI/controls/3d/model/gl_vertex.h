@@ -19,12 +19,19 @@ struct GlVertex
 
 	GlVertex() {}
 
-	GlVertex(QVector3D point, QVector3D color) : Point(point), Color (color) {}
+	GlVertex(QVector3D point, QVector3D color)
+		: Point(point)
+		, Color (color)
+	{}
 
-	GlVertex(float x, float y, float z, QColor color) {
-		Point = QVector3D(x, y, z);
-		Color = QVector3D(color.red() / 255.0f, color.green() / 255.0f, color.blue() / 255.0f);
-	}
+	GlVertex(QVector3D point, QColor color)
+		: Point(point)
+		, Color(QVector3D(color.red() / 255.0f, color.green() / 255.0f, color.blue() / 255.0f))
+	{}
+
+	GlVertex(float x, float y, float z, QColor color)
+		: GlVertex(QVector3D(x, y, z), color)
+	{}
 };
 
 #endif // GLVERTEX_H

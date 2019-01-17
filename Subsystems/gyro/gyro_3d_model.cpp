@@ -13,7 +13,7 @@ Gyro3DModel::Gyro3DModel(QQuickView *parent, IChannel<GyroFrame>& channel)
 {
 	auto root = parent->rootObject();
 	auto view = root->findChild<Projection*>("gyro3D");
-	QObject::connect(this, &Gyro3DModel::PointUpdated, view, &Projection::setPosition);
+	QObject::connect(this, &Gyro3DModel::PointUpdated, view, &Projection::set_position);
 }
 
 void Gyro3DModel::seek(quint64 counter)

@@ -21,7 +21,7 @@ Item
             anchors.margins: 8
             anchors.left: parent.left
             anchors.bottom: parent.bottom
-            text: "counter: " + project.Frame.Counter
+            text: "counter: " + project.frame.Counter
             color: "gray"
         }
 
@@ -42,7 +42,7 @@ Item
                     anchors.margins: 8
                     width: parent.width
                     Layout.fillHeight: true
-                    text: "roll: " + project.Frame.Roll.toFixed(7)
+                    text: "roll: " + project.frame.Roll.toFixed(7)
                     color: "gray"
                 }
 
@@ -51,7 +51,7 @@ Item
                     anchors.margins: 8
                     width: parent.width
                     Layout.fillHeight: true
-                    text: "pitch: " + project.Frame.Pitch.toFixed(7)
+                    text: "pitch: " + project.frame.Pitch.toFixed(7)
                     color: "gray"
                 }
 
@@ -60,7 +60,7 @@ Item
                     anchors.margins: 8
                     width: parent.width
                     Layout.fillHeight: true
-                    text: "yaw: " + project.Frame.Yaw.toFixed(7)
+                    text: "yaw: " + project.frame.Yaw.toFixed(7)
                     color: "gray"
                 }
             }
@@ -73,7 +73,7 @@ Item
                 {
                     anchors.margins: 8
                     Layout.fillHeight: true
-                    text: "wx: " + project.Frame.wx.toFixed(7)
+                    text: "wx: " + project.frame.wx.toFixed(7)
                     color: "gray"
                 }
 
@@ -81,7 +81,7 @@ Item
                 {
                     anchors.margins: 8
                     Layout.fillHeight: true
-                    text: "wy: " + project.Frame.wy.toFixed(7)
+                    text: "wy: " + project.frame.wy.toFixed(7)
                     color: "gray"
                 }
 
@@ -89,7 +89,7 @@ Item
                 {
                     anchors.margins: 8
                     Layout.fillHeight: true
-                    text: "wz: " + project.Frame.wz.toFixed(7)
+                    text: "wz: " + project.frame.wz.toFixed(7)
                     color: "gray"
                 }
             }
@@ -102,7 +102,7 @@ Item
                 {
                     anchors.margins: 8
                     Layout.fillHeight: true
-                    text: "ax: " + project.Frame.ax.toFixed(7)
+                    text: "ax: " + project.frame.ax.toFixed(7)
                     color: "gray"
                 }
 
@@ -110,7 +110,7 @@ Item
                 {
                     anchors.margins: 8
                     Layout.fillHeight: true
-                    text: "ay: " + project.Frame.ay.toFixed(7)
+                    text: "ay: " + project.frame.ay.toFixed(7)
                     color: "gray"
                 }
 
@@ -118,7 +118,7 @@ Item
                 {
                     anchors.margins: 8
                     Layout.fillHeight: true
-                    text: "az: " + project.Frame.az.toFixed(7)
+                    text: "az: " + project.frame.az.toFixed(7)
                     color: "gray"
                 }
             }

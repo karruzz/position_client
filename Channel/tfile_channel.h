@@ -24,6 +24,7 @@ public:
 	bool Open(const QString &path);
 	void Close();
 
+	// todo: to const method
 	quint64 StartCounter() override final;
 	quint64 EndCounter() override final;
 

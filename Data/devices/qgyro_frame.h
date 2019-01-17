@@ -31,7 +31,8 @@ class QGyroFrame : public QObject
 	Q_PROPERTY( double az  READ az NOTIFY changed)
 
 public:
-	explicit QGyroFrame(QObject *parent = 0);
+	explicit QGyroFrame(QObject *parent = 0) : QObject(parent) {}
+//	explicit QGyroFrame() {}
 
 	quint64 Counter() const { return data.Counter; }
 	double Roll() const { return data.Angle.x(); }

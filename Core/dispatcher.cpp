@@ -29,6 +29,7 @@ void Dispatcher::open(const QString &path)
 
 void Dispatcher::seek(quint64 counter)
 {
+	// todo: move updating internal frame counter to separate method
 	_channel->Count();
 	_gyroChart->seek(counter);
 	_gyro3D->seek(counter);
