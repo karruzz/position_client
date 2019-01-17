@@ -28,7 +28,7 @@ void LineNode::alloc(int size)
 	_geometry.allocate(size);
 }
 
-void LineNode::setPoints(const QRectF &bounds, const QVector<QPointF> &points,
+void LineNode::set_points(const QRectF &bounds, const QVector<QPointF> &points,
                          float minY, float maxY, quint64 minX, quint64 maxX)
 {
 	auto size = points.size();

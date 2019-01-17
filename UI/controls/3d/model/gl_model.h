@@ -30,7 +30,7 @@ public:
 	QMatrix4x4 translate_matrix;
 
 private:
-	int _count;
+	int _vertex_count;
 	QOpenGLVertexArrayObject _vao;
 	QOpenGLBuffer _array_buffer;
 };

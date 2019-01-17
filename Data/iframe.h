@@ -15,7 +15,6 @@ class IFrame
 {
 public:
 	const static int FrameSize = 0;
-//	const int FrameSize;
 
 	quint64 Counter;
 };

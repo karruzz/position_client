@@ -18,7 +18,7 @@ class LineNode : public QSGGeometryNode
 public:
 	LineNode(int size, const QColor &color);
 
-	void setPoints(const QRectF &bounds, const QVector<QPointF> &points,
+	void set_points(const QRectF &bounds, const QVector<QPointF> &points,
 				   float minY, float maxY, quint64 minX, quint64 maxX);
 
 	void alloc(int size);

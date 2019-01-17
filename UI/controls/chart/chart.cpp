@@ -12,12 +12,13 @@
 
 Chart::Chart(QQuickItem *parent)
 	: QQuickItem(parent)
-	, _minY(-0.1), _maxY(0.1), _color("red")
+	, _color("red")
+	, _minY(-0.1), _maxY(0.1)
 {
 	setFlag(ItemHasContents, true);
 }
 
-void Chart::appendPoints(const QVector<QPointF> &points, float minY, float maxY, float minX, float maxX)
+void Chart::append_points(const QVector<QPointF> &points, float minY, float maxY, float minX, float maxX)
 {
 	if (points.isEmpty()) return;
 	_points = points;
@@ -28,7 +29,7 @@ void Chart::appendPoints(const QVector<QPointF> &points, float minY, float maxY,
 	_minX = minX;
 	_maxX = maxX;
 
-	emit boundaryChanged();
+	emit boundary_changed();
 	update();
 }
 
@@ -66,9 +67,9 @@ QSGNode *Chart::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
 		n->gridGray->alloc();
 	}
 
-	n->gridGray->setRect(rect);
-	n->gridRed->setRect(rect);
-	n->line->setPoints(rect, _points, _minY, _maxY, _minX, _maxX);
+	n->gridGray->set_rect(rect);
+	n->gridRed->set_rect(rect);
+	n->line->set_points(rect, _points, _minY, _maxY, _minX, _maxX);
 
 	return n;
 }

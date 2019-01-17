@@ -15,7 +15,7 @@ GridNode::GridNode(QColor color, int cols, int rows)
 	, _cols(cols)
 	, _rows(rows)
 {
-	_verticesCount = _cols * _rows + 12;
+	_vertices_count = _cols * _rows + 12;
 	_geometry.setLineWidth(1);
 	_geometry.setDrawingMode(GL_LINES);
 	setGeometry(&_geometry);
@@ -29,10 +29,10 @@ GridNode::GridNode(QColor color, int cols, int rows)
 
 void GridNode::alloc()
 {
-	_geometry.allocate(_verticesCount);
+	_geometry.allocate(_vertices_count);
 }
 
-void GridNode::setRect(const QRectF &bounds)
+void GridNode::set_rect(const QRectF &bounds)
 {
 	QSGGeometry::Point2D *vertices = _geometry.vertexDataAsPoint2D();
 
@@ -62,7 +62,7 @@ void GridNode::setRect(const QRectF &bounds)
 		i++;
 	}
 
-	while (position < _verticesCount) {
+	while (position < _vertices_count) {
 		vertices[position++].set(0, 0);
 	}
 

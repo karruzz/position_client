@@ -26,13 +26,12 @@ public:
 	void seek(quint64 index);
 
 signals:
-	void AngleXUpdated(const QVector<QPointF> &points, float minY, float maxY, float minX, float maxX );
-	void AngleYUpdated(const QVector<QPointF> &points, float minY, float maxY, float minX, float maxX );
-	void AngleZUpdated(const QVector<QPointF> &points, float minY, float maxY, float minX, float maxX );
+	void angle_x_updated(const QVector<QPointF> &points, float minY, float maxY, float minX, float maxX );
+	void angle_y_updated(const QVector<QPointF> &points, float minY, float maxY, float minX, float maxX );
+	void angle_z_updated(const QVector<QPointF> &points, float minY, float maxY, float minX, float maxX );
 
 private:
 	IChannel<GyroFrame>& _channel;
-	quint64 _count;
 
 	const int Scale_ns = 2e+9;
 };

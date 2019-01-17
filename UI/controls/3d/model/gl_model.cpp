@@ -9,7 +9,7 @@
 #include "gl_model.h"
 
 GlModel::GlModel(QOpenGLShaderProgram& _program, QVector<GlVertex> &vertexes)
-	: _count(vertexes.length())
+	: _vertex_count(vertexes.length())
 {
 	initializeOpenGLFunctions();
 
@@ -57,7 +57,7 @@ void GlModel::draw(QOpenGLShaderProgram& _program, GLushort primitive)
 	_program.setAttributeBuffer("in_position", GL_FLOAT, 0, 3, 6 * sizeof(GLfloat));
 	_program.setAttributeBuffer("in_color", GL_FLOAT, 3 * sizeof(GLfloat), 3, 6 * sizeof(GLfloat));
 
-	glDrawArrays(primitive, 0, _count);
+	glDrawArrays(primitive, 0, _vertex_count);
 
 	 _array_buffer.release();
 	_vao.release();
