@@ -82,7 +82,7 @@ GridLayout {
 
                     Timer {
                         id: timer
-                        interval: 50; running: false; repeat: true
+                        interval: 10; running: false; repeat: true
                         onTriggered: dispatcher.seek(dispatcher.end_counter)
                     }
 

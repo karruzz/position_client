@@ -34,7 +34,7 @@ Item
             spacing: 8
 
             ColumnLayout {
-                width: 200
+                width: 120
                 spacing: 8
 
                 Text
@@ -42,7 +42,7 @@ Item
                     anchors.margins: 8
                     width: parent.width
                     Layout.fillHeight: true
-                    text: "roll: " + project.frame.Roll.toFixed(7)
+                    text: "roll: " + project.frame.Roll.toFixed(3)
                     color: "gray"
                 }
 
@@ -51,7 +51,7 @@ Item
                     anchors.margins: 8
                     width: parent.width
                     Layout.fillHeight: true
-                    text: "pitch: " + project.frame.Pitch.toFixed(7)
+                    text: "pitch: " + project.frame.Pitch.toFixed(3)
                     color: "gray"
                 }
 
@@ -60,20 +60,20 @@ Item
                     anchors.margins: 8
                     width: parent.width
                     Layout.fillHeight: true
-                    text: "yaw: " + project.frame.Yaw.toFixed(7)
+                    text: "yaw: " + project.frame.Yaw.toFixed(3)
                     color: "gray"
                 }
             }
 
             ColumnLayout {
-                width: 200
+                width: 120
                 spacing: 8
 
                 Text
                 {
                     anchors.margins: 8
                     Layout.fillHeight: true
-                    text: "wx: " + project.frame.wx.toFixed(7)
+                    text: "wx: " + project.frame.wx.toFixed(3)
                     color: "gray"
                 }
 
@@ -81,7 +81,7 @@ Item
                 {
                     anchors.margins: 8
                     Layout.fillHeight: true
-                    text: "wy: " + project.frame.wy.toFixed(7)
+                    text: "wy: " + project.frame.wy.toFixed(3)
                     color: "gray"
                 }
 
@@ -89,20 +89,20 @@ Item
                 {
                     anchors.margins: 8
                     Layout.fillHeight: true
-                    text: "wz: " + project.frame.wz.toFixed(7)
+                    text: "wz: " + project.frame.wz.toFixed(3)
                     color: "gray"
                 }
             }
 
             ColumnLayout {
-                width: 200
+                width: 120
                 spacing: 8
 
                 Text
                 {
                     anchors.margins: 8
                     Layout.fillHeight: true
-                    text: "ax: " + project.frame.ax.toFixed(7)
+                    text: "ax: " + project.frame.ax.toFixed(3)
                     color: "gray"
                 }
 
@@ -110,7 +110,7 @@ Item
                 {
                     anchors.margins: 8
                     Layout.fillHeight: true
-                    text: "ay: " + project.frame.ay.toFixed(7)
+                    text: "ay: " + project.frame.ay.toFixed(3)
                     color: "gray"
                 }
 
@@ -118,7 +118,7 @@ Item
                 {
                     anchors.margins: 8
                     Layout.fillHeight: true
-                    text: "az: " + project.frame.az.toFixed(7)
+                    text: "az: " + project.frame.az.toFixed(3)
                     color: "gray"
                 }
             }
