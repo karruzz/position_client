@@ -13,17 +13,17 @@ GridLayout {
     rows: 2
     columns: 2
 
-//    Component.onCompleted: {
-//       Qt.quit()
-//    }
+    Component.onCompleted: {
+       Qt.quit()
+    }
 
     Rectangle
     {
         Layout.fillWidth: true
         height: 60
         Layout.columnSpan: 2
-        Layout.row: 1
-        Layout.column: 1
+        Layout.row: 0
+        Layout.column: 0
         anchors.top: parent.top
 
         color: "black"
@@ -58,7 +58,7 @@ GridLayout {
                             console.log("Canceled")
                         }
                         onAccepted: {
-                            dispatcher.open(fileDialog.fileUrl.toString().replace("file://",""))
+                            dispatcher.open(fileDialog.fileUrl.toString().replace("file:///",""))
                             console.log("File selected: " + fileUrl)
                         }
                     }
@@ -123,30 +123,29 @@ GridLayout {
                     onClicked: Qt.quit();
                 }
             }
+        }
 
+        Scroll{ visible: dispatcher.is_opened
+                opacity: playButton.checked ? 0.5 : 1.0
+                enabled: !playButton.checked
+                height: 15
+                width: parent.width
+                anchors.bottom: parent.bottom
+                minimum: dispatcher.start_counter
+                maximum: dispatcher.end_counter
+
+                onSeek: {
+                    dispatcher.seek(counter)
+                }
+        }
     }
-
-    Scroll{ visible: dispatcher.is_opened
-            opacity: playButton.checked ? 0.5 : 1.0
-            enabled: !playButton.checked
-            height: 15
-            width: parent.width
-            anchors.bottom: parent.bottom
-            minimum: dispatcher.start_counter
-            maximum: dispatcher.end_counter
-
-            onSeek: {
-                dispatcher.seek(counter)
-            }
-    }
-}
 
     Rectangle
     {
         Layout.fillHeight: true
         Layout.fillWidth: true
-        Layout.row: 2
-        Layout.column: 1
+        Layout.row: 1
+        Layout.column: 0
 
         color: "transparent"
         border.color: "gray"
@@ -161,8 +160,8 @@ GridLayout {
     {
         Layout.fillHeight: true
         Layout.fillWidth: true
-        Layout.row: 2
-        Layout.column: 2
+        Layout.row: 1
+        Layout.column: 1
 
         GyroChartView
         {

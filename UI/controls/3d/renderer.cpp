@@ -140,8 +140,8 @@ void Renderer::paint()
 //	glDepthMask(GL_FALSE); // GL_FALSE
 
 	glClearDepthf(1.0f);
-	glDepthRangef(0.0f, 1.0f);
-	glDepthRange(0, 1); // disable
+//	glDepthRangef(0.0f, 1.0f);
+//	glDepthRange(0, 1); // disable
 	glDepthFunc(GL_LEQUAL);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

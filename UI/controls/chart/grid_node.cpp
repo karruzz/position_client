@@ -62,9 +62,9 @@ void GridNode::set_rect(const QRectF &bounds)
 		i++;
 	}
 
-	while (position < _vertices_count) {
-		vertices[position++].set(0, 0);
-	}
+//	while (position < _vertices_count) {
+//		vertices[position++].set(0, 0);
+//	}
 
 	markDirty(QSGNode::DirtyGeometry);
 }

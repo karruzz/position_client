@@ -35,7 +35,9 @@ int main(int argc, char *argv[])
 	viewer.rootContext()->setContextProperty("dispatcher", &model);
 	viewer.setSource(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 	QObject::connect((QObject*)viewer.engine(), SIGNAL(quit()), &app, SLOT(quit()));
-	viewer.showFullScreen();
+	viewer.setWidth(1280);
+	viewer.setHeight(768);
+	viewer.show();
 
 	return app.exec();
 }
